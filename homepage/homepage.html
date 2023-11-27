@@ -109,7 +109,7 @@
             font-family: Inter;
             font-style: normal;
             font-size: 18px;
-            font-weight: 400;
+			font-weight: 400;
             line-height: 24px;
         }
 
@@ -231,12 +231,15 @@
             .cards_container .card {
                 width: 350px;
             }
+            .cards_container {
+                flex-wrap: wrap;
+            }
         }
 
         @media only screen and (max-width: 1200px) {
-            .cards_container .card {
+            /* .cards_container .card {
                 width: 300px;
-            }
+            } */
         }
 
         @media only screen and (max-width: 1065px) {
@@ -249,22 +252,11 @@
             .cards_container {
                 flex-wrap: wrap;
             }
-
-            .cards_container .card {
-                width: 408px;
-                /* flex-basis: 408px; */
-            }
         }
 
         @media only screen and (max-width: 950px) {
             .hero_container h1 {
                 font-size: 60px;
-            }
-        }
-
-        @media only screen and (max-width: 768px) {
-            .header_container {
-                padding: 20px 80px;
             }
 
             .hero_container {
@@ -274,9 +266,16 @@
                 justify-content: flex-start;
                 width: 408px;
             }
+        }
+
+        @media only screen and (max-width: 800px) {
+            .header_container {
+                padding: 20px 50px;
+            }
 
             .hero_container h1 {
-                font-size: 35px;
+                font-size: 35px !important;
+                width: fit-content !important;
             }
         }
 
@@ -344,7 +343,7 @@
                 </div>
                 <div class="hero_content">
                     <p>
-                        Explore our guides and examples to integrate our
+                        Explore our guides and examples to integrate our 
                         Next-Gen Credit Core® and launch your credit card operation in a matter of weeks.
                     </p>
                     <a class="hero_btn" href="docs/core-overview">Get Started</a>
