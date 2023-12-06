@@ -1,34 +1,36 @@
 <style>
-  .card-container {
+  .card_container3 {
     display: flex;
-    gap: 20px;
-    margin: 0 20px;
+    gap: 7px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
   }
 
-  .card {
+  .card_container3 .card {
     display: flex;
-    flex-direction: column;
     border: 1px solid #e5e7eb;
     text-align: center;
     padding: 1rem;
-    border-width: 1px;
     color: #0C1E3D;
     justify-content: center;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    width: 241px;
+    min-width: 241px;
     height: 82px;
-    /* padding: 0px 151px 0px 70px; */
+    flex-grow: 1;
     align-items: center;
     flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid #F0F0F0;
   }
 
-  .card:hover {
+  .card_container3 .card:hover {
     cursor: pointer;
     border-color: var(--color-primary);
     box-shadow: 0 2px 4px rgba(12, 30, 61, 0.221);
   }
 
-  .card-title {
+  .card_container3 .card_title {
     width: 100%;
     display: flex;
     align-items: center;
@@ -36,18 +38,52 @@
     gap: 10px;
   }
 
-  .card-title .card-img {
-    max-width: 30px;
-    margin: 0 !important;
-  }
-
-  .card-title h3 {
+  .card_container3 .card_title .card_img {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    border-radius: 4.444px;
+    border: 0.556px solid #244693;
+    background: url(<path-to-image>), lightgray 0.592px 1.34px / 93.274% 87.542% no-repeat, #FFF;
     margin: 0;
-    /* flex-grow: 1; */
-    font-size: large;
   }
 
-  .card-text p {
+  .card_container3 .card_title .equifax_logo {
+    background-color: #B32541;
+  }
+
+  .card_container3 .card_title .truora_logo {
+    border-color: #4860F5;
+  }
+
+  .card_container3 .card_title .metamap_logo {
+    border-color: #EA6766;
+  }
+
+  .card_container3 .card_title .onfido_logo {
+    border-color: #4860F5;
+  }
+
+  .card_container3 .card_title .authentix_logo {
+    border-color: #F86E00;
+  }
+
+  .card_container3 .card_title .equifax_logo svg {
+    margin-top: -5px;
+  }
+
+  .card_container3 .card_title h3 {
+    margin: 0;
+    color: #28304E;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 17.5px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+  }
+
+  .card_container3 .card_text p {
     font-size: 1.2em;
     margin: 10px 0 0 0;
   }
@@ -55,27 +91,47 @@
 </head>
 
 <body>
+  <div class="card_container3">
 
-  <div class="card-container">
-    <div class="card" onclick="window.location='https://www.experian.com/'">
-      <div class="card-title">
-        <h3>Experian</h3>
+    <div class="card" onclick="window.location='https://www.lendflow.com/credit-decisioning'">
+      <div class="card_title">
+        <img
+          class="card_img"
+          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/lendflow-logo.png"
+          alt="lendflow logo">
+        <h3>Lendflow</h3>
       </div>
     </div>
 
-    <div class="card"
-      onclick="window.location='https://www.equifax.com/enterprise-b?rdid=true&trgtorigrefer=https%3A%2F%2Fwww.google.com%2F'">
-      <div class="card-title">
-        <h3>Equifax</h3>
+    <div class="card" onclick="window.location='https://www.uflow.biz/'">
+      <div class="card_title">
+        <img
+          class="card_img"
+          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/lendflow-logo.png"
+          alt="lendflow logo">
+        <h3>Uflow</h3>
       </div>
     </div>
 
-    <div class="card" onclick="window.location='https://www.transunion.com/'">
-      <div class="card-title">
-        <h3>Transunion</h3>
+    <div class="card" onclick="window.location='https://www.provenir.com/'">
+      <div class="card_title">
+        <img
+          class="card_img"
+          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/lendflow-logo.png"
+          alt="lendflow logo">
+        <h3>Provenir</h3>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location='https://iqdecisionengine.com/'">
+      <div class="card_title">
+        <img
+          class="card_img"
+          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/iq-decision-logo.png"
+          alt="lendflow logo">
+        <h3>IQ Decisioning Engine</h3>
       </div>
     </div>
 
   </div>
-
 </body>
