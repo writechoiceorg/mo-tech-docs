@@ -1,0 +1,140 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+<style>
+  .error_callout_container,
+  .info_callout_container,
+  .neutral_callout_container,
+  .success_callout_container,
+  .warning_callout_container {
+    background: rgba(233, 232, 255, 0.24);
+    border: 1px solid var(--grey-2, #ECEFF2);
+    border-radius: 6px;
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .error_callout_container h3,
+  .info_callout_container h3,
+  .neutral_callout_container h3,
+  .success_callout_container h3,
+  .warning_callout_container h3 {
+    margin: 0 0 0.5rem;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 17.5px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px;
+  }
+
+  .error_callout_container h3 {
+    color: #CA3821;
+  }
+
+  .info_callout_container h3 {
+    color: #4860F5;
+  }
+
+  .success_callout_container h3 {
+    color: #208F59;
+  }
+
+  .warning_callout_container h3 {
+    color: #F4982B;
+  }
+
+  .error_callout_container p,
+  .info_callout_container p,
+  .neutral_callout_container p,
+  .success_callout_container p,
+  .warning_callout_container p,
+  .contentContainer ul {
+    margin: 0;
+    color: var(--text-foundations-boldest, #0C1E3D);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: DM Sans;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.125rem;
+  }
+
+  .error_callout_container .icon,
+  .info_callout_container .icon,
+  .neutral_callout_container .icon,
+  .success_callout_container .icon,
+  .warning_callout_container .icon {
+    margin-top: 1px;
+  }
+
+  .error_callout_container a,
+  .info_callout_container a,
+  .neutral_callout_container a,
+  .success_callout_container a,
+  .warning_callout_container a,
+  .content_container a {
+    cursor: pointer;
+  }
+
+  .content_container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* Specific styles for each callout type */
+  .error_callout_container {
+    border: 1px solid var(--border-danger-subtle, #E9ADA4);
+    background: var(--background-danger-subtler, #FAEBE9);
+  }
+
+  .info_callout_container {
+    border: 1px solid var(--border-info-subtle, #96C4EB);
+    background: var(--background-info-subtler, #E6F1FA);
+  }
+
+  .neutral_callout_container {
+    border: 1px solid var(--border-foundations-bold, #C2C7D0);
+    background: var(--background-foundations-subtlest, #F4F5F5);
+  }
+
+  .success_callout_container {
+    border: 1px solid var(--border-success-subtle, #A4D8C2);
+    background: var(--background-success-subtler, #E9F6F0);
+  }
+
+  .warning_callout_container {
+    border: 1px solid var(--border-warning-subtle, #EBD697);
+    background: var(--background-warning-subtler, #FAF5E6);
+  }
+</style>
+
+<!--CALLOUT-->
+
+<body>
+  <div class="warning_callout_container">
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 17 15" fill="none">
+        <path
+          d="M7.27249 1.6911L1.19239 11.8413C1.06704 12.0584 1.00071 12.3046 1.00001 12.5553C0.999304 12.8059 1.06425 13.0524 1.18839 13.2702C1.31253 13.488 1.49154 13.6695 1.70759 13.7966C1.92365 13.9238 2.16923 13.9921 2.4199 13.9949H14.5801C14.8308 13.9921 15.0763 13.9238 15.2924 13.7966C15.5085 13.6695 15.6875 13.488 15.8116 13.2702C15.9357 13.0524 16.0007 12.8059 16 12.5553C15.9993 12.3046 15.933 12.0584 15.8076 11.8413L9.72751 1.6911C9.59954 1.48013 9.41935 1.3057 9.20434 1.18465C8.98933 1.06359 8.74675 1 8.5 1C8.25325 1 8.01067 1.06359 7.79566 1.18465C7.58065 1.3057 7.40046 1.48013 7.27249 1.6911Z"
+          stroke="#F4982B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M8.5 5.38077V8.25213" stroke="#F4982B" stroke-width="1.8" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <path d="M8.5 11.1235H8.50814" stroke="#F4982B" stroke-width="1.8" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </div>
+    <div>
+      <h3>teste</h3>
+      <div class="content_container">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>

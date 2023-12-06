@@ -1,38 +1,148 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
 <style>
-  .card_container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin: 0 20px;
+  /* ------------------- IMAGES ------------------- */
+  img:not(.rm-Logo-img) {
+    border-radius: 8px;
+    display: block;
+    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0);
+    object-position: 50% 50%;
+    box-shadow: 0px 0px 0px 0px rgba(40, 42, 47, 0.05), 0px 3px 6px 0px rgba(40, 42, 47, 0.05), 0px 11px 11px 0px rgba(40, 42, 47, 0.04), 0px 25px 15px 0px rgba(40, 42, 47, 0.02), 0px 44px 18px 0px rgba(40, 42, 47, 0.01), 0px 69px 19px 0px rgba(40, 42, 47, 0.00);
   }
 
-  .card_container_no_text {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin: 0 20px;
+  /* ------------------- CALLOUTS ------------------- */
+  .error_callout_container,
+  .info_callout_container,
+  .neutral_callout_container,
+  .success_callout_container,
+  .warning_callout_container {
+    background: rgba(233, 232, 255, 0.24);
+    border: 1px solid var(--grey-2, #ECEFF2);
+    border-radius: 6px;
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
   }
 
-  .card_container .card {
-    border-radius: 0.3125rem;
-    background-color: #F1E3FF;
+  .error_callout_container h3,
+  .info_callout_container h3,
+  .neutral_callout_container h3,
+  .success_callout_container h3,
+  .warning_callout_container h3 {
+    margin: 0 0 0.5rem;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 17.5px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px;
+  }
+
+  .error_callout_container h3 {
+    color: #CA3821;
+  }
+
+  .info_callout_container h3 {
+    color: #4860F5;
+  }
+
+  .success_callout_container h3 {
+    color: #208F59;
+  }
+
+  .warning_callout_container h3 {
+    color: #F4982B;
+  }
+
+  .error_callout_container p,
+  .info_callout_container p,
+  .neutral_callout_container p,
+  .success_callout_container p,
+  .warning_callout_container p,
+  .contentContainer ul {
+    margin: 0;
+    color: var(--text-foundations-boldest, #0C1E3D);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: DM Sans;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.125rem;
+  }
+
+  .error_callout_container .icon,
+  .info_callout_container .icon,
+  .neutral_callout_container .icon,
+  .success_callout_container .icon,
+  .warning_callout_container .icon {
+    margin-top: 1px;
+  }
+
+  .error_callout_container a,
+  .info_callout_container a,
+  .neutral_callout_container a,
+  .success_callout_container a,
+  .warning_callout_container a,
+  .content_container a {
+    cursor: pointer;
+  }
+
+  .content_container {
     display: flex;
     flex-direction: column;
-    border: 1px solid #e5e7eb;
-    text-align: center;
-    padding: 1rem;
-    border-width: 1px;
-    color: #0C1E3D;
+    gap: 24px;
+  }
+
+  .error_callout_container {
+    border: 1px solid var(--border-danger-subtle, #E9ADA4);
+    background: var(--background-danger-subtler, #FAEBE9);
+  }
+
+  .info_callout_container {
+    border: 1px solid var(--border-info-subtle, #96C4EB);
+    background: var(--background-info-subtler, #E6F1FA);
+  }
+
+  .neutral_callout_container {
+    border: 1px solid var(--border-foundations-bold, #C2C7D0);
+    background: var(--background-foundations-subtlest, #F4F5F5);
+  }
+
+  .success_callout_container {
+    border: 1px solid var(--border-success-subtle, #A4D8C2);
+    background: var(--background-success-subtler, #E9F6F0);
+  }
+
+  .warning_callout_container {
+    border: 1px solid var(--border-warning-subtle, #EBD697);
+    background: var(--background-warning-subtler, #FAF5E6);
+  }
+
+  /* ------------------- ACCOUNTS CARDS ------------------- */
+  .account_card_container {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fill, minmax(179px, 1fr)); */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7px;
+    margin: 0 20px;
+  }
+
+  .account_card_container .card {
+    display: flex;
+    width: 100%;
+    height: 110px;
     align-items: center;
-    justify-content: center;
-    transition: all 0.15s ease-in-out;
+    gap: 5px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid #F0F0F0;
+    background: #F2F4FF;
   }
 
-  .card_container_no_text .card {
-    height: 150px;
-  }
-
-  .card_container .card:hover {
+  .account_card_container .card:hover {
     cursor: pointer;
     border-color: #7A49FF;
     box-shadow: 0 2px 4px rgba(12, 30, 61, 0.221);
@@ -40,7 +150,113 @@
     box-shadow: 0px 3px 5px 0px rgba(9, 30, 66, 0.20);
   }
 
-  .card_container .card_title {
+  .account_card_container .card_title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-left: 42px;
+  }
+
+  .card_title h3 {
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+  }
+
+  .card_title h3 svg {
+    margin-left: 5px;
+  }
+
+  .account_card_container .card_title .card-img {
+    max-width: 30px;
+    margin: 0 !important;
+  }
+
+  .account_card_container .card_title h3 {
+    margin: 0;
+    font-size: large;
+  }
+
+  .account_card_container .card_text {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+  }
+
+  .account_card_container .card:nth-child(3n-2) {
+    background-color: #4860F5;
+    color: white;
+  }
+
+  .account_card_container .card:nth-child(3n-2) svg path {
+    stroke: white;
+  }
+
+  .account_card_container .card:nth-child(3n-1) {
+    background-color: #F2F4FF;
+    color: #4860F5;
+  }
+
+  .account_card_container .card:nth-child(3n-1) svg path,
+  .account_card_container .card:nth-child(3n) svg path {
+    stroke: #4860F5;
+  }
+
+  .account_card_container .card:nth-child(3n) {
+    background-color: #CCD4FF;
+    color: #4860F5;
+  }
+
+  @media screen and (max-width: 490px) {
+    .account_card_container {
+      grid-template-columns: repeat(auto-fill, minmax(179px, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .account_card_container .card .card_title {
+      margin-left: 21px;
+    }
+
+    .account_card_container {
+      margin: 0 3px;
+    }
+  }
+
+  /* ------------------- KEY PROCESSES CARDS ------------------- */
+  .key_processes_card_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(179px, 1fr));
+    gap: 7px;
+    margin: 0 20px;
+  }
+
+  .key_processes_card_container .card {
+    display: flex;
+    width: 185px;
+    height: 82px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid #F0F0F0;
+    background: #4860F5;
+  }
+
+  .key_processes_card_container .card:hover {
+    cursor: pointer;
+    border-color: #7A49FF;
+    box-shadow: 0 2px 4px rgba(12, 30, 61, 0.221);
+    transform: translateY(-2px);
+    box-shadow: 0px 3px 5px 0px rgba(9, 30, 66, 0.20);
+  }
+
+  .key_processes_card_container .card_title {
     width: 100%;
     display: flex;
     align-items: center;
@@ -48,51 +264,137 @@
     gap: 15px;
   }
 
-  .card_container .card_no_text .card_title {
-    justify-content: center;
+  .card_title h3 {
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
   }
 
-  .card_container .card_with_text .card_title {
-    justify-content: start;
-  }
-
-  .card_container .card_title .card-img {
+  .key_processes_card_container .card_title .card-img {
     max-width: 30px;
     margin: 0 !important;
   }
 
-  .card_container .card_title h3 {
+  .key_processes_card_container .card_title h3 {
     margin: 0;
     font-size: large;
   }
 
-  .card_container .card_text {
+  .key_processes_card_container .card_text {
     display: flex;
     justify-content: start;
     width: 100%;
   }
 
-  .card_container .card_with_text .card_text p {
-    font-size: 1.2em;
-    margin: 10px 0 0 0;
-    justify-self: start;
-    align-self: flex-start;
-    text-align: start;
+  .key_processes_card_container .card:nth-child(3n-2) {
+    background-color: #4860F5;
+    color: white;
   }
 
-  .card_container .card_plus3:nth-child(3n-2) {
-    background-color: #F1E3FF;
+  .key_processes_card_container .card:nth-child(3n-2) svg path {
+    stroke: white;
   }
 
-  .card_plus3:nth-child(3n-1) {
-    background-color: #E2E8F0;
+  .key_processes_card_container .card:nth-child(3n-1) {
+    background-color: #F2F4FF;
+    color: #4860F5;
   }
 
-  .card_plus3:nth-child(3n) {
-    background-color: #C7CDED;
+  .key_processes_card_container .card:nth-child(3n-1) svg path,
+  .key_processes_card_container .card:nth-child(3n) svg path {
+    stroke: #4860F5;
   }
+
+  .key_processes_card_container .card:nth-child(3n) {
+    background-color: #CCD4FF;
+    color: #4860F5;
+  }
+
+  /* ------------------- LINKS ------------------- */
+  .markdown-body a {
+    color: #4860F5 !important;
+  }
+
+  .markdown-body a:hover, .markdown-body a:visited:hover {
+    color: #283652 !important;
+  }
+
+  .markdown-body a:visited {
+    color: #93F !important;
+  }
+
+  .markdown-body a:disabled {
+    color: #A6AEBB !important;
+  }
+
+  /* ------------------- README RECIPES ------------------- */
+  .TutorialTile-Body1X3Rmz9bMZKI {
+    width: 240px;
+    height: 68px;
+    border-radius: 5px;
+    border: 1px solid #9DABFF;
+    background: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .TutorialTile-Body1X3Rmz9bMZKI:hover {
+    border-radius: 5px;
+    border: 1px solid #7689FF;
+    background: #4860F5;
+    box-shadow: 1px 1px 3.2px 0px rgba(0, 0, 0, 0.20);
+  }
+
+  .TutorialTile-Body1X3Rmz9bMZKI:hover .TutorialTile-Body-Text-TitleOyQYvfYa_PEo,
+  .TutorialTile-Body1X3Rmz9bMZKI:hover .TutorialTile-Body-Text-Action1lbXk8Bdpeol {
+    color: white !important;
+  }
+
+  /* ------------------- PAGINATION ------------------- */
+  .Pagination-text3yhjKs84FCa6,
+  .Pagination-iconGA9TkfVeYvTp,
+  .Icon-wrapper2z2wVIeGsiU {
+    stroke: #B8B8B8 !important;
+  }
+
+  .Pagination-iconGA9TkfVeYvTp {
+    font-weight: 900 !important;
+  }
+
+  .Pagination-text3yhjKs84FCa6, .WhatsNext-link {
+    color: #4860F5 !important;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 17.5px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+  }
+
+  .Pagination-text_left3HzCMqntTYq5 {
+    padding-left: 0.25rem !important;
+  }
+
+  .Pagination-text_right3I2htOlt_CfS {
+    padding-right: 0.25rem !important;
+  }
+
+  /* ------------------- X ------------------- */
 </style>
 
-<!------ Table of Contents --- -->
-<!-- Cards ----------------- 2 -->
-<!---------------------------- -->
+<!------------------------------------------- -->
+<!------------- Table of Contents ----------- -->
+<!------------------------------------------- -->
+<!-- IMAGES ------------------------------- 6 -->
+<!-- CALLOUTS ---------------------------- 16 -->
+<!-- ACCOUNTS CARDS --------------------- 124 -->
+<!-- KEY PROCESSES CARDS ---------------- 230 -->
+<!-- LINKS ------------------------------ 316 -->
+<!-- README RECIPES --------------------- 333 -->
+<!-- PAGINATION ------------------------- 357 -->
+<!--  ------------------------- 386 -->
+<!--  -------------------------  -->

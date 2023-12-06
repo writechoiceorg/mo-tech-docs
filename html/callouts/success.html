@@ -1,0 +1,135 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+<style>
+  .error_callout_container,
+  .info_callout_container,
+  .neutral_callout_container,
+  .success_callout_container,
+  .warning_callout_container {
+    background: rgba(233, 232, 255, 0.24);
+    border: 1px solid var(--grey-2, #ECEFF2);
+    border-radius: 6px;
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .error_callout_container h3,
+  .info_callout_container h3,
+  .neutral_callout_container h3,
+  .success_callout_container h3,
+  .warning_callout_container h3 {
+    margin: 0 0 0.5rem;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 17.5px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px;
+  }
+
+  .error_callout_container h3 {
+    color: #CA3821;
+  }
+
+  .info_callout_container h3 {
+    color: #4860F5;
+  }
+
+  .success_callout_container h3 {
+    color: #208F59;
+  }
+
+  .warning_callout_container h3 {
+    color: #F4982B;
+  }
+
+  .error_callout_container p,
+  .info_callout_container p,
+  .neutral_callout_container p,
+  .success_callout_container p,
+  .warning_callout_container p,
+  .contentContainer ul {
+    margin: 0;
+    color: var(--text-foundations-boldest, #0C1E3D);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: DM Sans;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.125rem;
+  }
+
+  .error_callout_container .icon,
+  .info_callout_container .icon,
+  .neutral_callout_container .icon,
+  .success_callout_container .icon,
+  .warning_callout_container .icon {
+    margin-top: 1px;
+  }
+
+  .error_callout_container a,
+  .info_callout_container a,
+  .neutral_callout_container a,
+  .success_callout_container a,
+  .warning_callout_container a,
+  .content_container a {
+    cursor: pointer;
+  }
+
+  .content_container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  /* Specific styles for each callout type */
+  .error_callout_container {
+    border: 1px solid var(--border-danger-subtle, #E9ADA4);
+    background: var(--background-danger-subtler, #FAEBE9);
+  }
+
+  .info_callout_container {
+    border: 1px solid var(--border-info-subtle, #96C4EB);
+    background: var(--background-info-subtler, #E6F1FA);
+  }
+
+  .neutral_callout_container {
+    border: 1px solid var(--border-foundations-bold, #C2C7D0);
+    background: var(--background-foundations-subtlest, #F4F5F5);
+  }
+
+  .success_callout_container {
+    border: 1px solid var(--border-success-subtle, #A4D8C2);
+    background: var(--background-success-subtler, #E9F6F0);
+  }
+
+  .warning_callout_container {
+    border: 1px solid var(--border-warning-subtle, #EBD697);
+    background: var(--background-warning-subtler, #FAF5E6);
+  }
+</style>
+
+<!--CALLOUT-->
+
+<body>
+  <div class="success_callout_container">
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">
+        <path d="M15 1L5.375 11L1 6.45455" stroke="#208F59" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </div>
+    <div>
+      <h3>teste</h3>
+      <div class="content_container">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna aliqua.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>

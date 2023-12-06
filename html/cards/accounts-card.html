@@ -1,0 +1,176 @@
+<style>
+  .account_card_container {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fill, minmax(179px, 1fr)); */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7px;
+    margin: 0 20px;
+  }
+
+  .account_card_container .card {
+    display: flex;
+    width: 100%;
+    height: 110px;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid #F0F0F0;
+    background: #F2F4FF;
+  }
+
+  .account_card_container .card:hover {
+    cursor: pointer;
+    border-color: #7A49FF;
+    box-shadow: 0 2px 4px rgba(12, 30, 61, 0.221);
+    transform: translateY(-2px);
+    box-shadow: 0px 3px 5px 0px rgba(9, 30, 66, 0.20);
+  }
+
+  .account_card_container .card_title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-left: 42px;
+  }
+
+  .card_title h3 {
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+  }
+
+  .card_title h3 svg {
+    margin-left: 5px;
+  }
+
+  .account_card_container .card_title .card-img {
+    max-width: 30px;
+    margin: 0 !important;
+  }
+
+  .account_card_container .card_title h3 {
+    margin: 0;
+    font-size: large;
+  }
+
+  .account_card_container .card_text {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+  }
+
+  .account_card_container .card:nth-child(3n-2) {
+    background-color: #4860F5;
+    color: white;
+  }
+
+  .account_card_container .card:nth-child(3n-2) svg path {
+    stroke: white;
+  }
+
+  .account_card_container .card:nth-child(3n-1) {
+    background-color: #F2F4FF;
+    color: #4860F5;
+  }
+
+  .account_card_container .card:nth-child(3n-1) svg path,
+  .account_card_container .card:nth-child(3n) svg path {
+    stroke: #4860F5;
+  }
+
+  .account_card_container .card:nth-child(3n) {
+    background-color: #CCD4FF;
+    color: #4860F5;
+  }
+
+  @media screen and (max-width: 490px) {
+    .account_card_container {
+      grid-template-columns: repeat(auto-fill, minmax(179px, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .account_card_container .card .card_title {
+      margin-left: 21px;
+    }
+
+    .account_card_container {
+      margin: 0 3px;
+    }
+  }
+</style>
+
+<body>
+
+  <div class="account_card_container">
+    <div class="card" onclick="window.location='account-card-details'">
+      <div class="card_title">
+        <h3>Card Details
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="12" viewBox="0 0 15 12" fill="none">
+            <path
+              d="M12.8182 1.27271H2.18182C1.52912 1.27271 1 1.80182 1 2.45452V9.54543C1 10.1981 1.52912 10.7273 2.18182 10.7273H12.8182C13.4709 10.7273 14 10.1981 14 9.54543V2.45452C14 1.80182 13.4709 1.27271 12.8182 1.27271Z"
+              stroke="#28304E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M1 4.81812H14" stroke="#28304E" stroke-width="1.3" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </h3>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location='account-transactions'">
+      <div class="card_title">
+        <h3>Transactions
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none">
+            <path d="M1 8.20499L9.86768 8.20499M9.86768 8.20499L8.20499 9.86768M9.86768 8.20499L8.20499 6.5423"
+              stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M9.86768 2.66269L1 2.66269M1 2.66269L2.66269 4.32538M1 2.66269L2.66269 1" stroke="white"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </h3>
+
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location='account-payments'">
+      <div class="card_title">
+        <h3>Payments
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="13" viewBox="0 0 14 13" fill="none">
+            <path
+              d="M11.7331 11.9998H2.34164C1.60067 11.9998 1 11.3992 1 10.6582V4.62081C1 3.87985 1.60067 3.27917 2.34164 3.27917H11.7331C12.4741 3.27917 13.0747 3.87985 13.0747 4.62081V10.6582C13.0747 11.3992 12.4741 11.9998 11.7331 11.9998Z"
+              stroke="#28304E" stroke-width="1.3" />
+            <path
+              d="M10.3306 7.58626C10.0275 7.58626 9.78174 7.83203 9.78174 8.13511C9.78174 8.43818 10.0275 8.68396 10.3306 8.68396C10.6337 8.68396 10.8794 8.43818 10.8794 8.13511C10.8794 7.83203 10.6337 7.58626 10.3306 7.58626Z"
+              fill="#28304E" stroke="#28304E" stroke-width="0.548852" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M11.0623 3.27936V2.34237C11.0623 1.46087 10.2267 0.818906 9.37497 1.04603L1.99594 3.01377C1.40864 3.17039 1 3.70228 1 4.31011V4.62099"
+              stroke="#28304E" stroke-width="1.3" />
+          </svg>
+        </h3>
+
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location='account-disputes'">
+      <div class="card_title">
+        <h3>Disputes
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="11" viewBox="0 0 12 11" fill="none">
+            <path
+              d="M10.75 7.125C10.75 7.41232 10.6359 7.68787 10.4327 7.89103C10.2295 8.0942 9.95398 8.20833 9.66667 8.20833H3.16667L1 10.375V1.70833C1 1.42102 1.11414 1.14547 1.3173 0.942301C1.52047 0.739137 1.79602 0.625 2.08333 0.625H9.66667C9.95398 0.625 10.2295 0.739137 10.4327 0.942301C10.6359 1.14547 10.75 1.42102 10.75 1.70833V7.125Z"
+              stroke="#28304E" stroke-width="1.08333" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M5.875 2.25V4.41667" stroke="#28304E" stroke-width="1.08333" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M5.875 6.58337H5.88" stroke="#28304E" stroke-width="1.08333" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </h3>
+      </div>
+    </div>
+
+  </div>
+
+</body>
