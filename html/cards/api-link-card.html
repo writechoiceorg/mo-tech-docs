@@ -1,0 +1,134 @@
+<style>
+  .api_card_container {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .api_card_container .card {
+    display: flex;
+    flex-direction: column;
+    padding: 0 18px;
+    color: #0C1E3D;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    width: 365px;
+    height: 122px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid #F0F0F0;
+    justify-content: center;
+  }
+
+  .api_card_container .card:hover {
+    cursor: pointer;
+    border-color: #4860F5;
+    box-shadow: 1px 1px 3.2px 0px rgba(0, 0, 0, 0.20);
+  }
+
+  .api_card_container .card_title {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+  }
+
+  .api_card_container .card_title .card-img {
+    max-width: 30px;
+    max-height: 24px;
+    margin: 0 !important;
+  }
+
+  .api_card_container .card_title h3 {
+    margin: 0;
+    /* flex-grow: 1; */
+    font-size: large;
+  }
+
+  .api_card_container .card_text p {
+    margin: 10px 0 0 0;
+  }
+
+  .api_card_container .card .card_title p {
+    text-align: center;
+    align-self: center;
+    border-radius: 15px;
+    color: #FFF;
+    font-size: 8px;
+    font-weight: 700;
+    font-family: Inter;
+    padding: 3px 1px;
+    margin: 0;
+    line-height: 9.103px;
+    word-break: keep-all;
+    margin-right: 16px;
+    width: 40px;
+    text-transform: uppercase;
+  }
+
+  .api_card_container .card .card_title .post {
+    background-color: #4860F5;
+  }
+
+  .api_card_container .card .card_title .get {
+    background-color: #26D07C;
+  }
+
+  .api_card_container .card .card_title .put {
+    background-color: #93F;
+  }
+
+  .api_card_container .card .card_title .patch {
+    background-color: #FF8B00;
+  }
+
+  .api_card_container .card .card_title .delete {
+    background-color: #d02626;
+  }
+</style>
+
+<body>
+
+  <div class="api_card_container">
+    <div class="card" onclick="window.location='getting-started-with-your-api'">
+      <div class="card_title">
+        <h3>Create Customer</h3>
+        <p class="post">POST</p>
+      </div>
+      <div class="card_text">
+        <p>Create a new customer account.</p>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location='get-customer-information'">
+      <div class="card_title">
+        <h3>Get Customer Information</h3>
+        <p class="get">GET</p>
+      </div>
+      <div class="card_text">
+        <p>Retrieve a customer’s account information.</p>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location='get-customer-information-copy'">
+      <div class="card_title">
+        <h3>Get Customer Balance</h3>
+        <p class="post">POST</p>
+      </div>
+      <div class="card_text">
+        <p>Retrieve the real time balance of the account and other information.</p>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location=''">
+      <div class="card_title">
+        <h3>Update Status</h3>
+        <p class="post">POST</p>
+      </div>
+      <div class="card_text">
+        <p>Request a change of status of an account.</p>
+      </div>
+    </div>
+  </div>
+
+</body>

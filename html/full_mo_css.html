@@ -3,6 +3,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 
 <style>
+  /* ------------------- GENERAL CONFIGURATION ------------------- */
+  * {
+    font-family: Inter;
+  }
+
   /* ------------------- IMAGES ------------------- */
   img:not(.rm-Logo-img) {
     border-radius: 8px;
@@ -383,18 +388,276 @@
     padding-right: 0.25rem !important;
   }
 
+  /* ------------------- ACCORDION ------------------- */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .accordion_container {
+    border-radius: 6px;
+    border: 1px solid var(--border-foundations-subtle, #E7EAEE);
+    display: flex;
+    transition: all .2s;
+  }
+
+  .accordion_container:hover {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .accordion_container .control-icon {
+    fill: #A6AEBB;
+    transition: .3s ease;
+    pointer-events: none;
+  }
+
+  .accordion_container .control-icon-close {
+    display: none;
+  }
+
+  .accordion_call {
+    font-weight: 500;
+  }
+
+  details[open] .control-icon-close {
+    display: initial;
+    transition: .3s ease;
+  }
+
+  details[open] .control-icon-expand {
+    display: none;
+  }
+
+  details[open] summary {
+    border: 1px solid #614ad623;
+    border-bottom: 0;
+    border-end-end-radius: 0;
+    margin-bottom: 1rem;
+  }
+
+
+  .accordion_container summary {
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .accordion_container summary .accordion_call {
+    display: block;
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .accordion_container summary .sumary_icon {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+  }
+
+  .accordion_container .accordion_content {
+    display: flex;
+    padding: 0rem 1rem 1rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: stretch;
+  }
+
+  .accordion_container .accordion_content table {
+    margin: 0 !important;
+  }
+
+  .accordion_container .accordion_content th {
+    text-align: left;
+  }
+
+  @media only screen and (max-width: 700px) {
+    .accordion_container .accordion_content table {
+      display: block !important;
+      overflow-x: auto !important;
+    }
+  }
+
+  details[open] div {
+    animation: sweep .3s ease-in-out;
+  }
+
+  @keyframes sweep {
+    0% {
+      opacity: 0;
+      margin-left: -10px
+    }
+
+    100% {
+      opacity: 1;
+      margin-left: 0px
+    }
+  }
+
+  /* ------------------- TABLE ------------------- */
+  .table_container, table {
+    border-radius: 6px !important;
+    border: 1px solid var(--border-foundations-subtle, #E7EAEE);
+    background: var(--background-foundations-default, #FFF);
+    align-items: flex-start;
+  }
+
+  .table_container tbody, table tbody {
+    border-radius: 6px !important;
+  }
+
+  .table_container th, table th {
+    padding: 30px 32px !important;
+    align-items: center !important;
+    align-self: stretch !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--border-foundations-subtle, #E5E6E9) !important;
+    background: var(--background-foundations-default, #FFF) !important;
+    text-align: start !important;
+    color: #4E4E4E !important;
+    font-feature-settings: 'clig' off, 'liga' off !important;
+    font-family: Inter !important;
+    font-size: 14px !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    line-height: 18px !important;
+  }
+
+  .table_container td, table td {
+    background: var(--background-foundations-default, #FFF) !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--border-foundations-subtle, #E5E6E9) !important;
+    padding: 30px 32px !important;
+    align-items: center !important;
+    align-self: stretch !important;
+    text-align: start !important;
+    color: #8E8E8E !important;
+    font-feature-settings: 'clig' off, 'liga' off !important;
+    font-family: Inter !important;
+    font-size: 14px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 18px !important;
+  }
+
+  .table_container .bottom_row {
+    border-bottom: 0 !important;
+  }
+
+  /* ------------------- SIDEBAR ------------------- */
+  .rm-Sidebar-heading {
+    margin-bottom: 8px !important;
+    color: #4860F5 !important;
+    font-feature-settings: 'clig' off, 'liga' off !important;
+    font-family: Inter !important;
+    font-size: 14px !important;
+    font-style: normal !important;
+    font-weight: 700 !important;
+    line-height: 18px !important;
+    text-transform: uppercase !important;
+  }
+
+  .rm-Sidebar-link {
+    border-radius: 6px !important;
+    color: #5A5A5A !important;
+    padding: 12px 5px 12px 15px !important;
+  }
+
+  .rm-Sidebar .active {
+    /*background: var(--Secondary-1) !important;*/
+    background: rgba(72, 96, 245, 0.14) !important;
+    border-radius: 4px !important;
+    color: #4860F5 !important;
+    font-weight: 600 !important;
+  }
+
+  /*.rm-Sidebar-section:not(:first-of-type){*/
+  .rm-Sidebar-section {
+    margin: 0 !important;
+    margin-top: 24px !important;
+    /*margin-top:48px !important;*/
+  }
+
+  .Sidebar-link-textLuTE1ySm4Kqn {
+    display: flex;
+    justify-items: space-between !important;
+    /*flex-direction: row-reverse;*/
+  }
+
+  .Sidebar-link_parent3OBrzjAJRSfq {
+    padding-left: 15px !important;
+  }
+
+  .rm-Sidebar-list a button {
+    order: 2;
+  }
+
+  .Sidebar-link-textLuTE1ySm4Kqn {
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 242px;
+  }
+
+  .rm-Sidebar-list .subpage {
+    /*padding: 12px !important;*/
+    margin-left: 0px !important;
+    padding-left: 32px !important;
+  }
+
+  /* .Sidebar-link2Dsha-r-GKh2.active {} */
+
+  .rm-Sidebar-list .active {
+    background: #E9E8FF !important;
+  }
+
+  .icon-chevron-rightward:before {
+    font-size: 18px;
+  }
+
+  .APIMethod {
+    border-radius: 7px !important;
+  }
+
+  .APIMethod_get {
+    background: #26D07C !important;
+  }
+
+  .APIMethod_post {
+    background: #4860F5 !important;
+  }
+
+  .APIMethod_put {
+    background: #9933FF !important;
+  }
+
+  .APIMethod_patch {
+    background: #FF8B00 !important;
+  }
+
+  .APIMethod_delete {
+    background: #ff0000 !important;
+  }
+
   /* ------------------- X ------------------- */
 </style>
 
 <!------------------------------------------- -->
 <!------------- Table of Contents ----------- -->
 <!------------------------------------------- -->
-<!-- IMAGES ------------------------------- 6 -->
-<!-- CALLOUTS ---------------------------- 16 -->
-<!-- ACCOUNTS CARDS --------------------- 124 -->
-<!-- KEY PROCESSES CARDS ---------------- 230 -->
-<!-- LINKS ------------------------------ 316 -->
-<!-- README RECIPES --------------------- 333 -->
-<!-- PAGINATION ------------------------- 357 -->
-<!--  ------------------------- 386 -->
-<!--  -------------------------  -->
+<!-- GENERAL CONFIGURATION ---------------- 6 -->
+<!-- IMAGES ------------------------------ 11 -->
+<!-- CALLOUTS ---------------------------- 21 -->
+<!-- ACCOUNTS CARDS --------------------- 129 -->
+<!-- KEY PROCESSES CARDS ---------------- 235 -->
+<!-- LINKS ------------------------------ 321 -->
+<!-- README RECIPES --------------------- 338 -->
+<!-- PAGINATION ------------------------- 362 -->
+<!-- ACCORDION -------------------------- 391 -->
+<!-- TABLE ------------------------------ 502 -->
+<!-- SIDEBAR ---------------------------- 552 -->
+<!-- X ---------------------------- 646 -->
