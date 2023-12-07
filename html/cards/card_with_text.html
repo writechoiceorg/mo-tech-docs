@@ -1,0 +1,203 @@
+<style>
+  .card_container {
+    display: flex;
+    gap: 7px;
+    margin: 0;
+    flex-wrap: wrap;
+    align-self: center;
+    justify-content: center;
+  }
+
+  .card_container .card {
+    border-radius: 0.3125rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+    color: #0C1E3D;
+    width: 49%;
+    align-items: start;
+    justify-content: start;
+    transition: all 0.15s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid #F0F0F0;
+    background: #F2F4FF;
+    box-sizing: border-box;
+  }
+
+  .card_container_no_text .card {
+    height: 150px;
+  }
+
+  .card_container .card:hover {
+    border-color: #7A49FF;
+    box-shadow: 0px 3px 5px 0px rgba(9, 30, 66, 0.20);
+  }
+
+  .card_container .card_title {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    text-align: start;
+    gap: 15px;
+  }
+
+  .card_container .card_title svg {
+    min-width: 25px;
+    min-height: 24px;
+  }
+
+  .card_container .card_title .card-img {
+    max-width: 30px;
+    margin: 0 !important;
+  }
+
+  .card_container .card_title h3 {
+    margin: 0;
+    font-size: large;
+  }
+
+  .card_container .card_text {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+  }
+
+  .card_container .card_with_text .card_text p {
+    font-size: 1.2em;
+    margin: 10px 0 0 0;
+    justify-self: start;
+    align-self: flex-start;
+    text-align: start;
+  }
+
+  .card_container .card:nth-child(3n-2) {
+    background-color: #4860F5;
+    color: white;
+  }
+
+  .card_container .card:nth-child(3n-2) svg path {
+    stroke: white;
+  }
+
+  .card_container .card:nth-child(3n-1) {
+    background-color: #F2F4FF;
+    color: #4860F5;
+  }
+
+  .card_container .card:nth-child(3n-1) svg path,
+  .card_container .card:nth-child(3n) svg path {
+    stroke: #4860F5;
+  }
+
+  .card_container .card:nth-child(3n) {
+    background-color: #CCD4FF;
+    color: #4860F5;
+  }
+</style>
+
+<body>
+
+  <div class="card_container">
+    <div class="card card_plus3 card_with_text">
+      <div class="card_title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+          <path
+            d="M17.9155 9V7C17.9155 5.89543 17.0201 5 15.9155 5H5.91553C4.81096 5 3.91553 5.89543 3.91553 7V13C3.91553 14.1046 4.81096 15 5.91553 15H7.91553M9.91553 19H19.9155C21.0201 19 21.9155 18.1046 21.9155 17V11C21.9155 9.89543 21.0201 9 19.9155 9H9.91553C8.81096 9 7.91553 9.89543 7.91553 11V17C7.91553 18.1046 8.81096 19 9.91553 19ZM16.9155 14C16.9155 15.1046 16.0201 16 14.9155 16C13.811 16 12.9155 15.1046 12.9155 14C12.9155 12.8954 13.811 12 14.9155 12C16.0201 12 16.9155 12.8954 16.9155 14Z"
+            stroke="#283652" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <h3>Security in Development, QA, Code Verification (DevSecOps)</h3>
+      </div>
+      <div class="card_text">
+        <p>DevSecOps methodologies ensure secure coding throughout the development life cycle.</p>
+      </div>
+    </div>
+
+    <div class="card card_plus3 card_with_text">
+      <div class="card_title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+          <path
+            d="M17.9155 9V7C17.9155 5.89543 17.0201 5 15.9155 5H5.91553C4.81096 5 3.91553 5.89543 3.91553 7V13C3.91553 14.1046 4.81096 15 5.91553 15H7.91553M9.91553 19H19.9155C21.0201 19 21.9155 18.1046 21.9155 17V11C21.9155 9.89543 21.0201 9 19.9155 9H9.91553C8.81096 9 7.91553 9.89543 7.91553 11V17C7.91553 18.1046 8.81096 19 9.91553 19ZM16.9155 14C16.9155 15.1046 16.0201 16 14.9155 16C13.811 16 12.9155 15.1046 12.9155 14C12.9155 12.8954 13.811 12 14.9155 12C16.0201 12 16.9155 12.8954 16.9155 14Z"
+            stroke="#283652" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <h3>GRC Strategy (Governance, Risk, and Compliance)
+        </h3>
+      </div>
+      <div class="card_text">
+        <p>Compliance with industry standards, regulations, and effective risk management practices is essential for
+          good governance.</p>
+      </div>
+    </div>
+
+    <div class="card card_plus3 card_with_text">
+      <div class="card_title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+          <path
+            d="M17.9155 9V7C17.9155 5.89543 17.0201 5 15.9155 5H5.91553C4.81096 5 3.91553 5.89543 3.91553 7V13C3.91553 14.1046 4.81096 15 5.91553 15H7.91553M9.91553 19H19.9155C21.0201 19 21.9155 18.1046 21.9155 17V11C21.9155 9.89543 21.0201 9 19.9155 9H9.91553C8.81096 9 7.91553 9.89543 7.91553 11V17C7.91553 18.1046 8.81096 19 9.91553 19ZM16.9155 14C16.9155 15.1046 16.0201 16 14.9155 16C13.811 16 12.9155 15.1046 12.9155 14C12.9155 12.8954 13.811 12 14.9155 12C16.0201 12 16.9155 12.8954 16.9155 14Z"
+            stroke="#283652" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <h3>Data Protection and Privacy
+        </h3>
+      </div>
+      <div class="card_text">
+        <p>Personal data is protected and privacy-centric, compliant with country laws, using structured data
+          architecture managed by MO Manage.</p>
+      </div>
+    </div>
+
+    <div class="card card_plus3 card_with_text">
+      <div class="card_title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+          <path
+            d="M17.9155 9V7C17.9155 5.89543 17.0201 5 15.9155 5H5.91553C4.81096 5 3.91553 5.89543 3.91553 7V13C3.91553 14.1046 4.81096 15 5.91553 15H7.91553M9.91553 19H19.9155C21.0201 19 21.9155 18.1046 21.9155 17V11C21.9155 9.89543 21.0201 9 19.9155 9H9.91553C8.81096 9 7.91553 9.89543 7.91553 11V17C7.91553 18.1046 8.81096 19 9.91553 19ZM16.9155 14C16.9155 15.1046 16.0201 16 14.9155 16C13.811 16 12.9155 15.1046 12.9155 14C12.9155 12.8954 13.811 12 14.9155 12C16.0201 12 16.9155 12.8954 16.9155 14Z"
+            stroke="#283652" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <h3>Vulnerability Management
+        </h3>
+      </div>
+      <div class="card_text">
+        <p>The security team continuously evaluates for vulnerabilities, proactively covering potential gaps to enhance
+          system resilience.</p>
+      </div>
+    </div>
+
+    <div class="card card_plus3 card_with_text">
+      <div class="card_title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+          <path
+            d="M17.9155 9V7C17.9155 5.89543 17.0201 5 15.9155 5H5.91553C4.81096 5 3.91553 5.89543 3.91553 7V13C3.91553 14.1046 4.81096 15 5.91553 15H7.91553M9.91553 19H19.9155C21.0201 19 21.9155 18.1046 21.9155 17V11C21.9155 9.89543 21.0201 9 19.9155 9H9.91553C8.81096 9 7.91553 9.89543 7.91553 11V17C7.91553 18.1046 8.81096 19 9.91553 19ZM16.9155 14C16.9155 15.1046 16.0201 16 14.9155 16C13.811 16 12.9155 15.1046 12.9155 14C12.9155 12.8954 13.811 12 14.9155 12C16.0201 12 16.9155 12.8954 16.9155 14Z"
+            stroke="#283652" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <h3>Monitoring
+        </h3>
+      </div>
+      <div class="card_text">
+        <p>Establishing monitoring mechanisms for prompt response to security events & real-time surveillance to
+          preserve sensitive information integrity and confidentiality.</p>
+      </div>
+    </div>
+
+    <div class="card card_plus3 card_with_text">
+      <div class="card_title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+          <path
+            d="M17.9155 9V7C17.9155 5.89543 17.0201 5 15.9155 5H5.91553C4.81096 5 3.91553 5.89543 3.91553 7V13C3.91553 14.1046 4.81096 15 5.91553 15H7.91553M9.91553 19H19.9155C21.0201 19 21.9155 18.1046 21.9155 17V11C21.9155 9.89543 21.0201 9 19.9155 9H9.91553C8.81096 9 7.91553 9.89543 7.91553 11V17C7.91553 18.1046 8.81096 19 9.91553 19ZM16.9155 14C16.9155 15.1046 16.0201 16 14.9155 16C13.811 16 12.9155 15.1046 12.9155 14C12.9155 12.8954 13.811 12 14.9155 12C16.0201 12 16.9155 12.8954 16.9155 14Z"
+            stroke="#283652" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <h3>Infrastructure Security
+        </h3>
+      </div>
+      <div class="card_text">
+        <p>Robust security measures are implemented to secure the MO Manage infrastructure against potential threats.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+</body>

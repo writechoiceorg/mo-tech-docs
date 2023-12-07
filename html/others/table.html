@@ -1,16 +1,19 @@
 <style>
-  .table_container, table {
+  .table_container,
+  table {
     border-radius: 6px !important;
     border: 1px solid var(--border-foundations-subtle, #E7EAEE);
     background: var(--background-foundations-default, #FFF);
     align-items: flex-start;
   }
 
-  .table_container tbody, table tbody {
+  .table_container tbody,
+  table tbody {
     border-radius: 6px !important;
   }
 
-  .table_container th, table th {
+  .table_container th,
+  table th {
     padding: 30px 32px !important;
     align-items: center !important;
     align-self: stretch !important;
@@ -27,7 +30,8 @@
     line-height: 18px !important;
   }
 
-  .table_container td, table td {
+  .table_container td,
+  table td {
     background: var(--background-foundations-default, #FFF) !important;
     border: 0 !important;
     border-bottom: 1px solid var(--border-foundations-subtle, #E5E6E9) !important;
@@ -42,27 +46,208 @@
     font-style: normal !important;
     font-weight: 400 !important;
     line-height: 18px !important;
+    justify-content: center !important;
   }
 
   .table_container .bottom_row {
     border-bottom: 0 !important;
   }
+
+  .check {
+    width: 23px;
+    height: 23px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .check.check_true {
+    border: 1px solid #26D07C;
+    background: #E7FFF3;
+  }
+
+  .check.check_false {
+    border: 1px solid #D02626;
+    background: #FFE7E7;
+  }
 </style>
 
 
 <body>
-  <table class="table_container">
+
+  <table>
     <tr>
-      <th>Property</th>
-      <th>Value</th>
+      <th>Function</th>
+      <th>Sandbox</th>
+      <th>Client Validation</th>
+      <th>Production</th>
     </tr>
     <tr>
-      <td><code>command</code></td>
-      <td><code>jump_to_the_next_cycle_start_date</code></td>
+      <td>Uses a standard product and program.</td>
+      <td>
+        <div class="check check_true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+            <path d="M12 1L4.4375 8L1 4.81818" stroke="#208F59" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="check check_false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
+            <path d="M1 1.5L10 10.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M1 10.5L10 1.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="check check_false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
+            <path d="M1 1.5L10 10.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M1 10.5L10 1.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+        </div>
+      </td>
     </tr>
     <tr>
-      <td class="bottom_row"><code>command</code></td>
-      <td class="bottom_row"><code>pay_all_issued_invoices</code></td>
+      <td>Test environment, no movement of real funds.</td>
+      <td>
+        <div class="check check_true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+            <path d="M12 1L4.4375 8L1 4.81818" stroke="#208F59" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="check check_true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+            <path d="M12 1L4.4375 8L1 4.81818" stroke="#208F59" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="check check_false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
+            <path d="M1 1.5L10 10.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M1 10.5L10 1.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Uses your specific product and program configurations.</td>
+      <td>
+        <div class="check check_false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
+            <path d="M1 1.5L10 10.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M1 10.5L10 1.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="check check_true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+            <path d="M12 1L4.4375 8L1 4.81818" stroke="#208F59" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="check check_true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+            <path d="M12 1L4.4375 8L1 4.81818" stroke="#208F59" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Access to real-world transactions like ATM withdrawals, refunds, and ACH direct deposits.</td>
+      <td>
+        <div class="check check_false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
+            <path d="M1 1.5L10 10.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M1 10.5L10 1.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="check check_true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+            <path d="M12 1L4.4375 8L1 4.81818" stroke="#208F59" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="check check_false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
+            <path d="M1 1.5L10 10.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M1 10.5L10 1.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Acts on live customer data.</td>
+      <td>
+        <div class="check check_false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
+            <path d="M1 1.5L10 10.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M1 10.5L10 1.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="check check_true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+            <path d="M12 1L4.4375 8L1 4.81818" stroke="#208F59" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="check check_true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+            <path d="M12 1L4.4375 8L1 4.81818" stroke="#208F59" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>Live product, transactions move real funds.</td>
+      <td>
+        <div class="check check_false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
+            <path d="M1 1.5L10 10.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+            <path d="M1 10.5L10 1.5" stroke="#E01600" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="check check_true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+            <path d="M12 1L4.4375 8L1 4.81818" stroke="#208F59" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </td>
+      <td>
+        <div class="check check_true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+            <path d="M12 1L4.4375 8L1 4.81818" stroke="#208F59" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+      </td>
     </tr>
   </table>
+
 </body>
