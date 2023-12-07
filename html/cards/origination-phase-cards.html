@@ -1,5 +1,5 @@
 <style>
-  .card_container4 {
+  .card_container3 {
     display: flex;
     gap: 7px;
     flex-wrap: wrap;
@@ -7,7 +7,7 @@
     justify-content: center;
   }
 
-  .card_container4 .card {
+  .card_container3 .card {
     display: flex;
     border: 1px solid #e5e7eb;
     text-align: center;
@@ -24,13 +24,13 @@
     border: 1px solid #F0F0F0;
   }
 
-  .card_container4 .card:hover {
+  .card_container3 .card:hover {
     cursor: pointer;
     border-color: var(--color-primary);
     box-shadow: 0 2px 4px rgba(12, 30, 61, 0.221);
   }
 
-  .card_container4 .card_title {
+  .card_container3 .card_title {
     width: 100%;
     display: flex;
     align-items: center;
@@ -38,45 +38,45 @@
     gap: 10px;
   }
 
-  .card_container4 .card_title .card_img {
+  .card_container3 .card_title .card_img {
     width: 20px;
     height: 20px;
     flex-shrink: 0;
     border-radius: 4.444px;
-    border: 0.556px solid transparent;
+    border: 0.556px solid #244693;
     background: url(<path-to-image>), lightgray 0.592px 1.34px / 93.274% 87.542% no-repeat, #FFF;
     margin: 0;
   }
 
-  .card_container4 .card_title .equifax_logo {
+  .card_container3 .card_title .equifax_logo {
     background-color: #B32541;
   }
 
-  .card_container4 .card_title .truora_logo {
+  .card_container3 .card_title .truora_logo {
     border-color: #4860F5;
   }
 
-  .card_container4 .card_title .metamap_logo {
+  .card_container3 .card_title .metamap_logo {
     border-color: #EA6766;
   }
 
-  .card_container4 .card_title .onfido_logo {
+  .card_container3 .card_title .onfido_logo {
     border-color: #4860F5;
   }
 
-  .card_container4 .card_title .authentix_logo {
+  .card_container3 .card_title .authentix_logo {
     border-color: #F86E00;
   }
 
-  .card_container4 .card_title .iq_decision_logo {
+  .card_container3 .card_title .iq_decision_logo {
     border-color: #2C6CBA;
   }
 
-  .card_container4 .card_title .equifax_logo svg {
+  .card_container3 .card_title .equifax_logo svg {
     margin-top: -5px;
   }
 
-  .card_container4 .card_title h3 {
+  .card_container3 .card_title h3 {
     margin: 0;
     color: #28304E;
     font-feature-settings: 'clig' off, 'liga' off;
@@ -87,36 +87,61 @@
     line-height: 18px;
   }
 
-  .card_container4 .card_text p {
+  .card_container3 .card_text p {
     font-size: 1.2em;
     margin: 10px 0 0 0;
   }
 
   .long_title {
-
+    
     text-align: start;
   }
 </style>
 </head>
 
 <body>
-  <div class="card_container4">
+  <div class="card_container3">
 
-    <div class="card" onclick="window.location='https://www.docusign.com/'">
+    <div class="card" onclick="window.location='https://www.lendflow.com/credit-decisioning'">
       <div class="card_title">
-        <img class="card_img"
-          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/docusign-logo.png"
-          alt="DocuSign logo">
-        <h3>DocuSign</h3>
+        <img
+          class="card_img"
+          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/lendflow-logo.png"
+          alt="lendflow logo">
+        <h3>Lendflow</h3>
       </div>
     </div>
 
-    <div class="card" onclick="window.location='https://www.adobe.com/'">
+    <div class="card" onclick="window.location='https://www.uflow.biz/'">
       <div class="card_title">
-        <img class="card_img"
-          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/adobe-logo.png"
-          alt="Adobe logo">
-        <h3>Adobe</h3>
+        <img
+          class="card_img"
+          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/uflow-logo.png"
+          alt="Uflow logo">
+        <h3>Uflow</h3>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location='https://www.provenir.com/'">
+      <div class="card_title">
+        <img
+          class="card_img"
+          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/provenir-logo.png"
+          alt="Provenir logo">
+        <h3>Provenir</h3>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location='https://iqdecisionengine.com/'">
+      <div class="card_title">
+        <img
+          class="card_img iq_decision_logo"
+          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/iq-decision-logo.png"
+          alt="IQ Decisioning Engine logo">
+          <div class="long_title">
+            <h3>IQ Decision</h3>
+            <h3>Engine</h3>
+          </div>
       </div>
     </div>
 
