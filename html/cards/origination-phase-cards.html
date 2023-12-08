@@ -1,5 +1,5 @@
 <style>
-  .card_container3 {
+  .card_container2 {
     display: flex;
     gap: 7px;
     flex-wrap: wrap;
@@ -7,15 +7,15 @@
     justify-content: center;
   }
 
-  .card_container3 .card {
+  .card_container2 .card {
     display: flex;
     border: 1px solid #e5e7eb;
     text-align: center;
-    /* padding: 1rem; */
+    padding: 1rem;
     color: #0C1E3D;
     justify-content: center;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    min-width: 179px;
+    min-width: 241px;
     height: 82px;
     flex-grow: 1;
     align-items: center;
@@ -24,13 +24,13 @@
     border: 1px solid #F0F0F0;
   }
 
-  .card_container3 .card:hover {
+  .card_container2 .card:hover {
     cursor: pointer;
     border-color: var(--color-primary);
     box-shadow: 0 2px 4px rgba(12, 30, 61, 0.221);
   }
 
-  .card_container3 .card_title {
+  .card_container2 .card_title {
     width: 100%;
     display: flex;
     align-items: center;
@@ -38,7 +38,7 @@
     gap: 10px;
   }
 
-  .card_container3 .card_title .card_img {
+  .card_container2 .card_title .card_img {
     width: 20px;
     height: 20px;
     flex-shrink: 0;
@@ -48,35 +48,35 @@
     margin: 0;
   }
 
-  .card_container3 .card_title .equifax_logo {
+  .card_container2 .card_title .equifax_logo {
     background-color: #B32541;
   }
 
-  .card_container3 .card_title .truora_logo {
+  .card_container2 .card_title .truora_logo {
     border-color: #4860F5;
   }
 
-  .card_container3 .card_title .metamap_logo {
+  .card_container2 .card_title .metamap_logo {
     border-color: #EA6766;
   }
 
-  .card_container3 .card_title .onfido_logo {
+  .card_container2 .card_title .jumio_logo {
+    border-color: transparent !important;
+  }
+
+  .card_container2 .card_title .onfido_logo {
     border-color: #4860F5;
   }
 
-  .card_container3 .card_title .authentix_logo {
-    border-color: #F86E00;
+  .card_container2 .card_title .authentix_logo {
+    border-color: transparent;
   }
 
-  .card_container3 .card_title .iq_decision_logo {
-    border-color: #2C6CBA;
-  }
-
-  .card_container3 .card_title .equifax_logo svg {
+  .card_container2 .card_title .equifax_logo svg {
     margin-top: -5px;
   }
 
-  .card_container3 .card_title h3 {
+  .card_container2 .card_title h3 {
     margin: 0;
     color: #28304E;
     font-feature-settings: 'clig' off, 'liga' off;
@@ -87,63 +87,63 @@
     line-height: 18px;
   }
 
-  .card_container3 .card_text p {
+  .card_container2 .card_text p {
     font-size: 1.2em;
     margin: 10px 0 0 0;
-  }
-
-  .long_title {
-    
-    text-align: start;
   }
 </style>
 </head>
 
 <body>
-  <div class="card_container3">
 
-    <div class="card" onclick="window.location='https://www.lendflow.com/credit-decisioning'">
+  <div class="card_container2">
+    <div class="card"
+      onclick="window.location='https://www.truora.com/es/?utm_source=google&utm_medium=paid_search&utm_campaign=tru02_search_branding_ao&utm_content=branding&utm_term=keyword&utm_term=truora&utm_campaign=TRU02_Search_Branding_AO&utm_source=adwords&utm_medium=ppc&hsa_acc=1279575897&hsa_cam=20432197610&hsa_grp=157823029851&hsa_ad=668842509107&hsa_src=g&hsa_tgt=kwd-363567533217&hsa_kw=truora&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAjwyY6pBhA9EiwAMzmfwShHuxuKD8DhMakt9NJnvbhx2vMsOPnvDUdl8msnthHVNTe2wGvbHBoC6OYQAvD_BwE'">
       <div class="card_title">
-        <img
-          class="card_img"
-          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/lendflow-logo.png"
-          alt="lendflow logo">
-        <h3>Lendflow</h3>
+        <img class="card_img truora_logo"
+          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/truora-logo.png"
+          alt="Truora logo">
+        <h3>Truora</h3>
       </div>
     </div>
 
-    <div class="card" onclick="window.location='https://www.uflow.biz/'">
+    <div class="card" onclick="window.location='https://www.metamap.com/'">
       <div class="card_title">
-        <img
-          class="card_img"
-          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/uflow-logo.png"
-          alt="Uflow logo">
-        <h3>Uflow</h3>
+        <img class="card_img metamap_logo"
+          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/metacap-logo.png"
+          alt="metamap logo">
+        <h3>Metamap</h3>
       </div>
     </div>
 
-    <div class="card" onclick="window.location='https://www.provenir.com/'">
+    <div class="card"
+      onclick="window.location='https://go.jumio.com/ppc-brand-idv?utm_source=google&utm_medium=cpc&utm_campaign=PPC_KYCAML_Request_Info&utm_term=Unbrand_IDV&gad=1&gclid=CjwKCAjwyY6pBhA9EiwAMzmfwSZ2q34oIu-HvtX0th6Q2Lor7HrC3V_-HVZg-TWWZtHsS1q__-IvhBoCl4YQAvD_BwE'">
       <div class="card_title">
-        <img
-          class="card_img"
-          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/provenir-logo.png"
-          alt="Provenir logo">
-        <h3>Provenir</h3>
+        <img class="card_img jumio_logo"
+          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/jumio-logo.png"
+          alt="Jumio logo">
+        <h3>Jumio</h3>
       </div>
     </div>
 
-    <div class="card" onclick="window.location='https://iqdecisionengine.com/'">
+    <div class="card" onclick="window.location='https://onfido.com/'">
       <div class="card_title">
-        <img
-          class="card_img iq_decision_logo"
-          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/iq-decision-logo.png"
-          alt="IQ Decisioning Engine logo">
-          <div class="long_title">
-            <h3>IQ Decision</h3>
-            <h3>Engine</h3>
-          </div>
+        <img class="card_img onfido_logo"
+          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/onfido-logo.png"
+          alt="Onfido logo">
+        <h3>Onfido</h3>
+      </div>
+    </div>
+
+    <div class="card" onclick="window.location='https://authentix.com/'">
+      <div class="card_title">
+        <img class="card_img authentix_logo"
+          src="https://raw.githubusercontent.com/writechoiceorg/mo-tech-docs/main/images/origination-phase/authentix-logo.png"
+          alt="Authentix logo">
+        <h3>Authentix</h3>
       </div>
     </div>
 
   </div>
+
 </body>
