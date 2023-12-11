@@ -13,7 +13,7 @@
     padding: 0 18px;
     color: #0C1E3D;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    width: 365px;
+    width: 49%;
     height: 122px;
     flex-shrink: 0;
     border-radius: 6px;
@@ -84,6 +84,32 @@
 
   .api_card_container .card .card_title .delete {
     background-color: #d02626;
+  }
+
+  @media screen and (max-width: 1430px) {
+    .api_card_container .card {
+      width: 350px;
+    }
+  }
+
+  @media screen and (max-width: 1360px) {
+    .api_card_container .card {
+      width: 330px;
+    }
+  }
+
+  @media screen and (max-width: 760px) {
+    .api_card_container .card {
+      width: 300px;
+    }
+  }
+
+  @media screen and (max-width: 410px) {
+    .api_card_container .card {
+      width: 90%;
+      height: fit-content;
+      padding: 10px 9px;
+    }
   }
 </style>
 
