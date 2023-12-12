@@ -1,3 +1,5 @@
+<!------------------ 12/12/2023 ---------------- -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
@@ -786,7 +788,108 @@
     background: #FFE7E7;
   }
 
-  /* ------------------- x ------------------- */
+  /* ------------------- CARDS WITH TEXT ------------------- */
+  .card_with_text_container {
+    display: flex;
+    gap: 7px;
+    margin: 0;
+    flex-wrap: wrap;
+    align-self: center;
+    justify-content: center;
+  }
+
+  .card_with_text_container .card {
+    border-radius: 6px;
+    border: 1px solid #F0F0F0;
+    display: flex;
+    text-align: center;
+    padding: 1rem;
+    color: #0C1E3D;
+    width: 49%;
+    align-items: start;
+    justify-content: start;
+    transition: all 0.15s ease-in-out;
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 42px 35px;
+  }
+
+  .card_with_text_container .content {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: Inter;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-size: 14px !important;
+    font-style: normal;
+  }
+
+  .card_with_text_container .content h3 {
+    margin: 0;
+    font-weight: 700;
+    line-height: 18px;
+    font-size: 14px !important;
+  }
+
+  .card_with_text_container .content p {
+    margin: 0;
+    font-weight: 400;
+    line-height: 18px;
+    font-size: 14px !important;
+  }
+
+  .card_with_text_container svg {
+    min-width: 13px;
+    min-height: 13px;
+    top: -5px;
+  }
+
+  .card_with_text_container .card:nth-child(3n-2) {
+    background-color: #CCD4FF;
+    color: #4860F5;
+  }
+
+  .card_with_text_container .card:nth-child(3n-2) svg path {
+    stroke: #4860F5;
+  }
+
+  .card_with_text_container .card:nth-child(3n-1) {
+    background-color: #4860F5;
+    color: #FFF;
+  }
+
+  .card_with_text_container .card:nth-child(3n-1) svg path,
+  .card_with_text_container .card:nth-child(3n) svg path {
+    stroke: #FFF;
+  }
+
+  .card_with_text_container .card:nth-child(3n) {
+    background-color: #F2F4FF;
+    color: #4860F5;
+  }
+
+  @media screen and (max-width: 900px) {
+    .card_with_text_container .card {
+      width: 95%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .card_with_text_container .card {
+      width: 49%;
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    .card_with_text_container .card {
+      width: 95%;
+      padding: 21px 17px;
+    }
+  }
+
   /* ------------------- x ------------------- */
   /* ------------------- x ------------------- */
 </style>
@@ -794,20 +897,20 @@
 <!------------------------------------------- -->
 <!------------- Table of Contents ----------- -->
 <!------------------------------------------- -->
-<!-- GENERAL CONFIGURATION ---------------- 6 -->
-<!-- IMAGES ------------------------------ 11 -->
-<!-- CALLOUTS ---------------------------- 21 -->
-<!-- ACCOUNTS CARDS --------------------- 129 -->
-<!-- KEY PROCESSES CARDS ---------------- 235 -->
-<!-- LINKS ------------------------------ 321 -->
-<!-- README RECIPES --------------------- 338 -->
-<!-- PAGINATION ------------------------- 362 -->
-<!-- ACCORDION -------------------------- 391 -->
-<!-- TABLE ------------------------------ 502 -->
-<!-- SIDEBAR ---------------------------- 552 -->
-<!-- API CARDS -------------------------- 646 -->
-<!-- CHECKMARKS ------------------------- 767 -->
-<!--  ------------------------- 789 -->
-<!--  -------------------------  -->
+<!-- GENERAL CONFIGURATION ---------------- 8 -->
+<!-- IMAGES ------------------------------ 13 -->
+<!-- CALLOUTS ---------------------------- 23 -->
+<!-- ACCOUNTS CARDS --------------------- 131 -->
+<!-- KEY PROCESSES CARDS ---------------- 237 -->
+<!-- LINKS ------------------------------ 323 -->
+<!-- README RECIPES --------------------- 340 -->
+<!-- PAGINATION ------------------------- 364 -->
+<!-- ACCORDION -------------------------- 393 -->
+<!-- TABLE ------------------------------ 504 -->
+<!-- SIDEBAR ---------------------------- 554 -->
+<!-- API CARDS -------------------------- 648 -->
+<!-- CHECKMARKS ------------------------- 769 -->
+<!-- CARDS WITH TEXT -------------------- 791 -->
+<!--  ------------------------- 893 -->
 <!--  -------------------------  -->
 <!--  -------------------------  -->

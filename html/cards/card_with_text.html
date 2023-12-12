@@ -1,5 +1,5 @@
 <style>
-  .card_container {
+  .card_with_text_container {
     display: flex;
     gap: 7px;
     margin: 0;
@@ -8,11 +8,10 @@
     justify-content: center;
   }
 
-  .card_container .card {
+  .card_with_text_container .card {
     border-radius: 6px;
     border: 1px solid #F0F0F0;
     display: flex;
-    flex-direction: column;
     text-align: center;
     padding: 1rem;
     color: #0C1E3D;
@@ -21,179 +20,174 @@
     justify-content: start;
     transition: all 0.15s ease-in-out;
     display: flex;
-    align-items: center;
-    gap: 5px;
+    gap: 10px;
     flex-shrink: 0;
     box-sizing: border-box;
     padding: 42px 35px;
   }
 
-  .card_container .card_title {
-    width: 100%;
-    display: flex;
-    align-items: start;
-    justify-content: start;
+  .card_with_text_container .content {
     text-align: start;
-    gap: 15px;
-    font-feature-settings: 'clig' off, 'liga' off;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     font-family: Inter;
-    font-size: 14px;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-size: 14px !important;
     font-style: normal;
+  }
+
+  .card_with_text_container .content h3 {
+    margin: 0;
     font-weight: 700;
     line-height: 18px;
+    font-size: 14px !important;
   }
 
-  .card_container .card_title svg {
-    min-width: 13px;
-    min-height: 13px;
-    margin-top: 5px;
-  }
-
-  .card_container .card_title .card-img {
-    max-width: 30px;
-    margin: 0 !important;
-  }
-
-  .card_container .card_title h3 {
+  .card_with_text_container .content p {
     margin: 0;
-  }
-
-  .card_container .card_text {
-    display: flex;
-    justify-content: start;
-    width: 100%;
-  }
-
-  .card_container .card_with_text .card_text p {
-    margin: 10px 0 0 0;
-    justify-self: start;
-    align-self: flex-start;
-    text-align: start;
-    font-feature-settings: 'clig' off, 'liga' off;
-    font-family: Inter;
-    font-size: 14px;
-    font-style: normal;
     font-weight: 400;
     line-height: 18px;
+    font-size: 14px !important;
   }
 
-  .card_container .card:nth-child(3n-2) {
+  .card_with_text_container svg {
+    min-width: 13px;
+    min-height: 13px;
+    top: -5px;
+  }
+
+  .card_with_text_container .card:nth-child(3n-2) {
     background-color: #CCD4FF;
     color: #4860F5;
   }
 
-  .card_container .card:nth-child(3n-2) svg path {
+  .card_with_text_container .card:nth-child(3n-2) svg path {
     stroke: #4860F5;
   }
 
-  .card_container .card:nth-child(3n-1) {
+  .card_with_text_container .card:nth-child(3n-1) {
     background-color: #4860F5;
     color: #FFF;
   }
 
-  .card_container .card:nth-child(3n-1) svg path,
-  .card_container .card:nth-child(3n) svg path {
+  .card_with_text_container .card:nth-child(3n-1) svg path,
+  .card_with_text_container .card:nth-child(3n) svg path {
     stroke: #FFF;
   }
 
-  .card_container .card:nth-child(3n) {
+  .card_with_text_container .card:nth-child(3n) {
     background-color: #F2F4FF;
     color: #4860F5;
+  }
+
+  @media screen and (max-width: 900px) {
+    .card_with_text_container .card{
+      width: 95%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .card_with_text_container .card{
+      width: 49%;
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    .card_with_text_container .card{
+      width: 95%;
+      padding: 21px 17px;
+    }
   }
 </style>
 
 <body>
 
-  <div class="card_container">
-    <div class="card card_plus3 card_with_text">
-      <div class="card_title">
+  <div class="card_with_text_container">
+    <div class="card">
+      <div class="icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
           <path
             d="M8.0041 0.0273786C8.32581 0.136449 8.51344 0.539907 8.42316 0.928515L5.74206 12.4665C5.65172 12.8551 5.31773 13.0817 4.99598 12.9726C4.67424 12.8636 4.48663 12.4601 4.57694 12.0715L7.25805 0.533527C7.34833 0.144912 7.68238 -0.0816988 8.0041 0.0273786ZM3.59999 2.88246C3.83628 3.16787 3.83628 3.63061 3.59999 3.91602L1.46076 6.49995L3.59999 9.08382C3.83628 9.36922 3.83628 9.83198 3.59999 10.1174C3.3637 10.4028 2.98059 10.4028 2.7443 10.1174L0.177224 7.01672C0.0637497 6.87962 0 6.69377 0 6.49995C0 6.30606 0.0637497 6.12021 0.177224 5.98317L2.7443 2.88246C2.98059 2.59705 3.3637 2.59705 3.59999 2.88246ZM9.40004 3.91602C9.1637 3.63061 9.1637 3.16787 9.40004 2.88246C9.63632 2.59705 10.0194 2.59705 10.2557 2.88246L12.8228 5.98317C12.9362 6.12021 13 6.30606 13 6.49995C13 6.69377 12.9362 6.87962 12.8228 7.01672L10.2557 10.1174C10.0194 10.4028 9.63632 10.4028 9.40004 10.1174C9.1637 9.83198 9.1637 9.36922 9.40004 9.08382L11.5393 6.49995L9.40004 3.91602Z"
             fill="#28304E" />
         </svg>
-        <h3>Security in Development, QA, Code Verification (DevSecOps)</h3>
       </div>
-      <div class="card_text">
+      <div class="content">
+        <h3>Security in Development, QA, Code Verification (DevSecOps)</h3>
         <p>DevSecOps methodologies ensure secure coding throughout the development life cycle.</p>
       </div>
     </div>
 
-    <div class="card card_plus3 card_with_text">
-      <div class="card_title">
+    <div class="card">
+      <div class="icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
           <path
             d="M5.7789 0C8.97049 0 11.5578 2.5873 11.5578 5.7789C11.5578 7.12974 11.0943 8.37227 10.3177 9.35625L12.8009 11.8394C13.0664 12.1049 13.0664 12.5354 12.8009 12.8009C12.5354 13.0664 12.1049 13.0664 11.8394 12.8009L9.35625 10.3177C8.37227 11.0943 7.12974 11.5578 5.7789 11.5578C2.5873 11.5578 0 8.97049 0 5.7789C0 2.5873 2.5873 0 5.7789 0ZM5.7789 1.35974C3.33827 1.35974 1.35974 3.33827 1.35974 5.7789C1.35974 8.21957 3.33827 10.1981 5.7789 10.1981C8.21957 10.1981 10.1981 8.21957 10.1981 5.7789C10.1981 3.33827 8.21957 1.35974 5.7789 1.35974Z"
             fill="white" />
         </svg>
-        <h3>GRC Strategy (Governance, Risk, and Compliance)
-        </h3>
       </div>
-      <div class="card_text">
+      <div class="content">
+        <h3>GRC Strategy (Governance, Risk, and Compliance)</h3>
         <p>Compliance with industry standards, regulations, and effective risk management practices is essential for
           good governance.</p>
       </div>
     </div>
 
-    <div class="card card_plus3 card_with_text">
-      <div class="card_title">
+    <div class="card">
+      <div class="icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="13" viewBox="0 0 14 13" fill="none">
           <path
             d="M5.26357 0C5.68883 0 6.09112 0.199463 6.35677 0.542107L7.33642 1.80556H12.6C13.3732 1.80556 14 2.45226 14 3.25V11.5556C14 12.3533 13.3732 13 12.6 13H1.4C0.626801 13 0 12.3533 0 11.5556V1.44444C0 0.646699 0.626801 0 1.4 0H5.26357ZM5.26357 1.44444H1.4V11.5556H12.6V3.25H7.33642C6.91117 3.25 6.50888 3.05054 6.24323 2.70789L5.26357 1.44444ZM7 5.05556C7.77322 5.05556 8.4 5.70223 8.4 6.5C8.4 6.99353 8.16011 7.42922 7.79407 7.68976L7.7 7.75118V9.38889C7.7 9.78777 7.38661 10.1111 7 10.1111C6.64101 10.1111 6.34514 9.83231 6.30471 9.47312L6.3 9.38889V7.75118C5.88154 7.50143 5.6 7.03466 5.6 6.5C5.6 5.70223 6.22678 5.05556 7 5.05556Z"
             fill="#28304E" />
         </svg>
-        <h3>Data Protection and Privacy
-        </h3>
       </div>
-      <div class="card_text">
+      <div class="content">
+        <h3>Data Protection and Privacy</h3>
         <p>Personal data is protected and privacy-centric, compliant with country laws, using structured data
           architecture managed by MO Manage.</p>
       </div>
     </div>
 
-    <div class="card card_plus3 card_with_text">
-      <div class="card_title">
+    <div class="card">
+      <div class="icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14" fill="none">
           <path fill-rule="evenodd" clip-rule="evenodd"
             d="M5.53187 0.084895C5.83367 -0.0282983 6.16633 -0.0282983 6.46813 0.084895L11.1348 1.83489C11.6553 2.03004 12 2.52754 12 3.08333V6.65846C12 8.93112 10.716 11.0087 8.68327 12.0251L6.4472 13.1431C6.16567 13.2839 5.83433 13.2839 5.5528 13.1431L3.31672 12.0251C1.28401 11.0087 0 8.93112 0 6.65846V3.08333C0 2.52754 0.344767 2.03004 0.865167 1.83489L5.53187 0.084895ZM6 1.33333L1.33333 3.08333V6.65846C1.33333 8.42605 2.33201 10.042 3.913 10.8325L6 11.876V1.33333Z"
             fill="#28304E" />
         </svg>
-        <h3>Vulnerability Management
-        </h3>
       </div>
-      <div class="card_text">
+      <div class="content">
+        <h3>Vulnerability Management</h3>
         <p>The security team continuously evaluates for vulnerabilities, proactively covering potential gaps to enhance
           system resilience.</p>
       </div>
     </div>
 
-    <div class="card card_plus3 card_with_text">
-      <div class="card_title">
+    <div class="card">
+      <div class="icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
           <path fill-rule="evenodd" clip-rule="evenodd"
             d="M13.0943 1.51238L13.8316 4.13946C14.0353 4.86489 13.5843 5.61058 12.8245 5.80497L11.1514 6.23299V7.28024C11.1514 7.65577 11.4702 7.96018 11.8635 7.96018H12.5757C12.5757 7.58472 12.8945 7.28024 13.2878 7.28024C13.6812 7.28024 14 7.58472 14 7.96018V9.32006C14 9.69559 13.6812 10 13.2878 10C12.8945 10 12.5757 9.69559 12.5757 9.32006H11.8635C10.6836 9.32006 9.72706 8.40683 9.72706 7.28024V6.59737L5.0887 7.78401C4.47443 7.94114 3.82549 7.69051 3.49848 7.16975L1.35143 3.75074C0.986488 3.16958 1.30561 2.4165 1.99113 2.24112L10.4777 0.0700103C11.6175 -0.221562 12.789 0.424205 13.0943 1.51238ZM0.349855 4.09472C0.664245 3.91724 1.06327 3.99696 1.27892 4.26806L1.32531 4.33399L2.48261 6.20308C2.68277 6.52632 2.57056 6.94333 2.23198 7.13439C1.91759 7.31187 1.51857 7.23215 1.30291 6.96105L1.25652 6.89512L0.0992257 5.02603C-0.100933 4.70279 0.0112816 4.28585 0.349855 4.09472ZM10.8464 1.38355L2.81575 3.43801L4.72006 6.4705L12.4558 4.49146L11.7186 1.86435C11.6168 1.50162 11.2263 1.28636 10.8464 1.38355Z"
             fill="white" />
         </svg>
-        <h3>Monitoring
-        </h3>
       </div>
-      <div class="card_text">
+      <div class="content">
+        <h3>Monitoring</h3>
         <p>Establishing monitoring mechanisms for prompt response to security events & real-time surveillance to
           preserve sensitive information integrity and confidentiality.</p>
       </div>
     </div>
 
-    <div class="card card_plus3 card_with_text">
-      <div class="card_title">
+    <div class="card">
+      <div class="icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 14 12" fill="none">
           <path fill-rule="evenodd" clip-rule="evenodd"
             d="M3.15 0C3.69579 0 4.14431 0.39659 4.19519 0.903693L4.2 1V2H4.9V1C4.9 0.480201 5.31642 0.0530339 5.84888 0.00457764L5.95 0H8.05C8.59577 0 9.04431 0.39659 9.09519 0.903693L9.1 1V2H9.8V1C9.8 0.480201 10.2164 0.0530339 10.7489 0.00457764L10.85 0H12.95C13.4958 0 13.9443 0.39659 13.9952 0.903693L14 1V11C14 11.5198 13.5836 11.947 13.0511 11.9954L12.95 12H1.05C0.504211 12 0.0556856 11.6034 0.00480652 11.0963L0 11V1C0 0.480201 0.41642 0.0530339 0.948878 0.00457764L1.05 0H3.15ZM12.6 8.66667H10.5V10.6667H12.6V8.66667ZM9.1 8.66667H4.9V10.6667H9.1V8.66667ZM3.5 8.66667H1.4V10.6667H3.5V8.66667ZM12.6 6H7.7V7.33333H12.6V6ZM6.3 6H1.4V7.33333H6.3V6ZM2.8 1.33333H1.4V4.66667H12.6V1.33333H11.2V2.33333C11.2 2.88562 10.7299 3.33333 10.15 3.33333H8.75C8.17012 3.33333 7.7 2.88562 7.7 2.33333V1.33333H6.3V2.33333C6.3 2.88562 5.82988 3.33333 5.25 3.33333H3.85C3.2701 3.33333 2.8 2.88562 2.8 2.33333V1.33333Z"
             fill="#28304E" />
         </svg>
-        <h3>Infrastructure Security
-        </h3>
       </div>
-      <div class="card_text">
+      <div class="content">
+        <h3>Infrastructure Security</h3>
         <p>Robust security measures are implemented to secure the MO Manage infrastructure against potential threats.
         </p>
       </div>
