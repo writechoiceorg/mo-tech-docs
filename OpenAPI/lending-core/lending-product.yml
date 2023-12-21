@@ -36,6 +36,7 @@ paths:
       parameters:
         - name: offer_id
           in: path
+          description: Unique identifier of the Offer in MO.
           schema:
             type: string
           required: true
