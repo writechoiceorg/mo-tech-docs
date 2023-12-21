@@ -1,0 +1,4772 @@
+openapi: 3.1.0
+info:
+  title: Credit Card Product
+  version: '3.0'
+servers:
+  - url: https://mo-services-demo-cc-alpha.moprestamo.com
+tags:
+    - name: Onboarding
+    - name: Account Management
+    - name: Transactions
+    - name: Payments
+    - name: Disputes
+    - name: Bulk Cards
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      x-default: feebf600-5b52-485a-be26-17cc0debdaee
+      name: x-api-key
+security:
+  - sec0: []
+paths:
+  /products/segments/:
+    get:
+      summary: Get Segment
+      description: ''
+      tags:
+        - Onboarding
+      operationId: get-segment
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+        - name: line_of_credit
+          in: query
+          description: >-
+            Maximum range of the score or line of credit that the product has.
+            Ex: 1,000-10,000 is the score range for the platinum product or
+            segment
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 10000
+        - name: product_name
+          in: query
+          description: >-
+            Name of the product configured on the project of the program
+            manager.
+          schema:
+            type: string
+            default: platinum
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                        "status_code": 200,
+                        "status": "ok",
+                        "processing_time": 46,
+                        "response_data": {
+                            "product_id": "ef12dd2c-f660-40bc-a62b-a54245bda11a",
+                            "product_name": "platinum",
+                            "interest_rate": "42.00",
+                            "line_of_credit": "10000.00"
+                        },
+                        "system_timestamp": "2023-09-15T16:03:34.788-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 200
+                    default: 0
+                  status:
+                    type: string
+                    example: ok
+                  processing_time:
+                    type: integer
+                    example: 46
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      product_id:
+                        type: string
+                        example: ef12dd2c-f660-40bc-a62b-a54245bda11a
+                      product_name:
+                        type: string
+                        example: platinum
+                      interest_rate:
+                        type: string
+                        example: '42.00'
+                      line_of_credit:
+                        type: string
+                        example: '10000.00'
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-15T16:03:34.788-06:00'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Segment:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 46225,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "No segment found with the specified score",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-26T13:36:46.102-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 400
+                    default: 0
+                  status:
+                    type: string
+                    example: bad_request
+                  processing_time:
+                    type: integer
+                    example: 46225
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: No segment found with the specified score
+                            code:
+                              type: string
+                              example: invalid
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-26T13:36:46.102-06:00'
+      deprecated: false
+  /customers/:
+    post:
+      summary: Create Customer
+      description: ''
+      tags:
+        - Onboarding
+      operationId: create-customer
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - line_of_credit
+                - product_id
+                - external_id
+                - first_name
+                - last_name
+                - city
+                - address
+                - payment_day
+              properties:
+                line_of_credit:
+                  type: integer
+                  description: >-
+                    Line of credit for the credit card account. Also called open
+                    to buy or OTB on the processors.
+                  default: 10000
+                  format: int32
+                product_id:
+                  type: string
+                  description: >-
+                    Product identifier given by MO. Remember that products are
+                    created in advance and represent segments of scores or line
+                    of credits.
+                  default: ef12dd2c-f660-40bc-a62b-a54245bda11a
+                external_id:
+                  type: string
+                  description: >-
+                    External identifier provided by the program manager for the
+                    customer.
+                  default: motest88
+                first_name:
+                  type: string
+                  description: First name of the customer.
+                  default: Jon
+                middle_name:
+                  type: string
+                  description: Middle name of the customer.
+                last_name:
+                  type: string
+                  description: Last name of the customer.
+                  default: Snow
+                city:
+                  type: string
+                  description: City that the customer registered on the application.
+                  default: Toronto
+                address:
+                  type: string
+                  description: Address registered by the customer on the application.
+                  default: 218 Lawrence Stree
+                postal_code:
+                  type: string
+                  description: >-
+                    Postal code of the address that the customer registered on
+                    the application.
+                payment_day:
+                  type: string
+                  description: >-
+                    Maximum payment day or due date chosen by the customer on
+                    the application. Available options depend on the dates
+                    selected by the program manager.
+                  default: '2'
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                        "status_code": 201,
+                        "status": "created",
+                        "processing_time": 1342,
+                        "response_data": {
+                            "id": "876a5437-9acd-4cf7-bfe5-0eec083f98dc",
+                            "external_id": "motest88",
+                            "first_name": "Jon",
+                            "middle_name": "",
+                            "last_name": "Snow",
+                            "address": "calle 98 # 56 - 123",
+                            "city": "Bogota",
+                            "postal_code": "080001",
+                            "line_of_credit": {
+                                "pre_approved_amount": "20000.00",
+                                "product_id": "ef12dd2c-f660-40bc-a62b-a54245bda11a",
+                                "others": {
+                                    "line_of_credit": "20000",
+                                    "last_closing_date": "2023-09-05"
+                                }
+                            }
+                        },
+                        "system_timestamp": "2023-09-05T15:12:26.103-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 201
+                    default: 0
+                  status:
+                    type: string
+                    example: created
+                  processing_time:
+                    type: integer
+                    example: 1342
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 876a5437-9acd-4cf7-bfe5-0eec083f98dc
+                      external_id:
+                        type: string
+                        example: motest88
+                      first_name:
+                        type: string
+                        example: Jon
+                      middle_name:
+                        type: string
+                        example: ''
+                      last_name:
+                        type: string
+                        example: Snow
+                      address:
+                        type: string
+                        example: 'calle 98 # 56 - 123'
+                      city:
+                        type: string
+                        example: Bogota
+                      postal_code:
+                        type: string
+                        example: '080001'
+                      line_of_credit:
+                        type: object
+                        properties:
+                          pre_approved_amount:
+                            type: string
+                            example: '20000.00'
+                          product_id:
+                            type: string
+                            example: ef12dd2c-f660-40bc-a62b-a54245bda11a
+                          others:
+                            type: object
+                            properties:
+                              line_of_credit:
+                                type: string
+                                example: '20000'
+                              last_closing_date:
+                                type: string
+                                example: '2023-09-05'
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-05T15:12:26.103-06:00'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Customer:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 117,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "Customer already exists",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-26T10:57:05.569-06:00"
+                    }
+                Invalid Payment Day:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 12,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "\"44\" is not a valid choice.",
+                                    "code": "invalid_choice",
+                                    "field": "payment_day"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-26T10:57:35.560-06:00"
+                    }
+                Invalid Score:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 391,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "the score is not within the product's allowable range",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-26T10:59:11.942-06:00"
+                    }
+                Invalid Product:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 56,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "Product does not exists",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-26T11:00:35.974-06:00"
+                    }
+              schema:
+                oneOf:
+                  - title: Invalid Customer
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 117
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: Customer already exists
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-26T10:57:05.569-06:00'
+                  - title: Invalid Payment Day
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 12
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: '"44" is not a valid choice.'
+                                code:
+                                  type: string
+                                  example: invalid_choice
+                                field:
+                                  type: string
+                                  example: payment_day
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-26T10:57:35.560-06:00'
+                  - title: Invalid Score
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 391
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: >-
+                                    the score is not within the product's
+                                    allowable range
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-26T10:59:11.942-06:00'
+                  - title: Invalid Product
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 56
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: Product does not exists
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-26T11:00:35.974-06:00'
+      deprecated: false
+  /accounts/cards/:
+    post:
+      summary: Create Additional Card
+      description: ''
+      tags:
+        - Account Management
+      operationId: create-additional-card
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - account_card_external_id
+                - card_external_id
+              properties:
+                account_card_external_id:
+                  type: string
+                  description: >-
+                    Account card identifier given by the processor to the
+                    customer.
+                  default: '126'
+                card_external_id:
+                  type: string
+                  description: >-
+                    Payment reference number PRN or credit card identifier given
+                    by the processor to track all transactions
+                  default: '563101002647'
+                others:
+                  type: string
+                  description: >-
+                    Additional information that the program manager wants to
+                    save on MO. All the information must be in a JSON.
+                  default: '{''processor_product_id'':''1234-abc''}'
+                  format: json
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                        "status_code": 201,
+                        "status": "created",
+                        "processing_time": 240,
+                        "response_data": {
+                            "external_id": "563101002647",
+                            "card_number": "518065XXXXXX5215",
+                            "brand": "visa",
+                            "card_type": "physical",
+                            "status": "default",
+                            "is_main": true,
+                            "others": {
+                                "product_id": "3031"
+                            },
+                            "id": "2949fd7e-fc68-4ac1-8abe-73fd9da38a8c"
+                        },
+                        "system_timestamp": "2023-09-05T15:10:25.683-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 201
+                    default: 0
+                  status:
+                    type: string
+                    example: created
+                  processing_time:
+                    type: integer
+                    example: 240
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      external_id:
+                        type: string
+                        example: '563101002647'
+                      card_number:
+                        type: string
+                        example: 518065XXXXXX5215
+                      brand:
+                        type: string
+                        example: visa
+                      card_type:
+                        type: string
+                        example: physical
+                      status:
+                        type: string
+                        example: default
+                      is_main:
+                        type: boolean
+                        example: true
+                        default: true
+                      others:
+                        type: object
+                        properties:
+                          product_id:
+                            type: string
+                            example: '3031'
+                      id:
+                        type: string
+                        example: 2949fd7e-fc68-4ac1-8abe-73fd9da38a8c
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-05T15:10:25.683-06:00'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Card Exists:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 95,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "There is already a card with this external_id",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T09:16:26.954-06:00"
+                    }
+                Invalid Acocunt:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 46,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The customer does not have an account card",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T09:17:20.099-06:00"
+                    }
+              schema:
+                oneOf:
+                  - title: Card Exists
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 95
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: >-
+                                    There is already a card with this
+                                    external_id
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T09:16:26.954-06:00'
+                  - title: Invalid Acocunt
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 46
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The customer does not have an account card
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T09:17:20.099-06:00'
+      deprecated: false
+  /customers/confirm/:
+    post:
+      summary: Confirm Customer
+      description: ''
+      tags:
+        - Onboarding
+      operationId: confirm-customer
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - external_id
+                - card_external_id
+              properties:
+                external_id:
+                  type: string
+                  description: >-
+                    External identifier provided by the program manager for the
+                    customer.
+                  default: motest88
+                card_external_id:
+                  type: string
+                  description: >-
+                    Payment reference number PRN or credit card identifier given
+                    by the processor to track all transactions
+                  default: '563101002647'
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                        "status_code": 202,
+                        "status": "accepted",
+                        "processing_time": 6509,
+                        "response_data": {
+                            "external_id": "11",
+                            "status": "active",
+                            "cards": [
+                                {
+                                    "external_id": "563101002647",
+                                    "card_number": "518065XXXXXX5215",
+                                    "brand": "visa",
+                                    "card_type": "physical",
+                                    "status": "default",
+                                    "is_main": true,
+                                    "others": {
+                                        "product_id": "3031"
+                                    }
+                                }
+                            ],
+                            "others": {}
+                        },
+                        "system_timestamp": "2023-09-14T09:08:37.727-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 202
+                    default: 0
+                  status:
+                    type: string
+                    example: accepted
+                  processing_time:
+                    type: integer
+                    example: 6509
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      external_id:
+                        type: string
+                        example: '11'
+                      status:
+                        type: string
+                        example: active
+                      cards:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            external_id:
+                              type: string
+                              example: '563101002647'
+                            card_number:
+                              type: string
+                              example: 518065XXXXXX5215
+                            brand:
+                              type: string
+                              example: visa
+                            card_type:
+                              type: string
+                              example: physical
+                            status:
+                              type: string
+                              example: default
+                            is_main:
+                              type: boolean
+                              example: true
+                              default: true
+                            others:
+                              type: object
+                              properties:
+                                product_id:
+                                  type: string
+                                  example: '3031'
+                      others:
+                        type: object
+                        properties: {}
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-14T09:08:37.727-06:00'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Not Allowed:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 5255,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The creation of anonymous customers is not allowed.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-05T15:14:23.993-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 400
+                    default: 0
+                  status:
+                    type: string
+                    example: bad_request
+                  processing_time:
+                    type: integer
+                    example: 5255
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: >-
+                                The creation of anonymous customers is not
+                                allowed.
+                            code:
+                              type: string
+                              example: invalid
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-05T15:14:23.993-06:00'
+      deprecated: false
+  /customers/{external_id}/:
+    get:
+      summary: Get Customer Information
+      description: ''
+      tags:
+        - Account Management
+      operationId: get-customer-information
+      parameters:
+        - name: external_id
+          in: path
+          description: >-
+            External identifier of the customer provided by the program manager
+            and saved on MO.
+          schema:
+            type: string
+            default: motest88
+          required: true
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                        "status_code": 200,
+                        "status": "ok",
+                        "processing_time": 928,
+                        "response_data": {
+                            "external_id": "motest88",
+                            "first_name": "Jon",
+                            "middle_name": "",
+                            "last_name": "Snow",
+                            "address": "calle 98 # 56 - 123",
+                            "city": "Bogota",
+                            "postal_code": "080001",
+                            "product": {
+                                "product_id": "ef12dd2c-f660-40bc-a62b-a54245bda11a",
+                                "interest_rate": "42.00"
+                            },
+                            "account_card": {
+                                "external_id": "126",
+                                "status": "active",
+                                "others": {},
+                                "cards": [
+                                    {
+                                        "external_id": "562101002409",
+                                        "brand": "visa",
+                                        "card_type": "physical",
+                                        "card_number": "900000XXXXXX0497",
+                                        "is_main": true,
+                                        "status": "default",
+                                        "others": {
+                                            "product_id": "3016"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "system_timestamp": "2023-09-05T15:17:37.548-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 200
+                    default: 0
+                  status:
+                    type: string
+                    example: ok
+                  processing_time:
+                    type: integer
+                    example: 928
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      external_id:
+                        type: string
+                        example: motest88
+                      first_name:
+                        type: string
+                        example: Jon
+                      middle_name:
+                        type: string
+                        example: ''
+                      last_name:
+                        type: string
+                        example: Snow
+                      address:
+                        type: string
+                        example: 'calle 98 # 56 - 123'
+                      city:
+                        type: string
+                        example: Bogota
+                      postal_code:
+                        type: string
+                        example: '080001'
+                      product:
+                        type: object
+                        properties:
+                          product_id:
+                            type: string
+                            example: ef12dd2c-f660-40bc-a62b-a54245bda11a
+                          interest_rate:
+                            type: string
+                            example: '42.00'
+                      account_card:
+                        type: object
+                        properties:
+                          external_id:
+                            type: string
+                            example: '126'
+                          status:
+                            type: string
+                            example: active
+                          others:
+                            type: object
+                            properties: {}
+                          cards:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                external_id:
+                                  type: string
+                                  example: '562101002409'
+                                brand:
+                                  type: string
+                                  example: visa
+                                card_type:
+                                  type: string
+                                  example: physical
+                                card_number:
+                                  type: string
+                                  example: 900000XXXXXX0497
+                                is_main:
+                                  type: boolean
+                                  example: true
+                                  default: true
+                                status:
+                                  type: string
+                                  example: default
+                                others:
+                                  type: object
+                                  properties:
+                                    product_id:
+                                      type: string
+                                      example: '3016'
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-05T15:17:37.548-06:00'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Customer:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 84,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The customer does not exists",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T10:48:42.726-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 400
+                    default: 0
+                  status:
+                    type: string
+                    example: bad_request
+                  processing_time:
+                    type: integer
+                    example: 84
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: The customer does not exists
+                            code:
+                              type: string
+                              example: invalid
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-27T10:48:42.726-06:00'
+      deprecated: false
+  /customers/score/update/:
+    put:
+      summary: Update Score
+      description: ''
+      tags:
+        - Account Management
+      operationId: update-score
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - account_card_external_id
+                - amount
+              properties:
+                account_card_external_id:
+                  type: string
+                  description: >-
+                    Account card identifier given by the processor to the
+                    account of the customer.
+                  default: '126'
+                amount:
+                  type: string
+                  description: New score or line of credit LOC for the credit card account.
+                  default: '50000'
+      responses:
+        '202':
+          description: '202'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                        "status_code": 202,
+                        "status": "accepted",
+                        "processing_time": 2241,
+                        "response_data": {
+                            "customer_id": "8b9772fb-e9e0-4a78-9feb-fd928886772f",
+                            "product_id": "ec061bbf-1905-4cce-abe7-ce1440a85049",
+                            "pre_approved_amount": "2300",
+                            "pre_approved_at": "2023-09-25 09:43:38.783008-06:00",
+                            "payment_day": "2",
+                            "others": {
+                                "changes": [
+                                    {
+                                        "timestamp": "2023-09-25T09:42:48.949467-06:00",
+                                        "new_credit_limit": "10000.00",
+                                        "old_credit_limit": "3000.00"
+                                    },
+                                    {
+                                        "timestamp": "2023-09-25T09:43:38.783407-06:00",
+                                        "new_credit_limit": "50000.00",
+                                        "old_credit_limit": "10000.00"
+                                    }
+                                ],
+                                "line_of_credit": "50000.00",
+                                "last_closing_date": "2023-09-20",
+                                "score_extra_amount": "300"
+                            }
+                        },
+                        "system_timestamp": "2023-09-25T09:43:39.687-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 202
+                    default: 0
+                  status:
+                    type: string
+                    example: accepted
+                  processing_time:
+                    type: integer
+                    example: 2241
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      customer_id:
+                        type: string
+                        example: 8b9772fb-e9e0-4a78-9feb-fd928886772f
+                      product_id:
+                        type: string
+                        example: ec061bbf-1905-4cce-abe7-ce1440a85049
+                      pre_approved_amount:
+                        type: string
+                        example: '2300'
+                      pre_approved_at:
+                        type: string
+                        example: '2023-09-25 09:43:38.783008-06:00'
+                      payment_day:
+                        type: string
+                        example: '2'
+                      others:
+                        type: object
+                        properties:
+                          changes:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                timestamp:
+                                  type: string
+                                  example: '2023-09-25T09:42:48.949467-06:00'
+                                new_credit_limit:
+                                  type: string
+                                  example: '10000.00'
+                                old_credit_limit:
+                                  type: string
+                                  example: '3000.00'
+                          line_of_credit:
+                            type: string
+                            example: '50000.00'
+                          last_closing_date:
+                            type: string
+                            example: '2023-09-20'
+                          score_extra_amount:
+                            type: string
+                            example: '300'
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-25T09:43:39.687-06:00'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Customer:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 2910,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The customer account does not exist.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-25T09:55:40.163-06:00"
+                    }
+                Total Debt Restriction:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 2910,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "Total debt greater than amount requested.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-25T09:55:40.163-06:00"
+                    }
+                Invalid Line of Credit:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 2910,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "There is no credit line with coverage for this amount",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-25T09:55:40.163-06:00"
+                    }
+              schema:
+                oneOf:
+                  - title: Invalid Customer
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 2910
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The customer account does not exist.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-25T09:55:40.163-06:00'
+                  - title: Total Debt Restriction
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 2910
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: Total debt greater than amount requested.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-25T09:55:40.163-06:00'
+                  - title: Invalid Line of Credit
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 2910
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: >-
+                                    There is no credit line with coverage for
+                                    this amount
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-25T09:55:40.163-06:00'
+      deprecated: false
+  /customers/balance/{external_id}/:
+    get:
+      summary: Get Customer Balance
+      description: ''
+      tags:
+        - Account Management
+      operationId: get-customer-information-copy
+      parameters:
+        - name: external_id
+          in: path
+          description: >-
+            External identifier of the customer provided by the program manager
+            and saved on MO.
+          schema:
+            type: string
+            default: motest88
+          required: true
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                        "status_code": 200,
+                        "status": "ok",
+                        "processing_time": 5350,
+                        "response_data": {
+                            "customer_external_id": "motest88",
+                            "pre_approved_amount": "50000.00",
+                            "available_amount": "47500.25",
+                            "total_debt": "0.00",
+                            "balance_on_hold": "0.00",
+                            "advance": "0.00",
+                            "debt_in_dispute": "0.00",
+                            "payment_promise": {
+                                "maximum_payment_date": "2023-09-01",
+                                "minimum_payment": "450.25",
+                                "outstanding": "150",
+                                "pay_off_amount": "2800",
+                                "pay_off_amount_outstanding": "2499.75",
+                                "closing_date": "2023-08-21"
+                                },
+                            "maximum_payment_date": "2023-09-01",
+                            "closing_date": "2023-08-21"
+                        },
+                        "system_timestamp": "2023-09-05T15:18:29.489-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 200
+                    default: 0
+                  status:
+                    type: string
+                    example: ok
+                  processing_time:
+                    type: integer
+                    example: 5350
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      customer_external_id:
+                        type: string
+                        example: motest88
+                      pre_approved_amount:
+                        type: string
+                        example: '50000.00'
+                      available_amount:
+                        type: string
+                        example: '47500.25'
+                      total_debt:
+                        type: string
+                        example: '0.00'
+                      balance_on_hold:
+                        type: string
+                        example: '0.00'
+                      advance:
+                        type: string
+                        example: '0.00'
+                      debt_in_dispute:
+                        type: string
+                        example: '0.00'
+                      payment_promise:
+                        type: object
+                        properties:
+                          maximum_payment_date:
+                            type: string
+                            example: '2023-09-01'
+                          minimum_payment:
+                            type: string
+                            example: '450.25'
+                          outstanding:
+                            type: string
+                            example: '150'
+                          pay_off_amount:
+                            type: string
+                            example: '2800'
+                          pay_off_amount_outstanding:
+                            type: string
+                            example: '2499.75'
+                          closing_date:
+                            type: string
+                            example: '2023-08-21'
+                      maximum_payment_date:
+                        type: string
+                        example: '2023-09-01'
+                      closing_date:
+                        type: string
+                        example: '2023-08-21'
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-05T15:18:29.489-06:00'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Customer:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 84,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The customer does not exists",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T10:48:42.726-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 400
+                    default: 0
+                  status:
+                    type: string
+                    example: bad_request
+                  processing_time:
+                    type: integer
+                    example: 84
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: The customer does not exists
+                            code:
+                              type: string
+                              example: invalid
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-27T10:48:42.726-06:00'
+      deprecated: false
+  /loans/:
+    post:
+      summary: Create Authorization
+      description: ''
+      tags:
+        - Transactions
+      operationId: create-authorization
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - external_id
+                - amount
+                - account_card_external_id
+                - card_external_id
+              properties:
+                external_id:
+                  type: string
+                  description: >-
+                    External identifier of the authorization or pre-loan
+                    provided by the processor.
+                  default: auth_2212
+                amount:
+                  type: integer
+                  description: Authorized amount by the processor for the transaction.
+                  default: 5000
+                  format: int32
+                account_card_external_id:
+                  type: string
+                  description: >-
+                    Account card identifier given by the processor to the
+                    account of the customer.
+                  default: '126'
+                card_external_id:
+                  type: string
+                  description: >-
+                    Payment reference number PRN or credit card identifier given
+                    by the processor.
+                  default: '563101002647'
+                number_of_installments:
+                  type: integer
+                  description: >-
+                    Number of installments for BNPL transactions or flex loans.
+                    The variable is set as zero by default, but if any positive
+                    number different from zero is sent on the request, then MO
+                    will associate an installment loan offer to the pre-loan or
+                    transaction.
+                  default: 0
+                  format: int32
+                others:
+                  type: string
+                  description: >-
+                    Additional information that the program manager wants to
+                    save on the pre-loans, such as merchant name, merchant
+                    location, mcc code, etc.
+                  format: json
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                        "status_code": 201,
+                        "status": "created",
+                        "processing_time": 2291,
+                        "response_data": {
+                            "id": "fe62974c-dd9f-4853-b1fd-20b44088b317",
+                            "external_id": "auth_2212",
+                            "customer_id": "876a5437-9acd-4cf7-bfe5-0eec083f98dc",
+                            "offer_id": "65a57521-449c-4626-9b7e-4d108bdf2192",
+                            "amount": "5000.00"
+                        },
+                        "system_timestamp": "2023-09-05T15:26:42.873-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 201
+                    default: 0
+                  status:
+                    type: string
+                    example: created
+                  processing_time:
+                    type: integer
+                    example: 2291
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: fe62974c-dd9f-4853-b1fd-20b44088b317
+                      external_id:
+                        type: string
+                        example: auth_2212
+                      customer_id:
+                        type: string
+                        example: 876a5437-9acd-4cf7-bfe5-0eec083f98dc
+                      offer_id:
+                        type: string
+                        example: 65a57521-449c-4626-9b7e-4d108bdf2192
+                      amount:
+                        type: string
+                        example: '5000.00'
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-05T15:26:42.873-06:00'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Account:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 118,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The account number does not exists.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T16:17:16.352-06:00"
+                    }
+                Invalid Preloan:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 81,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "Pre loan already exists.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T16:10:17.981-06:00"
+                    }
+                Invalid Amount:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 126,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The available score is less than the amount.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T16:17:56.905-06:00"
+                    }
+              schema:
+                oneOf:
+                  - title: Invalid Account
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 118
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The account number does not exists.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T16:17:16.352-06:00'
+                  - title: Invalid Preloan
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 81
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: Pre loan already exists.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T16:10:17.981-06:00'
+                  - title: Invalid Amount
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 126
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The available score is less than the amount.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T16:17:56.905-06:00'
+      deprecated: false
+  /loans/confirm/:
+    post:
+      summary: Confirm Settlement
+      description: ''
+      tags:
+        - Transactions
+      operationId: confirm-settlement
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - external_id
+                - amount
+                - account_card_external_id
+                - card_external_id
+                - others
+              properties:
+                external_id:
+                  type: string
+                  description: >-
+                    External identifier of the authorization or pre-loan
+                    provided by the processor.
+                  default: auth_2212
+                amount:
+                  type: integer
+                  description: Authorized amount by the processor for the transaction.
+                  default: 5000
+                  format: int32
+                account_card_external_id:
+                  type: string
+                  description: >-
+                    Account card identifier given by the processor to the
+                    account of the customer.
+                  default: '126'
+                card_external_id:
+                  type: string
+                  description: >-
+                    Payment reference number PRN or credit card identifier given
+                    by the processor.
+                  default: '563101002647'
+                number_of_installments:
+                  type: integer
+                  description: >-
+                    Number of installments for BNPL transactions or flex loans.
+                    The variable is set as zero by default, but if any positive
+                    number different from zero is sent on the request, then MO
+                    will associate an installment loan offer to the pre-loan or
+                    transaction.
+                  default: 0
+                  format: int32
+                others:
+                  type: string
+                  description: >-
+                    Additional information that the program manager wants to
+                    save on the pre-loans, such as merchant name, merchant
+                    location, mcc code, etc. If the loan_external_id inside the
+                    others dictionary is different from the external id, MO will
+                    use the external id for the pre-loan and the loan external
+                    id for the loan.
+                  default: >-
+                    {"act_type": "settlement",         "merchant_location":
+                    "PERRY, GA",         "merchant_name": "AT&T RNCP
+                    136300",         "otype": "SETL",        
+                    "original_auth_id": "12578",         "loan_external_id":
+                    "9024"}
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Account:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 118,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The account number does not exists.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T16:17:16.352-06:00"
+                    }
+                Invalid Preloan:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 81,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "Pre loan already exists.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T16:10:17.981-06:00"
+                    }
+                Invalid Amount:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 126,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The available score is less than the amount.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T16:17:56.905-06:00"
+                    }
+              schema:
+                oneOf:
+                  - title: Invalid Account
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 118
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The account number does not exists.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T16:17:16.352-06:00'
+                  - title: Invalid Preloan
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 81
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: Pre loan already exists.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T16:10:17.981-06:00'
+                  - title: Invalid Amount
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 126
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The available score is less than the amount.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T16:17:56.905-06:00'
+      deprecated: false
+  /loans/reverse/:
+    post:
+      summary: Reverse Authorization
+      description: ''
+      tags:
+        - Transactions
+      operationId: reverse-authorization
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - external_id
+                - amount
+              properties:
+                external_id:
+                  type: string
+                  description: >-
+                    External identifier of the authorization or pre-loan
+                    provided by the processor.
+                  default: auth_2212
+                amount:
+                  type: integer
+                  description: Authorized amount by the processor for the transaction.
+                  default: 1000
+                  format: int32
+                others:
+                  type: string
+                  description: >-
+                    Additional information that the program manager wants to
+                    save on the reversal, such as merchant name, merchant
+                    location, mcc code, reversal reason, etc.
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                        "status_code": 200,
+                        "status": "ok",
+                        "processing_time": 984,
+                        "response_data": {
+                            "id": "fe62974c-dd9f-4853-b1fd-20b44088b317",
+                            "external_id": "123123",
+                            "customer_id": "876a5437-9acd-4cf7-bfe5-0eec083f98dc",
+                            "offer_id": "65a57521-449c-4626-9b7e-4d108bdf2192",
+                            "amount": "4000.00"
+                        },
+                        "system_timestamp": "2023-09-05T15:29:22.913-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 200
+                    default: 0
+                  status:
+                    type: string
+                    example: ok
+                  processing_time:
+                    type: integer
+                    example: 984
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: fe62974c-dd9f-4853-b1fd-20b44088b317
+                      external_id:
+                        type: string
+                        example: '123123'
+                      customer_id:
+                        type: string
+                        example: 876a5437-9acd-4cf7-bfe5-0eec083f98dc
+                      offer_id:
+                        type: string
+                        example: 65a57521-449c-4626-9b7e-4d108bdf2192
+                      amount:
+                        type: string
+                        example: '4000.00'
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-05T15:29:22.913-06:00'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Account:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 118,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The account number does not exists.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T16:17:16.352-06:00"
+                    }
+                Invalid Preloan:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 81,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "Pre loan already exists.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T16:10:17.981-06:00"
+                    }
+                Invalid Amount:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 126,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The available score is less than the amount.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T16:17:56.905-06:00"
+                    }
+              schema:
+                oneOf:
+                  - title: Invalid Account
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 118
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The account number does not exists.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T16:17:16.352-06:00'
+                  - title: Invalid Preloan
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 81
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: Pre loan already exists.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T16:10:17.981-06:00'
+                  - title: Invalid Amount
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 126
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The available score is less than the amount.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T16:17:56.905-06:00'
+      deprecated: false
+  /loans/reject/:
+    post:
+      summary: Reject Authorization
+      description: ''
+      tags:
+        - Transactions
+      operationId: reject-authorization
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - external_id
+              properties:
+                external_id:
+                  type: string
+                  description: >-
+                    External identifier of the authorization or pre-loan
+                    provided by the processor.
+                  default: auth_2212
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Account:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 118,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The account number does not exists.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T16:17:16.352-06:00"
+                    }
+                Invalid Preloan:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 81,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "Pre loan already exists.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T16:10:17.981-06:00"
+                    }
+                Invalid Amount:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 126,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The available score is less than the amount.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T16:17:56.905-06:00"
+                    }
+              schema:
+                oneOf:
+                  - title: Invalid Account
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 118
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The account number does not exists.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T16:17:16.352-06:00'
+                  - title: Invalid Preloan
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 81
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: Pre loan already exists.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T16:10:17.981-06:00'
+                  - title: Invalid Amount
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 126
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The available score is less than the amount.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-27T16:17:56.905-06:00'
+      deprecated: false
+  /transactions/:
+    get:
+      summary: Get Processor Transactions
+      description: ''
+      tags:
+        - Transactions
+      operationId: get-processor-transactions
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - customer_external_id
+                - start_date
+                - end_date
+                - page
+              properties:
+                customer_external_id:
+                  type: string
+                  description: >-
+                    External identifier of the customer provided by the program
+                    manager and saved on MO.
+                  default: motest88
+                start_date:
+                  type: string
+                  description: Starting date to filter the desired transactions.
+                  default: '2023-01-01'
+                end_date:
+                  type: string
+                  description: Final date to filter all the transactions.
+                  default: '2025-10-11'
+                page:
+                  type: integer
+                  description: Number of desired pages on the JSON.
+                  default: 10
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                        "status_code": 200,
+                        "status": "ok",
+                        "processing_time": 3991,
+                        "response_data": {
+                            "number_of_pages": 1,
+                            "page": 1,
+                            "total_record_count": 2,
+                            "transaction_count": 2,
+                            "transactions": [
+                                {
+                                    "pmt_ref_no": "407101066097",
+                                    "act_id": "10977",
+                                    "act_type": "PM",
+                                    "mcc": null,
+                                    "post_ts": "2023-02-20 14:56:53",
+                                    "amt": "6334",
+                                    "details": "SPEI Load",
+                                    "description": "Payment",
+                                    "source_id": "520",
+                                    "bal_id": "1414",
+                                    "prod_id": "34504",
+                                    "auth_ts": "2023-02-20 14:56:53",
+                                    "trans_code": "PMSE",
+                                    "external_trans_id": "86d2ac90-1e4d-11ed-861d-0242ac7130003",
+                                    "original_auth_id": "0",
+                                    "network_code": "?",
+                                    "merchant_id": "",
+                                    "formatted_merchant_desc": "",
+                                    "terminal_id": "",
+                                    "card_id": "0",
+                                    "billing_curr_code": null,
+                                    "billing_amt": null,
+                                    "settle_curr_code": null,
+                                    "settle_amt": null,
+                                    "local_curr_code": null,
+                                    "ach_transaction_id": null,
+                                    "local_amt": null,
+                                    "credit_ind": null
+                                },
+                                {
+                                    "pmt_ref_no": "407101066097",
+                                    "act_id": "10976",
+                                    "act_type": "PM",
+                                    "mcc": null,
+                                    "post_ts": "2023-02-20 14:06:18",
+                                    "amt": "1666",
+                                    "details": "SPEI Load",
+                                    "description": "Payment",
+                                    "source_id": "519",
+                                    "bal_id": "1414",
+                                    "prod_id": "34504",
+                                    "auth_ts": "2023-02-20 14:06:18",
+                                    "trans_code": "PMSE",
+                                    "external_trans_id": "86d2ac90-1e4d-11ed-861d-0242ac7030003",
+                                    "original_auth_id": "0",
+                                    "network_code": "?",
+                                    "merchant_id": "",
+                                    "formatted_merchant_desc": "",
+                                    "terminal_id": "",
+                                    "card_id": "0",
+                                    "billing_curr_code": null,
+                                    "billing_amt": null,
+                                    "settle_curr_code": null,
+                                    "settle_amt": null,
+                                    "local_curr_code": null,
+                                    "ach_transaction_id": null,
+                                    "local_amt": null,
+                                    "credit_ind": null
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-03-01T08:33:21.118-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 200
+                    default: 0
+                  status:
+                    type: string
+                    example: ok
+                  processing_time:
+                    type: integer
+                    example: 3991
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      number_of_pages:
+                        type: integer
+                        example: 1
+                        default: 0
+                      page:
+                        type: integer
+                        example: 1
+                        default: 0
+                      total_record_count:
+                        type: integer
+                        example: 2
+                        default: 0
+                      transaction_count:
+                        type: integer
+                        example: 2
+                        default: 0
+                      transactions:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            pmt_ref_no:
+                              type: string
+                              example: '407101066097'
+                            act_id:
+                              type: string
+                              example: '10977'
+                            act_type:
+                              type: string
+                              example: PM
+                            mcc: {}
+                            post_ts:
+                              type: string
+                              example: '2023-02-20 14:56:53'
+                            amt:
+                              type: string
+                              example: '6334'
+                            details:
+                              type: string
+                              example: SPEI Load
+                            description:
+                              type: string
+                              example: Payment
+                            source_id:
+                              type: string
+                              example: '520'
+                            bal_id:
+                              type: string
+                              example: '1414'
+                            prod_id:
+                              type: string
+                              example: '34504'
+                            auth_ts:
+                              type: string
+                              example: '2023-02-20 14:56:53'
+                            trans_code:
+                              type: string
+                              example: PMSE
+                            external_trans_id:
+                              type: string
+                              example: 86d2ac90-1e4d-11ed-861d-0242ac7130003
+                            original_auth_id:
+                              type: string
+                              example: '0'
+                            network_code:
+                              type: string
+                              example: '?'
+                            merchant_id:
+                              type: string
+                              example: ''
+                            formatted_merchant_desc:
+                              type: string
+                              example: ''
+                            terminal_id:
+                              type: string
+                              example: ''
+                            card_id:
+                              type: string
+                              example: '0'
+                            billing_curr_code: {}
+                            billing_amt: {}
+                            settle_curr_code: {}
+                            settle_amt: {}
+                            local_curr_code: {}
+                            ach_transaction_id: {}
+                            local_amt: {}
+                            credit_ind: {}
+                  system_timestamp:
+                    type: string
+                    example: '2023-03-01T08:33:21.118-06:00'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Customer:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 84,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The customer does not exists",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-27T10:48:42.726-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 400
+                    default: 0
+                  status:
+                    type: string
+                    example: bad_request
+                  processing_time:
+                    type: integer
+                    example: 84
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: The customer does not exists
+                            code:
+                              type: string
+                              example: invalid
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-27T10:48:42.726-06:00'
+      deprecated: false
+  /pre_payments/external/:
+    post:
+      summary: Create External Payment
+      description: ''
+      tags:
+        - Payments
+      operationId: create-external-payment
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - external_id
+                - customer_external_id
+                - amount
+                - provider
+              properties:
+                external_id:
+                  type: string
+                  description: >-
+                    External identifier of the payment provided by the payment
+                    gateway to the program manager.
+                  default: pmtext_2212
+                customer_external_id:
+                  type: string
+                  description: >-
+                    Customer identifier given by the program manager and saved
+                    on MO.
+                  default: motest88
+                amount:
+                  type: integer
+                  description: >-
+                    Payment amount confirmed by the payment gateway to the
+                    program manager.
+                  default: 3000
+                  format: int32
+                provider:
+                  type: string
+                  description: >-
+                    Provider or payment gateway that receives the payments for
+                    the program manager.
+                  default: Nubank
+                others:
+                  type: string
+                  description: >-
+                    Additional information that the program manager wants to
+                    save on the payments, such as the provider, the method,
+                    location, etc.
+                  format: json
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Customer:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 109,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The customer does not exist.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-28T08:22:29.773-06:00"
+                    }
+                Invalid Payment:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 689,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "A PrePayment already exists with the external_id.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-28T08:20:52.503-06:00"
+                    }
+                No Debt:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 94,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "Customer without debt.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-28T08:23:29.584-06:00"
+                    }
+                Invalid Amount:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 96,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The amount exceeds customer debt",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-28T08:33:34.129-06:00"
+                    }
+              schema:
+                oneOf:
+                  - title: Invalid Customer
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 109
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The customer does not exist.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-28T08:22:29.773-06:00'
+                  - title: Invalid Payment
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 689
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: >-
+                                    A PrePayment already exists with the
+                                    external_id.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-28T08:20:52.503-06:00'
+                  - title: No Debt
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 94
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: Customer without debt.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-28T08:23:29.584-06:00'
+                  - title: Invalid Amount
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 96
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The amount exceeds customer debt
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-28T08:33:34.129-06:00'
+      deprecated: false
+  /pre_payments/:
+    post:
+      summary: Create Processor Payment
+      description: ''
+      tags:
+        - Payments
+      operationId: create-processor-payment
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - external_id
+                - amount
+                - account_card_external_id
+                - card_external_id
+              properties:
+                external_id:
+                  type: string
+                  description: >-
+                    External identifier of the payment provided by the
+                    processor.
+                  default: pmt_2212
+                amount:
+                  type: integer
+                  description: Payment amount confirmed by the processor.
+                  default: 2500
+                  format: int32
+                account_card_external_id:
+                  type: string
+                  description: >-
+                    Account card identifier given by the processor to the
+                    account of the customer.
+                  default: '126'
+                card_external_id:
+                  type: string
+                  description: >-
+                    Payment reference number PRN or credit card identifier given
+                    by the processor.
+                  default: '563101002647'
+                others:
+                  type: string
+                  description: >-
+                    Additional information that the program manager wants to
+                    save on the payments, such as the provider, the method,
+                    location, etc.
+                  format: json
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Customer:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 109,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The customer does not exist.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-28T08:22:29.773-06:00"
+                    }
+                Invalid Payment:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 689,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "A PrePayment already exists with the external_id.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-28T08:20:52.503-06:00"
+                    }
+                No Debt:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 94,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "Customer without debt.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-28T08:23:29.584-06:00"
+                    }
+              schema:
+                oneOf:
+                  - title: Invalid Customer
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 109
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The customer does not exist.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-28T08:22:29.773-06:00'
+                  - title: Invalid Payment
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 689
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: >-
+                                    A PrePayment already exists with the
+                                    external_id.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-28T08:20:52.503-06:00'
+                  - title: No Debt
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 94
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: Customer without debt.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-28T08:23:29.584-06:00'
+      deprecated: false
+  /refund/:
+    post:
+      summary: Confirm Refund
+      description: ''
+      tags:
+        - Payments
+      operationId: create-refund
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refund_id
+                - status
+              properties:
+                refund_id:
+                  type: string
+                  description: >-
+                    Refund identifier created by MO to retrieve money to the
+                    account of the customer.
+                  default: r24
+                status:
+                  type: string
+                  description: Status of the refund can be either confirmed or rejected.
+                  default: confirmed
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Refund:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 53,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "Refund does not exists.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-28T09:18:26.805-06:00"
+                    }
+              schema:
+                type: object
+                properties:
+                  status_code:
+                    type: integer
+                    example: 400
+                    default: 0
+                  status:
+                    type: string
+                    example: bad_request
+                  processing_time:
+                    type: integer
+                    example: 53
+                    default: 0
+                  response_data:
+                    type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Refund does not exists.
+                            code:
+                              type: string
+                              example: invalid
+                  system_timestamp:
+                    type: string
+                    example: '2023-09-28T09:18:26.805-06:00'
+      deprecated: false
+  /advance/:
+    post:
+      summary: Create Advance
+      description: ''
+      tags:
+        - Payments
+      operationId: create-advance
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - external_id
+                - amount
+                - account_card_external_id
+                - card_external_id
+              properties:
+                external_id:
+                  type: string
+                  description: >-
+                    External identifier of the advance provided by either the
+                    processor or MO.
+                  default: ad_2212
+                amount:
+                  type: integer
+                  description: >-
+                    Advance amount confirmed by the processor due to a returned
+                    by the network or an overpayment when the account has
+                    balance on hold.
+                  default: 500
+                  format: int32
+                account_card_external_id:
+                  type: string
+                  description: >-
+                    Account card identifier given by the processor to the
+                    account of the customer.
+                  default: '126'
+                card_external_id:
+                  type: string
+                  description: >-
+                    Payment reference number PRN or credit card identifier given
+                    by the processor.
+                  default: '563101002647'
+                others:
+                  type: string
+                  description: >-
+                    Additional information that the program manager wants to
+                    save on the advance, such as the reason, mcc, transaction
+                    type, etc.
+                  format: json
+      responses:
+        '204':
+          description: '204'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Account:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 93,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "Customer account does not exists.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-28T09:08:34.517-06:00"
+                    }
+                Invalid Advance:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 137,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "Advance already exists with external id",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-28T09:07:41.984-06:00"
+                    }
+              schema:
+                oneOf:
+                  - title: Invalid Account
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 93
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: Customer account does not exists.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-28T09:08:34.517-06:00'
+                  - title: Invalid Advance
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 137
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: Advance already exists with external id
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-28T09:07:41.984-06:00'
+      deprecated: false
+  /disputes/{dispute_status}/:
+    patch:
+      summary: Process Dispute
+      description: ''
+      tags:
+        - Disputes
+      operationId: process-dispute
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+        - name: dispute_status
+          in: path
+          description: >-
+            Dispute status depends on the resolution of the dispute, if the
+            customer lost the dispute then the value of the path param must be
+            rejected, otherwise if the customer won the dispute then the value
+            of the path param must be accepted. Available options: ACCEPTED or
+            REJECTED.
+          schema:
+            type: string
+            default: accepted
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - external_id
+                - loan_external_id
+                - amount
+              properties:
+                external_id:
+                  type: string
+                  description: >-
+                    External identifier of the dispute provided by the
+                    processor.
+                  default: dp45
+                loan_external_id:
+                  type: string
+                  description: >-
+                    External identifier of the loan provided by the processor
+                    during the settlement.
+                  default: '9024'
+                amount:
+                  type: integer
+                  description: Amount of the loan that must be in dispute.
+                  default: 120
+                  format: int32
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Loan Status:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 105,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The status of loan is not allowed",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-03-23T11:02:33.397-06:00"
+                    }
+                Invalid Dispute:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 57,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The dispute does not exist.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-03-23T15:25:03.152-06:00"
+                    }
+                Invalid Amount Zero:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 140,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The value of the dispute cannot be less than or equal to 0",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-03-23T15:39:04.903-06:00"
+                    }
+                Invalid Amount:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 154,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The value of the dispute cannot be greater than the initial one.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-03-23T15:35:51.541-06:00"
+                    }
+              schema:
+                oneOf:
+                  - title: Invalid Loan Status
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 105
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The status of loan is not allowed
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-03-23T11:02:33.397-06:00'
+                  - title: Invalid Dispute
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 57
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The dispute does not exist.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-03-23T15:25:03.152-06:00'
+                  - title: Invalid Amount Zero
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 140
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: >-
+                                    The value of the dispute cannot be less than
+                                    or equal to 0
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-03-23T15:39:04.903-06:00'
+                  - title: Invalid Amount
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 154
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: >-
+                                    The value of the dispute cannot be greater
+                                    than the initial one.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-03-23T15:35:51.541-06:00'
+      deprecated: false
+  /disputes/:
+    post:
+      summary: Create Dispute
+      description: ''
+      tags:
+        - Disputes
+      operationId: create-dispute
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API KEY given by MO to the program manager.
+          required: true
+          schema:
+            type: string
+            default: feebf600-5b52-485a-be26-17cc0debdaee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - external_id
+                - loan_external_id
+                - amount
+              properties:
+                external_id:
+                  type: string
+                  description: >-
+                    External identifier of the dispute provided by the
+                    processor.
+                  default: dp45
+                loan_external_id:
+                  type: string
+                  description: >-
+                    External identifier of the loan provided by the processor
+                    during the settlement.
+                  default: '9024'
+                amount:
+                  type: integer
+                  description: Amount of the loan that must be in dispute.
+                  default: 120
+                  format: int32
+                others:
+                  type: string
+                  description: >-
+                    Additional information that the program manager wants to
+                    save on the dispute.
+                  format: json
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Invalid Loan Status:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 311,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The loan status is not valid.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-28T10:50:30.429-06:00"
+                    }
+                Invalid Dispute:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 491,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The external_id is used by an existing dispute.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-28T10:49:30.213-06:00"
+                    }
+                Invalid Loan:
+                  value: |-
+                    {
+                        "status_code": 400,
+                        "status": "bad_request",
+                        "processing_time": 259,
+                        "response_data": {
+                            "errors": [
+                                {
+                                    "message": "The loan does not exist.",
+                                    "code": "invalid"
+                                }
+                            ]
+                        },
+                        "system_timestamp": "2023-09-28T10:51:47.642-06:00"
+                    }
+              schema:
+                oneOf:
+                  - title: Invalid Loan Status
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 311
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The loan status is not valid.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-28T10:50:30.429-06:00'
+                  - title: Invalid Dispute
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 491
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: >-
+                                    The external_id is used by an existing
+                                    dispute.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-28T10:49:30.213-06:00'
+                  - title: Invalid Loan
+                    type: object
+                    properties:
+                      status_code:
+                        type: integer
+                        example: 400
+                        default: 0
+                      status:
+                        type: string
+                        example: bad_request
+                      processing_time:
+                        type: integer
+                        example: 259
+                        default: 0
+                      response_data:
+                        type: object
+                        properties:
+                          errors:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                message:
+                                  type: string
+                                  example: The loan does not exist.
+                                code:
+                                  type: string
+                                  example: invalid
+                      system_timestamp:
+                        type: string
+                        example: '2023-09-28T10:51:47.642-06:00'
+      deprecated: false
+  # /accounts/cards/activate/:
+  #   post:
+  #     summary: Activate Card
+  #     description: >-
+  #       Use this endpoint to activate a physical credit card using the
+  #       external_id of the card and the expiry_date. The card will share the
+  #       same balance or line of credit as the existing account.
+  #     tags:
+  #       - Account Management
+  #     operationId: activate-card
+  #     parameters:
+  #       - name: x-api-key
+  #         in: header
+  #         description: API KEY given by MO to the program manager.
+  #         required: true
+  #         schema:
+  #           type: string
+  #           default: feebf600-5b52-485a-be26-17cc0debdaee
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             required:
+  #               - card_external_id
+  #               - expiry_date
+  #             properties:
+  #               card_external_id:
+  #                 type: string
+  #                 description: >-
+  #                   Payment reference number PRN or credit card identifier given
+  #                   by the processor to track all transactions
+  #                 default: '563101002647'
+  #               expiry_date:
+  #                 type: string
+  #                 description: Expiration date of the credit card.
+  #                 default: 2023-03
+  #     responses:
+  #       '200':
+  #         description: '200'
+  #         content:
+  #           application/json:
+  #             examples:
+  #               Result:
+  #                 value: '{}'
+  #             schema:
+  #               type: object
+  #               properties: {}
+  #       '400':
+  #         description: '400'
+  #         content:
+  #           application/json:
+  #             examples:
+  #               Invalid Format:
+  #                 value: |-
+  #                   {
+  #                     "status_code": 400,
+  #                     "status": "bad_request",
+  #                     "processing_time": 1869,
+  #                     "response_data": {
+  #                       "errors": [
+  #                         {
+  #                           "message": "Date has wrong format. Use one of these formats instead: YYYY-MM.",
+  #                           "code": "invalid",
+  #                           "field": "expired_date"
+  #                         }
+  #                       ]
+  #                     },
+  #                     "system_timestamp": "2023-10-18T10:32:41.431-06:00"
+  #                   }
+  #               Invalid Card:
+  #                 value: |-
+  #                   {
+  #                       "status_code": 400,
+  #                       "status": "bad_request",
+  #                       "processing_time": 767,
+  #                       "response_data": {
+  #                           "errors": [
+  #                               {
+  #                                   "message": "The card does not exist.",
+  #                                   "code": "invalid"
+  #                               }
+  #                           ]
+  #                       },
+  #                       "system_timestamp": "2023-10-18T11:04:34.253-06:00"
+  #                   }
+  #               Card Already Active:
+  #                 value: |-
+  #                   {
+  #                       "status_code": 400,
+  #                       "status": "bad_request",
+  #                       "processing_time": 767,
+  #                       "response_data": {
+  #                           "errors": [
+  #                               {
+  #                                   "message": "the card was already active.",
+  #                                   "code": "invalid"
+  #                               }
+  #                           ]
+  #                       },
+  #                       "system_timestamp": "2023-10-18T11:04:34.253-06:00"
+  #                   }
+  #               Canceled Card:
+  #                 value: |-
+  #                   {
+  #                       "status_code": 400,
+  #                       "status": "bad_request",
+  #                       "processing_time": 767,
+  #                       "response_data": {
+  #                           "errors": [
+  #                               {
+  #                                   "message": "The card status is canceled.",
+  #                                   "code": "invalid"
+  #                               }
+  #                           ]
+  #                       },
+  #                       "system_timestamp": "2023-10-18T11:04:34.253-06:00"
+  #                   }
+  #             schema:
+  #               oneOf:
+  #                 - title: Invalid Format
+  #                   type: object
+  #                   properties:
+  #                     status_code:
+  #                       type: integer
+  #                       example: 400
+  #                       default: 0
+  #                     status:
+  #                       type: string
+  #                       example: bad_request
+  #                     processing_time:
+  #                       type: integer
+  #                       example: 1869
+  #                       default: 0
+  #                     response_data:
+  #                       type: object
+  #                       properties:
+  #                         errors:
+  #                           type: array
+  #                           items:
+  #                             type: object
+  #                             properties:
+  #                               message:
+  #                                 type: string
+  #                                 example: >-
+  #                                   Date has wrong format. Use one of these
+  #                                   formats instead: YYYY-MM.
+  #                               code:
+  #                                 type: string
+  #                                 example: invalid
+  #                               field:
+  #                                 type: string
+  #                                 example: expired_date
+  #                     system_timestamp:
+  #                       type: string
+  #                       example: '2023-10-18T10:32:41.431-06:00'
+  #                 - title: Invalid Card
+  #                   type: object
+  #                   properties:
+  #                     status_code:
+  #                       type: integer
+  #                       example: 400
+  #                       default: 0
+  #                     status:
+  #                       type: string
+  #                       example: bad_request
+  #                     processing_time:
+  #                       type: integer
+  #                       example: 767
+  #                       default: 0
+  #                     response_data:
+  #                       type: object
+  #                       properties:
+  #                         errors:
+  #                           type: array
+  #                           items:
+  #                             type: object
+  #                             properties:
+  #                               message:
+  #                                 type: string
+  #                                 example: The card does not exist.
+  #                               code:
+  #                                 type: string
+  #                                 example: invalid
+  #                     system_timestamp:
+  #                       type: string
+  #                       example: '2023-10-18T11:04:34.253-06:00'
+  #                 - title: Card Already Active
+  #                   type: object
+  #                   properties:
+  #                     status_code:
+  #                       type: integer
+  #                       example: 400
+  #                       default: 0
+  #                     status:
+  #                       type: string
+  #                       example: bad_request
+  #                     processing_time:
+  #                       type: integer
+  #                       example: 767
+  #                       default: 0
+  #                     response_data:
+  #                       type: object
+  #                       properties:
+  #                         errors:
+  #                           type: array
+  #                           items:
+  #                             type: object
+  #                             properties:
+  #                               message:
+  #                                 type: string
+  #                                 example: the card was already active.
+  #                               code:
+  #                                 type: string
+  #                                 example: invalid
+  #                     system_timestamp:
+  #                       type: string
+  #                       example: '2023-10-18T11:04:34.253-06:00'
+  #                 - title: Canceled Card
+  #                   type: object
+  #                   properties:
+  #                     status_code:
+  #                       type: integer
+  #                       example: 400
+  #                       default: 0
+  #                     status:
+  #                       type: string
+  #                       example: bad_request
+  #                     processing_time:
+  #                       type: integer
+  #                       example: 767
+  #                       default: 0
+  #                     response_data:
+  #                       type: object
+  #                       properties:
+  #                         errors:
+  #                           type: array
+  #                           items:
+  #                             type: object
+  #                             properties:
+  #                               message:
+  #                                 type: string
+  #                                 example: The card status is canceled.
+  #                               code:
+  #                                 type: string
+  #                                 example: invalid
+  #                     system_timestamp:
+  #                       type: string
+  #                       example: '2023-10-18T11:04:34.253-06:00'
+  #     deprecated: false
+  # /accounts/cards/modify_status/{card_status}/:
+  #   patch:
+  #     summary: Modify Card Status
+  #     description: >-
+  #       Use this endpoint to modify the current status of the credit card. It
+  #       just changes the status of the card without affecting the status of the
+  #       account. The available options to modify the card status are: active,
+  #       blocked, lost, stolen and canceled.
+  #     tags:
+  #       - Account Management
+  #     operationId: modify-card-status
+  #     parameters:
+  #       - name: card_status
+  #         in: path
+  #         description: >-
+  #           Status of the credit card saved on MO and later modified on the
+  #           processor, the available options are: active, blocked, lost, stolen,
+  #           and canceled. On MO the credit card can also be suspended, but this
+  #           status is used when a customer fails the minimum payment of one
+  #           billing cycle.
+  #         schema:
+  #           type: string
+  #           default: active
+  #         required: true
+  #       - name: x-api_key
+  #         in: header
+  #         description: API KEY given by MO to the program manager.
+  #         required: true
+  #         schema:
+  #           type: string
+  #           default: feebf600-5b52-485a-be26-17cc0debdaee
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             required:
+  #               - card_external_id
+  #             properties:
+  #               card_external_id:
+  #                 type: string
+  #                 description: >-
+  #                   Payment reference number PRN or credit card identifier given
+  #                   by the processor to track all transactions
+  #                 default: '563101002647'
+  #     responses:
+  #       '200':
+  #         description: '200'
+  #         content:
+  #           application/json:
+  #             examples:
+  #               Result:
+  #                 value: '{}'
+  #             schema:
+  #               type: object
+  #               properties: {}
+  #       '400':
+  #         description: '400'
+  #         content:
+  #           application/json:
+  #             examples:
+  #               Invalid Status:
+  #                 value: |-
+  #                   {
+  #                       "status_code": 400,
+  #                       "status": "bad_request",
+  #                       "processing_time": 104,
+  #                       "response_data": {
+  #                           "errors": [
+  #                               {
+  #                                   "message": "\"suspend\" is not a valid choice.",
+  #                                   "code": "invalid_choice",
+  #                                   "field": "status"
+  #                               }
+  #                           ]
+  #                       },
+  #                       "system_timestamp": "2023-10-20T15:11:32.153-06:00"
+  #                   }
+  #               Invalid Card:
+  #                 value: |-
+  #                   {
+  #                       "status_code": 400,
+  #                       "status": "bad_request",
+  #                       "processing_time": 122,
+  #                       "response_data": {
+  #                           "errors": [
+  #                               {
+  #                                   "message": "The card does not exist.",
+  #                                   "code": "invalid"
+  #                               }
+  #                           ]
+  #                       },
+  #                       "system_timestamp": "2023-10-20T15:13:15.792-06:00"
+  #                   }
+  #               Suspended Card:
+  #                 value: |-
+  #                   {
+  #                       "status_code": 400,
+  #                       "status": "bad_request",
+  #                       "processing_time": 118,
+  #                       "response_data": {
+  #                           "errors": [
+  #                               {
+  #                                   "message": "The card is suspended and cannot be activated or modified to another status.",
+  #                                   "code": "invalid"
+  #                               }
+  #                           ]
+  #                       },
+  #                       "system_timestamp": "2023-10-20T15:13:57.525-06:00"
+  #                   }
+  #               Remaining Balance:
+  #                 value: |-
+  #                   {
+  #                       "status_code": 400,
+  #                       "status": "bad_request",
+  #                       "processing_time": 150,
+  #                       "response_data": {
+  #                           "errors": [
+  #                               {
+  #                                   "message": "The card cannot be canceled because the account has remaining balance.",
+  #                                   "code": "invalid"
+  #                               }
+  #                           ]
+  #                       },
+  #                       "system_timestamp": "2023-10-24T14:44:12.976-06:00"
+  #                   }
+  #             schema:
+  #               oneOf:
+  #                 - title: Invalid Status
+  #                   type: object
+  #                   properties:
+  #                     status_code:
+  #                       type: integer
+  #                       example: 400
+  #                       default: 0
+  #                     status:
+  #                       type: string
+  #                       example: bad_request
+  #                     processing_time:
+  #                       type: integer
+  #                       example: 104
+  #                       default: 0
+  #                     response_data:
+  #                       type: object
+  #                       properties:
+  #                         errors:
+  #                           type: array
+  #                           items:
+  #                             type: object
+  #                             properties:
+  #                               message:
+  #                                 type: string
+  #                                 example: '"suspend" is not a valid choice.'
+  #                               code:
+  #                                 type: string
+  #                                 example: invalid_choice
+  #                               field:
+  #                                 type: string
+  #                                 example: status
+  #                     system_timestamp:
+  #                       type: string
+  #                       example: '2023-10-20T15:11:32.153-06:00'
+  #                 - title: Invalid Card
+  #                   type: object
+  #                   properties:
+  #                     status_code:
+  #                       type: integer
+  #                       example: 400
+  #                       default: 0
+  #                     status:
+  #                       type: string
+  #                       example: bad_request
+  #                     processing_time:
+  #                       type: integer
+  #                       example: 122
+  #                       default: 0
+  #                     response_data:
+  #                       type: object
+  #                       properties:
+  #                         errors:
+  #                           type: array
+  #                           items:
+  #                             type: object
+  #                             properties:
+  #                               message:
+  #                                 type: string
+  #                                 example: The card does not exist.
+  #                               code:
+  #                                 type: string
+  #                                 example: invalid
+  #                     system_timestamp:
+  #                       type: string
+  #                       example: '2023-10-20T15:13:15.792-06:00'
+  #                 - title: Suspended Card
+  #                   type: object
+  #                   properties:
+  #                     status_code:
+  #                       type: integer
+  #                       example: 400
+  #                       default: 0
+  #                     status:
+  #                       type: string
+  #                       example: bad_request
+  #                     processing_time:
+  #                       type: integer
+  #                       example: 118
+  #                       default: 0
+  #                     response_data:
+  #                       type: object
+  #                       properties:
+  #                         errors:
+  #                           type: array
+  #                           items:
+  #                             type: object
+  #                             properties:
+  #                               message:
+  #                                 type: string
+  #                                 example: >-
+  #                                   The card is suspended and cannot be
+  #                                   activated or modified to another status.
+  #                               code:
+  #                                 type: string
+  #                                 example: invalid
+  #                     system_timestamp:
+  #                       type: string
+  #                       example: '2023-10-20T15:13:57.525-06:00'
+  #                 - title: Remaining Balance
+  #                   type: object
+  #                   properties:
+  #                     status_code:
+  #                       type: integer
+  #                       example: 400
+  #                       default: 0
+  #                     status:
+  #                       type: string
+  #                       example: bad_request
+  #                     processing_time:
+  #                       type: integer
+  #                       example: 150
+  #                       default: 0
+  #                     response_data:
+  #                       type: object
+  #                       properties:
+  #                         errors:
+  #                           type: array
+  #                           items:
+  #                             type: object
+  #                             properties:
+  #                               message:
+  #                                 type: string
+  #                                 example: >-
+  #                                   The card cannot be canceled because the
+  #                                   account has remaining balance.
+  #                               code:
+  #                                 type: string
+  #                                 example: invalid
+  #                     system_timestamp:
+  #                       type: string
+  #                       example: '2023-10-24T14:44:12.976-06:00'
+  #     deprecated: false
+  # /accounts/cards/anon/order/location/:
+  #   post:
+  #     summary: Create Anonymous Card Location
+  #     description: >-
+  #       Use the this endpoint to create a new store location, associated with a
+  #       provider-specific ID, and nest it below a parent location (store) on
+  #       Galileo. The first location you create will be designated location 0,
+  #       the top-level location.
+  #     tags:
+  #       - Bulk Cards
+  #     operationId: create-anonymous-card-locations
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             required:
+  #               - name
+  #               - address
+  #               - city
+  #               - state
+  #               - postal_code
+  #               - parent_location
+  #             properties:
+  #               name:
+  #                 type: string
+  #                 description: Name of the store or location
+  #                 default: demo-cc-store
+  #               address:
+  #                 type: string
+  #                 description: Address of the store or location.
+  #                 default: 127 Lawrence Street
+  #               city:
+  #                 type: string
+  #                 description: City of the store or location.
+  #                 default: Toronto
+  #               state:
+  #                 type: string
+  #                 description: State of the city.
+  #                 default: 'ON'
+  #               postal_code:
+  #                 type: string
+  #                 description: Postal code of the address.
+  #                 default: '01902'
+  #               parent_location:
+  #                 type: integer
+  #                 description: >-
+  #                   Identifier for the parent location. The first time you
+  #                   create a location or store, pass 0.
+  #                 default: 0
+  #                 format: int32
+  #     responses:
+  #       '201':
+  #         description: '201'
+  #         content:
+  #           application/json:
+  #             examples:
+  #               Result:
+  #                 value: |-
+  #                   {
+  #                       "status_code": 201,
+  #                       "status": "created",
+  #                       "processing_time": 8921,
+  #                       "response_data": {
+  #                           "id": "d163b271-921b-4aa4-ae26-06057d6bbd67",
+  #                           "external_id": "6"
+  #                       },
+  #                       "system_timestamp": "2023-10-06T14:37:51.879-06:00"
+  #                   }
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 status_code:
+  #                   type: integer
+  #                   example: 201
+  #                   default: 0
+  #                 status:
+  #                   type: string
+  #                   example: created
+  #                 processing_time:
+  #                   type: integer
+  #                   example: 8921
+  #                   default: 0
+  #                 response_data:
+  #                   type: object
+  #                   properties:
+  #                     id:
+  #                       type: string
+  #                       example: d163b271-921b-4aa4-ae26-06057d6bbd67
+  #                     external_id:
+  #                       type: string
+  #                       example: '6'
+  #                 system_timestamp:
+  #                   type: string
+  #                   example: '2023-10-06T14:37:51.879-06:00'
+  #     deprecated: false
+  # /accounts/cards/anon/order/:
+  #   post:
+  #     summary: Create Anonymous Card Order
+  #     description: >-
+  #       Use this endpoint to initiate a request for a batch of instant-issue
+  #       cards or anonymous credit cards. The cards will be delivered to the
+  #       store location, though this endpoint only works on programs that use
+  #       Galileo.
+  #     tags:
+  #       - Bulk Cards
+  #     operationId: create-anonymous-card-order
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             required:
+  #               - location_external_id
+  #               - number_of_cards
+  #               - name
+  #               - address
+  #               - city
+  #               - state
+  #               - postal_code
+  #             properties:
+  #               location_external_id:
+  #                 type: string
+  #                 description: >-
+  #                   Location identifier given by the processor to the location
+  #                   or store created in advance.
+  #                 default: '3'
+  #               number_of_cards:
+  #                 type: integer
+  #                 description: Number of anonymous credit cards to be created on the order.
+  #                 default: 1000
+  #                 format: int32
+  #               name:
+  #                 type: string
+  #                 description: >-
+  #                   Name of the location or store where the bulk card order is
+  #                   to be shipped.
+  #                 default: demo-cc-store
+  #               address:
+  #                 type: string
+  #                 description: >-
+  #                   Address of the location or store where the bulk card order
+  #                   is to be shipped.
+  #                 default: 127 Lawerence Street
+  #               city:
+  #                 type: string
+  #                 description: City where the location or score is located.
+  #                 default: Toronto
+  #               state:
+  #                 type: string
+  #                 description: State of the city where the location or store is located.
+  #                 default: 'ON'
+  #               postal_code:
+  #                 type: string
+  #                 description: Postal code of the address of the location or store.
+  #                 default: '01917'
+  #     responses:
+  #       '200':
+  #         description: '200'
+  #         content:
+  #           application/json:
+  #             examples:
+  #               Result:
+  #                 value: '{}'
+  #             schema:
+  #               type: object
+  #               properties: {}
+  #       '400':
+  #         description: '400'
+  #         content:
+  #           application/json:
+  #             examples:
+  #               Result:
+  #                 value: '{}'
+  #             schema:
+  #               type: object
+  #               properties: {}
+  #     deprecated: false
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+x-readme-fauxas: true
