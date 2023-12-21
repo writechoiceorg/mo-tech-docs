@@ -19,7 +19,7 @@ jobs:
         # Docs: https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions#example-using-versioned-actions
         uses: readmeio/rdme@v8
         with:
-          rdme: openapi ./OpenAPI/lending-core/lending-product.yml --key=${{ secrets.README_API_KEY }} --id=${{ secrets.API_DEFINITION_ID }}
+          rdme: openapi ./OpenAPI/lending-core/lending-product.yml --key=${{ secrets.README_API_KEY }} --id=${{ secrets.LENDING_API_DEFINITION_ID }}
   
   sync-credit-core:
     runs-on: ubuntu-latest
@@ -33,4 +33,4 @@ jobs:
         # Docs: https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions#example-using-versioned-actions
         uses: readmeio/rdme@v8
         with:
-          rdme: openapi ./OpenAPI/credit-core/credit-product.yml --key=${{ secrets.README_API_KEY }} --id=${{ secrets.API_DEFINITION_ID }}
+          rdme: openapi ./OpenAPI/credit-core/credit-product.yml --key=${{ secrets.README_API_KEY }} --id=${{ secrets.CREDIT_API_DEFINITION_ID }}
