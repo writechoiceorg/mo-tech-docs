@@ -406,11 +406,7 @@ paths:
   /pre-customers:
     post:
       summary: Create Pre Customer
-      description: >-
-        Use the Create Pre Customer endpoint to create a new record in the
-        initial phase of a customer, known as Pre Customer, where minimal
-        required information is recorded by the system. Various steps need to be
-        taken during this phase to promote or upgrade to a Customer.
+      description: ''
       tags:
         - Pre Customers
       operationId: create-pre-customer
