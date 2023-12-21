@@ -1,0 +1,399 @@
+openapi: 3.1.0
+info:
+  title: Lending - Offers
+  version: '2'
+servers:
+  - url: https://mo-services-zero-production.moprestamo.com/api/v2
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+    sec1:
+      type: apiKey
+      in: header
+      name: X-AGGREGATOR-ID
+security:
+  - sec0: []
+    sec1: []
+paths:
+  /offers/{offer_id}/preview:
+    get:
+      summary: Get Offer Preview
+      description: ''
+      operationId: get-offer-preview
+      parameters:
+        - name: offer_id
+          in: path
+          schema:
+            type: string
+          required: true
+        - name: amount
+          in: query
+          required: true
+          schema:
+            type: number
+            format: double
+        - name: installment_quantity
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: disbursed_at
+          in: query
+          schema:
+            type: string
+            format: date
+        - name: x-api-key
+          in: header
+          description: >-
+            Use the `x-api-key` header to include the API key generated
+            previously for authentication purposes. The API key serves as a
+            secret token that identifies the client or application making the
+            request and is used to determine whether the client has the
+            necessary permissions to access the requested resource.
+          required: true
+          schema:
+            type: string
+        - name: x-aggregator-id
+          in: header
+          description: >-
+            Use the `x-aggregator-id` header to identify the aggregator for a
+            particular request. An aggregator is the entity that is involved in
+            the processing of transactions or data. By including the id in the
+            header, the server can identify which aggregator the request owns
+            and handle the request accordingly.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\"data\": {\n        \"installments\": [\n            {\n                \"amount\": \"44.9500000000\",\n                \"payday\": \"2023-11-21T00:00:00Z\",\n                \"taxes\": \"1.0800000000\",\n                \"conditions\": {\n                    \"capital\": {\n                        \"amount\": \"33.0400000000\",\n                        \"tax_amount\": \"0.0000000000\",\n                        \"amount_without_tax\": \"33.04\"\n                    },\n                    \"interest\": {\n                        \"amount\": \"0.9100000000\",\n                        \"tax_amount\": \"0.0800000000\",\n                        \"amount_without_tax\": \"0.83\"\n                    },\n                    \"cost\": {\n                        \"amount\": \"11.0000000000\",\n                        \"tax_amount\": \"1.0000000000\",\n                        \"amount_without_tax\": \"10\"\n                    }\n                },\n                \"installment_number\": 1\n            },\n            {\n                \"amount\": \"44.9500000000\",\n                \"payday\": \"2023-12-21T00:00:00Z\",\n                \"taxes\": \"1.0600000000\",\n                \"conditions\": {\n                    \"capital\": {\n                        \"amount\": \"33.3400000000\",\n                        \"tax_amount\": \"0.0000000000\",\n                        \"amount_without_tax\": \"33.34\"\n                    },\n                    \"interest\": {\n                        \"amount\": \"0.6100000000\",\n                        \"tax_amount\": \"0.0600000000\",\n                        \"amount_without_tax\": \"0.55\"\n                    },\n                    \"cost\": {\n                        \"amount\": \"11.0000000000\",\n                        \"tax_amount\": \"1.0000000000\",\n                        \"amount_without_tax\": \"10\"\n                    }\n                },\n                \"installment_number\": 2\n            },\n            {\n                \"amount\": \"44.9300000000\",\n                \"payday\": \"2024-01-22T00:00:00Z\",\n                \"taxes\": \"1.0300000000\",\n                \"conditions\": {\n                    \"capital\": {\n                        \"amount\": \"33.6200000000\",\n                        \"tax_amount\": \"0.0000000000\",\n                        \"amount_without_tax\": \"33.62\"\n                    },\n                    \"interest\": {\n                        \"amount\": \"0.3100000000\",\n                        \"tax_amount\": \"0.0300000000\",\n                        \"amount_without_tax\": \"0.28\"\n                    },\n                    \"cost\": {\n                        \"amount\": \"11.0000000000\",\n                        \"tax_amount\": \"1.0000000000\",\n                        \"amount_without_tax\": \"10\"\n                    }\n                },\n                \"installment_number\": 3\n            }\n        ],\n        \"total_capital\": \"100.0000000000\",\n        \"total_interest\": \"1.6600000000\",\n        \"total_costs\": \"30.0000000000\",\n        \"total_amount\": \"134.8300000000\",\n        \"total_taxes\": \"3.1700000000\",\n        \"tea\": \"10.0000000000\",\n        \"tcea\": \"514.5600000000\"\n    },\n\t\t\"metadata\": {\n\t\t\t\t\"version\": \"2\",\n\t\t\t\t\"timestamp\": \"2023-11-27T21:37:54.359694Z\"\n\t\t},\n\t\t\"errors\": []\n}"
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      installments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              example: '44.9500000000'
+                            payday:
+                              type: string
+                              example: '2023-11-21T00:00:00Z'
+                            taxes:
+                              type: string
+                              example: '1.0800000000'
+                            conditions:
+                              type: object
+                              properties:
+                                capital:
+                                  type: object
+                                  properties:
+                                    amount:
+                                      type: string
+                                      example: '33.0400000000'
+                                    tax_amount:
+                                      type: string
+                                      example: '0.0000000000'
+                                    amount_without_tax:
+                                      type: string
+                                      example: '33.04'
+                                interest:
+                                  type: object
+                                  properties:
+                                    amount:
+                                      type: string
+                                      example: '0.9100000000'
+                                    tax_amount:
+                                      type: string
+                                      example: '0.0800000000'
+                                    amount_without_tax:
+                                      type: string
+                                      example: '0.83'
+                                cost:
+                                  type: object
+                                  properties:
+                                    amount:
+                                      type: string
+                                      example: '11.0000000000'
+                                    tax_amount:
+                                      type: string
+                                      example: '1.0000000000'
+                                    amount_without_tax:
+                                      type: string
+                                      example: '10'
+                            installment_number:
+                              type: integer
+                              example: 1
+                              default: 0
+                      total_capital:
+                        type: string
+                        example: '100.0000000000'
+                      total_interest:
+                        type: string
+                        example: '1.6600000000'
+                      total_costs:
+                        type: string
+                        example: '30.0000000000'
+                      total_amount:
+                        type: string
+                        example: '134.8300000000'
+                      total_taxes:
+                        type: string
+                        example: '3.1700000000'
+                      tea:
+                        type: string
+                        example: '10.0000000000'
+                      tcea:
+                        type: string
+                        example: '514.5600000000'
+                  metadata:
+                    type: object
+                    properties:
+                      version:
+                        type: string
+                        example: '2'
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T21:37:54.359694Z'
+                  errors:
+                    type: array
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"09O9XX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: 09O9XX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"09O9XX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: 09O9XX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"09O9XX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: 09O9XX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"09O9XX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: 09O9XX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+      deprecated: false
+  /offers:
+    get:
+      summary: List Offers
+      description: ''
+      operationId: list-offers
+      parameters:
+        - name: x-api-key
+          in: header
+          description: >-
+            Use the `x-api-key` header to include the API key generated
+            previously for authentication purposes. The API key serves as a
+            secret token that identifies the client or application making the
+            request and is used to determine whether the client has the
+            necessary permissions to access the requested resource.
+          schema:
+            type: string
+        - name: x-aggregator-id
+          in: header
+          description: >-
+            Use the `x-aggregator-id` header to identify the aggregator for a
+            particular request. An aggregator is the entity that is involved in
+            the processing of transactions or data. By including the id in the
+            header, the server can identify which aggregator the request owns
+            and handle the request accordingly.
+          schema:
+            type: string
+        - name: amount
+          in: query
+          schema:
+            type: number
+            format: double
+        - name: installment_quantity
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: type
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\"data\": {\n    \"id\": \"d1532422-c1c2-4b78-9ee1-626ef73b7674\",\n    \"reference\": \"ce687851-392f-4d98-bf54-e1acd79c6f3e\",\n    \"name\": \"Oferta Demo Krealo\",\n    \"description\": \"Oferta para BF\",\n    \"product_id\": \"2da3c176-11b0-490e-8a3e-cc1de76a1abc\",\n    \"product_reference\": \"f6ed2dea-fca3-4875-ac20-0bc22f7859c5\",\n    \"status\": \"draft\",\n    \"created_at\": \"2023-11-24T17:29:26.235067Z\",\n    \"updated_at\": \"2023-11-24T17:29:26.235083Z\",\n    \"end_date\": null,\n    \"type\": \"standard\",\n    \"minimum_amount\": \"50000.0000000000\",\n    \"maximum_amount\": \"100000.0000000000\",\n    \"repayment\": {\n      \"type\": \"installment\",\n      \"periodicity\": \"monthly\"\n    },\n    \"charges\": [\n      {\n        \"trigger\": \"late_installment\",\n        \"tax\": \"19\",\n        \"type\": \"collection_cost\"\n      },\n      {\n        \"name\": \"Impuesto IVA F\",\n        \"tax\": \"19\",\n        \"type\": \"cost\"\n      },\n      {\n        \"trigger\": \"late_installment\",\n        \"interest_value\": \"60\",\n        \"tax\": \"19\",\n        \"type\": \"default_interest\"\n      },\n      {\n        \"name\": \"Desembolso\",\n        \"tax\": \"19\",\n        \"type\": \"cost\"\n      },\n      {\n        \"interest_value\": \"45\",\n        \"tax\": \"19\",\n        \"periodicity\": \"daily\",\n        \"type\": \"interest\"\n      }\n    ],\n\t\"metadata\": {\n\t\t\"version\": \"2\",\n    \"timestamp\": \"2023-11-27T21:37:54.359694Z\"\n\t},\n\t\"errors\": []\n}"
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+x-readme-fauxas: true
