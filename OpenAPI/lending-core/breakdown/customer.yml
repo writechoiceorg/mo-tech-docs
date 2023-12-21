@@ -19,275 +19,13 @@ security:
     sec1: []
 paths:
   /customers:
-    post:
-      summary: Create Customer
-      description: >-
-        Use the Create Customer endpoint to promote or upgrade a Pre Customer to
-        the Customer phase. This is done when all necessary onboarding steps
-        have been completed.
-      operationId: create-customer
-      parameters:
-        - name: x-api-key
-          in: header
-          description: >-
-            Use the `x-api-key` header to include the API key generated
-            previously for authentication purposes. The API key serves as a
-            secret token that identifies the client or application making the
-            request and is used to determine whether the client has the
-            necessary permissions to access the requested resource.
-          required: true
-          schema:
-            type: string
-        - name: x-aggregator-id
-          in: header
-          description: >-
-            Use the `x-aggregator-id` header to identify the aggregator for a
-            particular request. An aggregator is the entity that is involved in
-            the processing of transactions or data. By including the id in the
-            header, the server can identify which aggregator the request owns
-            and handle the request accordingly.
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - precustomer_id
-                - first_name
-                - last_name
-                - email
-              properties:
-                precustomer_id:
-                  type: string
-                external_id:
-                  type: string
-                  description: >-
-                    The `external_id` field allows you to provide an external
-                    identifier or code that can link the newly created Customer
-                    to an external system or entity. It can be useful for
-                    cross-referencing.
-                first_name:
-                  type: string
-                  description: >-
-                    The `first_name` field is required and should contain the
-                    first name of the new customer.
-                last_name:
-                  type: string
-                  description: >-
-                    The `last_name` field is required and should contain the
-                    last name or surname of the new customer.
-                document_type:
-                  type: string
-                  description: >-
-                    The `document_type` field can specify the type or category
-                    of the customer's document, such as a passport, driver's
-                    license, or other forms of identification.
-                document_number:
-                  type: string
-                  description: >-
-                    The `document_number` field can store the unique number or
-                    identifier associated with the document specified in the
-                    `document_type` field.
-                phone:
-                  type: string
-                  description: >-
-                    The `phone` field allows you to provide the customer's
-                    contact phone number.
-                email:
-                  type: string
-                address:
-                  type: string
-                  description: >-
-                    The `address` field can store the customer's physical
-                    address or location information.
-                personal_accepted_at:
-                  type: string
-                  description: >-
-                    The `personal_accepted_at` field records the date and time
-                    when the customer accepted or acknowledged personal
-                    agreements or terms.
-                commercial_accepted_at:
-                  type: string
-                  description: >-
-                    The `commercial_accepted_at` field records the date and time
-                    when the customer accepted or acknowledged commercial
-                    agreements or terms, often in a business context.
-                values:
-                  type: string
-                  description: >-
-                    The `values` field allows for the inclusion of additional
-                    custom fields or attributes. Example, it could be specified
-                    `field_1`, `field_2` and `field_3` which can hold specific
-                    values or information relevant to your system or business.
-                  format: json
-      responses:
-        '201':
-          description: '201'
-          content:
-            application/json:
-              examples:
-                Result:
-                  value: |-
-                    {
-                      "data": {
-                        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-                      },
-                      "metadata": {
-                        "version": 0,
-                        "timestamp": "2023-10-13T16:10:30.617Z"
-                      },
-                      "errors": []
-                    }
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                  metadata:
-                    type: object
-                    properties:
-                      version:
-                        type: integer
-                        example: 0
-                        default: 0
-                      timestamp:
-                        type: string
-                        example: '2023-10-13T16:10:30.617Z'
-                  errors:
-                    type: array
-        '400':
-          description: '400'
-          content:
-            application/json:
-              examples:
-                Result:
-                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
-              schema:
-                type: object
-                properties:
-                  data: {}
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: XXXXXX
-                        description:
-                          type: string
-                          example: Description of error
-                        detail:
-                          type: object
-                          properties:
-                            message:
-                              type: string
-                              example: Detail message of error
-                        name:
-                          type: string
-                          example: ERROR_NAME
-                  metadata:
-                    type: object
-                    properties:
-                      timestamp:
-                        type: string
-                        example: '2023-11-27T15:04:00.033472Z'
-                      version:
-                        type: string
-                        example: '2'
-        '401':
-          description: '401'
-          content:
-            application/json:
-              examples:
-                Result:
-                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
-              schema:
-                type: object
-                properties:
-                  data: {}
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: XXXXXX
-                        description:
-                          type: string
-                          example: Description of error
-                        detail:
-                          type: object
-                          properties:
-                            message:
-                              type: string
-                              example: Detail message of error
-                        name:
-                          type: string
-                          example: ERROR_NAME
-                  metadata:
-                    type: object
-                    properties:
-                      timestamp:
-                        type: string
-                        example: '2023-11-27T15:04:00.033472Z'
-                      version:
-                        type: string
-                        example: '2'
-        '403':
-          description: '403'
-          content:
-            application/json:
-              examples:
-                Result:
-                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
-              schema:
-                type: object
-                properties:
-                  data: {}
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        code:
-                          type: string
-                          example: XXXXXX
-                        description:
-                          type: string
-                          example: Description of error
-                        detail:
-                          type: object
-                          properties:
-                            message:
-                              type: string
-                              example: Detail message of error
-                        name:
-                          type: string
-                          example: ERROR_NAME
-                  metadata:
-                    type: object
-                    properties:
-                      timestamp:
-                        type: string
-                        example: '2023-11-27T15:04:00.033472Z'
-                      version:
-                        type: string
-                        example: '2'
-      deprecated: false
     get:
       summary: List Customers
       description: >-
         Use the List Customer endpoint to retrieve a list of all customers who
         have reached the Customer phase.
+      tags:
+        - Customers
       operationId: list-customers
       parameters:
         - name: x-api-key
@@ -558,6 +296,272 @@ paths:
                         type: string
                         example: '2'
       deprecated: false
+    post:
+      summary: Create Customer
+      description: >-
+        Use the Create Customer endpoint to promote or upgrade a Pre Customer to
+        the Customer phase. This is done when all necessary onboarding steps
+        have been completed.
+      tags:
+        - Customers
+      operationId: create-customer
+      parameters:
+        - name: x-api-key
+          in: header
+          description: >-
+            Use the `x-api-key` header to include the API key generated
+            previously for authentication purposes. The API key serves as a
+            secret token that identifies the client or application making the
+            request and is used to determine whether the client has the
+            necessary permissions to access the requested resource.
+          required: true
+          schema:
+            type: string
+        - name: x-aggregator-id
+          in: header
+          description: >-
+            Use the `x-aggregator-id` header to identify the aggregator for a
+            particular request. An aggregator is the entity that is involved in
+            the processing of transactions or data. By including the id in the
+            header, the server can identify which aggregator the request owns
+            and handle the request accordingly.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - precustomer_id
+                - first_name
+                - last_name
+                - email
+              properties:
+                precustomer_id:
+                  type: string
+                external_id:
+                  type: string
+                  description: >-
+                    The `external_id` field allows you to provide an external
+                    identifier or code that can link the newly created Customer
+                    to an external system or entity. It can be useful for
+                    cross-referencing.
+                first_name:
+                  type: string
+                  description: >-
+                    The `first_name` field is required and should contain the
+                    first name of the new customer.
+                last_name:
+                  type: string
+                  description: >-
+                    The `last_name` field is required and should contain the
+                    last name or surname of the new customer.
+                document_type:
+                  type: string
+                  description: >-
+                    The `document_type` field can specify the type or category
+                    of the customer's document, such as a passport, driver's
+                    license, or other forms of identification.
+                document_number:
+                  type: string
+                  description: >-
+                    The `document_number` field can store the unique number or
+                    identifier associated with the document specified in the
+                    `document_type` field.
+                phone:
+                  type: string
+                  description: >-
+                    The `phone` field allows you to provide the customer's
+                    contact phone number.
+                email:
+                  type: string
+                address:
+                  type: string
+                  description: >-
+                    The `address` field can store the customer's physical
+                    address or location information.
+                personal_accepted_at:
+                  type: string
+                  description: >-
+                    The `personal_accepted_at` field records the date and time
+                    when the customer accepted or acknowledged personal
+                    agreements or terms.
+                commercial_accepted_at:
+                  type: string
+                  description: >-
+                    The `commercial_accepted_at` field records the date and time
+                    when the customer accepted or acknowledged commercial
+                    agreements or terms, often in a business context.
+                values:
+                  type: string
+                  description: >-
+                    The `values` field allows for the inclusion of additional
+                    custom fields or attributes. Example, it could be specified
+                    `field_1`, `field_2` and `field_3` which can hold specific
+                    values or information relevant to your system or business.
+                  format: json
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    {
+                      "data": {
+                        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                      },
+                      "metadata": {
+                        "version": 0,
+                        "timestamp": "2023-10-13T16:10:30.617Z"
+                      },
+                      "errors": []
+                    }
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                  metadata:
+                    type: object
+                    properties:
+                      version:
+                        type: integer
+                        example: 0
+                        default: 0
+                      timestamp:
+                        type: string
+                        example: '2023-10-13T16:10:30.617Z'
+                  errors:
+                    type: array
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+      deprecated: false
   /customers/{customer_id}:
     get:
       summary: Detail Customer
@@ -565,6 +569,8 @@ paths:
         This web service provides specific details about a customer in the
         **Customer** phase. It can be used to obtain in-depth information about
         a particular customer.
+      tags:
+        - Customers
       operationId: detail-customer
       parameters:
         - name: customer_id
@@ -834,6 +840,8 @@ paths:
       description: >-
         Use the List Customer Score endpoint to retrieve a list of scores
         associated with a specific customer based on their `customer_id`.
+      tags:
+        - Customers
       operationId: list-customer-scores
       parameters:
         - name: limit
@@ -1101,6 +1109,8 @@ paths:
       description: >-
         Use the Set Customer Score endpoint to set or update a customer's score
         based on their `customer_id`.
+      tags:
+        - Customers
       operationId: set-customer-score
       parameters:
         - name: customer_id

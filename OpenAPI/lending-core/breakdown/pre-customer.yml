@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Lending - Payments
+  title: Lending - Pre-customers
   version: '2'
 servers:
   - url: https://mo-services-zero-production.moprestamo.com/api/v2
@@ -18,11 +18,17 @@ security:
   - sec0: []
     sec1: []
 paths:
-  /payments:
+  /pre-customers:
     post:
-      summary: Create Payment
-      description: ''
-      operationId: create-payment
+      summary: Create Pre Customer
+      description: >-
+        Use the Create Pre Customer endpoint to create a new record in the
+        initial phase of a customer, known as Pre Customer, where minimal
+        required information is recorded by the system. Various steps need to be
+        taken during this phase to promote or upgrade to a Customer.
+      tags:
+        - Pre Customers
+      operationId: create-pre-customer
       parameters:
         - name: x-api-key
           in: header
@@ -52,44 +58,64 @@ paths:
             schema:
               type: object
               required:
-                - customer_id
-                - loan_id
-                - amount
-                - application_mode
+                - first_name
+                - last_name
+                - email
               properties:
-                customer_id:
-                  type: string
-                  description: >-
-                    The `customer_id` field represents the unique identifier of
-                    the customer making the payment. It is required to provide a
-                    valid UUID to associate the payment with a specific
-                    customer.
-                loan_id:
-                  type: string
-                  description: >-
-                    The `loan_id` field is the unique identifier of the loan for
-                    which the payment is being made. It is required to provide a
-                    valid UUID to link the payment to a specific loan.
-                amount:
-                  type: number
-                  description: >-
-                    The `amount` field represents the payment amount that the
-                    customer intends to make. It is a decimal value and must be
-                    specified.
-                  format: double
                 external_id:
                   type: string
                   description: >-
-                    The `external_id` field allows you to provide an optional
-                    external identifier or code related to the payment. It is
-                    not mandatory but can be used for reference.
-                application_mode:
+                    The `external_id` field allows you to provide an external
+                    identifier or code that can link the newly created Pre
+                    Customer to an external system or entity. It can be useful
+                    for cross-referencing.
+                first_name:
                   type: string
                   description: >-
-                    The `application_mode` field specifies the mode in which the
-                    payment should be applied. It can have values such as
-                    "total," "installment," or "installment_advance". It is
-                    required to be provided.
+                    The `first_name` field is required and should contain the
+                    first name of the new Pre Customer.
+                last_name:
+                  type: string
+                  description: >-
+                    The `last_name` field is required and should contain the
+                    last name or surname of the new Pre Customer.
+                document_type:
+                  type: string
+                  description: >-
+                    The `document_type` field can specify the type or category
+                    of the Pre Customer's document, such as a passport, driver's
+                    license, or other forms of identification.
+                document_number:
+                  type: string
+                  description: >-
+                    The `document_number` field can store the unique number or
+                    identifier associated with the document specified in the
+                    `document_type` field.
+                phone:
+                  type: string
+                  description: >-
+                    The `phone` field allows you to provide the Pre Customer's
+                    contact phone number.
+                email:
+                  type: string
+                  description: >-
+                    The `email` field is required and should contain the email
+                    address of the "Pre Customer." It is marked as required to
+                    ensure each Pre Customer has a valid email address.
+                address:
+                  type: string
+                  description: >-
+                    The `address` field can store the Pre Customer's physical
+                    address or location information.
+                values:
+                  type: string
+                  description: >-
+                    The `values` field allows for the inclusion of additional
+                    custom fields or attributes. In your example, you have
+                    specified `field_1`, `field_2` and `field_3` which can hold
+                    specific values or information relevant to your system or
+                    business.
+                  format: json
       responses:
         '201':
           description: '201'
@@ -97,7 +123,17 @@ paths:
             application/json:
               examples:
                 Result:
-                  value: "{\n  \"data\": {\n\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\"loan_payments\": [\n\t\t\t{\n\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\"amount\": 100.0,\n\t\t\t\t\"loan\": {\n\t\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\t\"reference\": \"string\",\n\t\t\t\t\t\"external_id\": \"string\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\"amount\": 100.0,\n\t\t\t\t\"loan\": {\n\t\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\t\"reference\": \"string\",\n\t\t\t\t\t\"external_id\": \"string\"\n\t\t\t\t}\n\t\t\t}\n\t\t]\n\t},\n  \"metadata\": {\n    \"timestamp\": \"2023-08-30T16:30:00Z\",\n    \"version\": \"2\"\n  },\n  \"errors\": []\n}"
+                  value: |-
+                    {
+                      "data": {
+                        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                      },
+                      "metadata": {
+                        "version": 0,
+                        "timestamp": "2023-10-13T16:10:30.617Z"
+                      },
+                      "errors": []
+                    }
               schema:
                 type: object
                 properties:
@@ -107,39 +143,16 @@ paths:
                       id:
                         type: string
                         example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                      loan_payments:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: string
-                              example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                            amount:
-                              type: integer
-                              example: 100
-                              default: 0
-                            loan:
-                              type: object
-                              properties:
-                                id:
-                                  type: string
-                                  example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                                reference:
-                                  type: string
-                                  example: string
-                                external_id:
-                                  type: string
-                                  example: string
                   metadata:
                     type: object
                     properties:
+                      version:
+                        type: integer
+                        example: 0
+                        default: 0
                       timestamp:
                         type: string
-                        example: '2023-08-30T16:30:00Z'
-                      version:
-                        type: string
-                        example: '2'
+                        example: '2023-10-13T16:10:30.617Z'
                   errors:
                     type: array
         '400':
@@ -264,21 +277,15 @@ paths:
                         example: '2'
       deprecated: false
     get:
-      summary: List Payments
-      description: ''
-      operationId: list-payments
+      summary: List Pre Customers
+      description: >-
+        Use the List Pre Customer endpoint to retrieve a list of all records in
+        the Pre Customer phase. It can be useful for tracking or managing these
+        records.
+      tags:
+        - Pre Customers
+      operationId: list-pre-customers
       parameters:
-        - name: x-api-key
-          in: header
-          description: >-
-            Use the `x-api-key` header to include the API key generated
-            previously for authentication purposes. The API key serves as a
-            secret token that identifies the client or application making the
-            request and is used to determine whether the client has the
-            necessary permissions to access the requested resource.
-          required: true
-          schema:
-            type: string
         - name: ordering
           in: query
           description: >-
@@ -304,7 +311,8 @@ paths:
             requests to retrieve the complete dataset. It's particularly useful
             when dealing with large result sets.
           schema:
-            type: string
+            type: integer
+            format: int32
         - name: offset
           in: query
           description: >-
@@ -315,6 +323,18 @@ paths:
             For example, if you set `offset=20` and `limit=10`, you will receive
             results 21 to 30. It is often used to retrieve subsequent pages of
             results.
+          schema:
+            type: integer
+            format: int32
+        - name: x-api-key
+          in: header
+          description: >-
+            Use the `x-api-key` header to include the API key generated
+            previously for authentication purposes. The API key serves as a
+            secret token that identifies the client or application making the
+            request and is used to determine whether the client has the
+            necessary permissions to access the requested resource.
+          required: true
           schema:
             type: string
         - name: x-aggregator-id
@@ -335,7 +355,7 @@ paths:
             application/json:
               examples:
                 Result:
-                  value: "{\n  \"data\": [\n\t\t{\n\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\"reference\": \"string\",\n\t\t\t\"external_id\": \"string\",\n\t\t\t\"amount\": 50.0,\n\t\t\t\"type\": \"string\",\n\t\t\t\"application_mode\": \"string\",\n\t\t\t\"created_at\": \"2019-08-24T14:15:22Z\",\n\t\t\t\"updated_at\": \"2019-08-24T14:15:22Z\",\n\t\t\t\"customer\": {\n\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\"reference\": \"string\",\n\t\t\t\t\"external_id\": \"string\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\"reference\": \"string\",\n\t\t\t\"external_id\": \"string\",\n\t\t\t\"amount\": 50.0,\n\t\t\t\"type\": \"string\",\n\t\t\t\"application_mode\": \"string\",\n\t\t\t\"created_at\": \"2019-08-24T14:15:22Z\",\n\t\t\t\"updated_at\": \"2019-08-24T14:15:22Z\",\n\t\t\t\"customer\": {\n\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\"reference\": \"string\",\n\t\t\t\t\"external_id\": \"string\"\n\t\t\t}\n\t\t}\n\t],\n  \"metadata\": {\n    \"timestamp\": \"2023-08-30T16:30:00Z\",\n    \"version\": \"2\"\n  },\n  \"errors\": []\n}"
+                  value: "{\n  \"data\": [\n    {\n      \"id\": \"497f6eca-6276-4993-bfeb-53cbbbba6f08\",\n      \"reference\": \"string\",\n      \"external_id\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"document_type\": \"string\",\n      \"document_number\": \"string\",\n      \"phone\": \"string\",\n      \"email\": \"user@example.com\",\n      \"status\": \"string\",\n      \"created_at\": \"2019-08-24T14:15:22Z\",\n      \"updated_at\": \"2019-08-24T14:15:22Z\"\n\t\t},\n    {\n      \"id\": \"497f6eca-6276-4993-bfeb-53cbbbba6f08\",\n      \"reference\": \"string\",\n      \"external_id\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"document_type\": \"string\",\n      \"document_number\": \"string\",\n      \"phone\": \"string\",\n      \"email\": \"user@example.com\",\n      \"status\": \"string\",\n      \"created_at\": \"2019-08-24T14:15:22Z\",\n      \"updated_at\": \"2019-08-24T14:15:22Z\"\n    }\n  ],\n  \"metadata\": {\n    \"timestamp\": \"2023-08-30T16:30:00Z\",\n    \"version\": \"2\",\n    \"page_size\": 5,\n    \"filtered\": 2,\n    \"total_pages\": 1,\n    \"count\": 2\n  },\n  \"errors\": []\n}"
               schema:
                 type: object
                 properties:
@@ -346,21 +366,32 @@ paths:
                       properties:
                         id:
                           type: string
-                          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                          example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
                         reference:
                           type: string
                           example: string
                         external_id:
                           type: string
                           example: string
-                        amount:
-                          type: integer
-                          example: 50
-                          default: 0
-                        type:
+                        first_name:
                           type: string
                           example: string
-                        application_mode:
+                        last_name:
+                          type: string
+                          example: string
+                        document_type:
+                          type: string
+                          example: string
+                        document_number:
+                          type: string
+                          example: string
+                        phone:
+                          type: string
+                          example: string
+                        email:
+                          type: string
+                          example: user@example.com
+                        status:
                           type: string
                           example: string
                         created_at:
@@ -369,18 +400,6 @@ paths:
                         updated_at:
                           type: string
                           example: '2019-08-24T14:15:22Z'
-                        customer:
-                          type: object
-                          properties:
-                            id:
-                              type: string
-                              example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                            reference:
-                              type: string
-                              example: string
-                            external_id:
-                              type: string
-                              example: string
                   metadata:
                     type: object
                     properties:
@@ -390,6 +409,22 @@ paths:
                       version:
                         type: string
                         example: '2'
+                      page_size:
+                        type: integer
+                        example: 5
+                        default: 0
+                      filtered:
+                        type: integer
+                        example: 2
+                        default: 0
+                      total_pages:
+                        type: integer
+                        example: 1
+                        default: 0
+                      count:
+                        type: integer
+                        example: 2
+                        default: 0
                   errors:
                     type: array
         '400':
@@ -513,12 +548,28 @@ paths:
                         type: string
                         example: '2'
       deprecated: false
-  /payments/{payment_id}/process:
-    post:
-      summary: Process Payment
-      description: ''
-      operationId: process-payment
+  /pre-customers/{precustomer_id}:
+    get:
+      summary: Detail Pre Customer
+      description: >-
+        Use the Detail Pre Customer endpoint to retrieve the details about a
+        customer in the Pre Customer phase. It can be used to obtain in-depth
+        information about a particular record.
+      tags:
+        - Pre Customers
+      operationId: detail-pre-customer
       parameters:
+        - name: precustomer_id
+          in: path
+          description: >-
+            It is a UUID that uniquely identifies a **Pre Customer** in the
+            system. When making a request to retrieve details about a specific
+            **Pre Customer**, you should replace {precustomer_id} in the URL
+            with the actual UUID of the **Pre Customer** you want to retrieve
+            information about.
+          schema:
+            type: string
+          required: true
         - name: x-api-key
           in: header
           description: >-
@@ -527,13 +578,9 @@ paths:
             secret token that identifies the client or application making the
             request and is used to determine whether the client has the
             necessary permissions to access the requested resource.
-          schema:
-            type: string
-        - name: payment_id
-          in: path
-          schema:
-            type: string
           required: true
+          schema:
+            type: string
         - name: x-aggregator-id
           in: header
           description: >-
@@ -545,21 +592,6 @@ paths:
           required: true
           schema:
             type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - status
-              properties:
-                status:
-                  type: string
-                  description: >-
-                    The `status` field specifies the status of the payment
-                    processing, which can be either "completed" or "rejected."
-                    It indicates whether the payment has been successfully
-                    processed and completed or if it has been rejected.
       responses:
         '200':
           description: '200'
@@ -567,7 +599,7 @@ paths:
             application/json:
               examples:
                 Result:
-                  value: "{\n  \"data\": {\n\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\"external_id\": \"string\",\n\t\t\"loan_payments\": [\n\t\t\t{\n\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\"amount\": 100.0,\n\t\t\t\t\"loan\": {\n\t\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\t\"reference\": \"string\",\n\t\t\t\t\t\"external_id\": \"string\",\n\t\t\t\t\t\"installment_payments\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\t\t\t\"amount\": 50.0\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\"amount\": 100.0,\n\t\t\t\t\"loan\": {\n\t\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\t\"reference\": \"string\",\n\t\t\t\t\t\"external_id\": \"string\",\n\t\t\t\t\t\"installment_payments\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\t\t\t\"amount\": 50.0,\n\t\t\t\t\t\t\t\"installment\": {\n\t\t\t\t\t\t\t\t\"number\": 3\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t}\n\t\t]\n\t},\n  \"metadata\": {\n    \"timestamp\": \"2023-08-30T16:30:00Z\",\n    \"version\": \"2\"\n  },\n  \"errors\": []\n}"
+                  value: "{\n  \"data\": {\n\t\t\"id\": \"497f6eca-6276-4993-bfeb-53cbbbba6f08\",\n\t\t\"reference\": \"string\",\n\t\t\"external_id\": \"string\",\n\t\t\"first_name\": \"string\",\n\t\t\"last_name\": \"string\",\n\t\t\"document_type\": \"string\",\n\t\t\"document_number\": \"string\",\n\t\t\"phone\": \"string\",\n\t\t\"email\": \"user@example.com\",\n\t\t\"status\": \"string\",\n\t\t\"created_at\": \"2019-08-24T14:15:22Z\",\n\t\t\"updated_at\": \"2019-08-24T14:15:22Z\"\n\t},\n  \"metadata\": {\n    \"version\": 0,\n    \"timestamp\": \"2023-10-13T16:10:30.617Z\"\n  },\n  \"errors\": []\n}"
               schema:
                 type: object
                 properties:
@@ -576,55 +608,50 @@ paths:
                     properties:
                       id:
                         type: string
-                        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                        example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      reference:
+                        type: string
+                        example: string
                       external_id:
                         type: string
                         example: string
-                      loan_payments:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: string
-                              example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                            amount:
-                              type: integer
-                              example: 100
-                              default: 0
-                            loan:
-                              type: object
-                              properties:
-                                id:
-                                  type: string
-                                  example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                                reference:
-                                  type: string
-                                  example: string
-                                external_id:
-                                  type: string
-                                  example: string
-                                installment_payments:
-                                  type: array
-                                  items:
-                                    type: object
-                                    properties:
-                                      id:
-                                        type: string
-                                        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-                                      amount:
-                                        type: integer
-                                        example: 50
-                                        default: 0
+                      first_name:
+                        type: string
+                        example: string
+                      last_name:
+                        type: string
+                        example: string
+                      document_type:
+                        type: string
+                        example: string
+                      document_number:
+                        type: string
+                        example: string
+                      phone:
+                        type: string
+                        example: string
+                      email:
+                        type: string
+                        example: user@example.com
+                      status:
+                        type: string
+                        example: string
+                      created_at:
+                        type: string
+                        example: '2019-08-24T14:15:22Z'
+                      updated_at:
+                        type: string
+                        example: '2019-08-24T14:15:22Z'
                   metadata:
                     type: object
                     properties:
+                      version:
+                        type: integer
+                        example: 0
+                        default: 0
                       timestamp:
                         type: string
-                        example: '2023-08-30T16:30:00Z'
-                      version:
-                        type: string
-                        example: '2'
+                        example: '2023-10-13T16:10:30.617Z'
                   errors:
                     type: array
         '400':

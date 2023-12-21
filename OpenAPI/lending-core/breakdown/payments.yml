@@ -1,0 +1,1202 @@
+openapi: 3.1.0
+info:
+  title: Lending - Payments
+  version: '2'
+servers:
+  - url: https://mo-services-zero-production.moprestamo.com/api/v2
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+    sec1:
+      type: apiKey
+      in: header
+      name: X-AGGREGATOR-ID
+security:
+  - sec0: []
+    sec1: []
+paths:
+  /payments:
+    post:
+      summary: Create Payment
+      description: ''
+      tags:
+        - Payments
+      operationId: create-payment
+      parameters:
+        - name: x-api-key
+          in: header
+          description: >-
+            Use the `x-api-key` header to include the API key generated
+            previously for authentication purposes. The API key serves as a
+            secret token that identifies the client or application making the
+            request and is used to determine whether the client has the
+            necessary permissions to access the requested resource.
+          required: true
+          schema:
+            type: string
+        - name: x-aggregator-id
+          in: header
+          description: >-
+            Use the `x-aggregator-id` header to identify the aggregator for a
+            particular request. An aggregator is the entity that is involved in
+            the processing of transactions or data. By including the id in the
+            header, the server can identify which aggregator the request owns
+            and handle the request accordingly.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - customer_id
+                - loan_id
+                - amount
+                - application_mode
+              properties:
+                customer_id:
+                  type: string
+                  description: >-
+                    The `customer_id` field represents the unique identifier of
+                    the customer making the payment. It is required to provide a
+                    valid UUID to associate the payment with a specific
+                    customer.
+                loan_id:
+                  type: string
+                  description: >-
+                    The `loan_id` field is the unique identifier of the loan for
+                    which the payment is being made. It is required to provide a
+                    valid UUID to link the payment to a specific loan.
+                amount:
+                  type: number
+                  description: >-
+                    The `amount` field represents the payment amount that the
+                    customer intends to make. It is a decimal value and must be
+                    specified.
+                  format: double
+                external_id:
+                  type: string
+                  description: >-
+                    The `external_id` field allows you to provide an optional
+                    external identifier or code related to the payment. It is
+                    not mandatory but can be used for reference.
+                application_mode:
+                  type: string
+                  description: >-
+                    The `application_mode` field specifies the mode in which the
+                    payment should be applied. It can have values such as
+                    "total," "installment," or "installment_advance". It is
+                    required to be provided.
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": {\n\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\"loan_payments\": [\n\t\t\t{\n\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\"amount\": 100.0,\n\t\t\t\t\"loan\": {\n\t\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\t\"reference\": \"string\",\n\t\t\t\t\t\"external_id\": \"string\"\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\"amount\": 100.0,\n\t\t\t\t\"loan\": {\n\t\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\t\"reference\": \"string\",\n\t\t\t\t\t\"external_id\": \"string\"\n\t\t\t\t}\n\t\t\t}\n\t\t]\n\t},\n  \"metadata\": {\n    \"timestamp\": \"2023-08-30T16:30:00Z\",\n    \"version\": \"2\"\n  },\n  \"errors\": []\n}"
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                      loan_payments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                            amount:
+                              type: integer
+                              example: 100
+                              default: 0
+                            loan:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                                reference:
+                                  type: string
+                                  example: string
+                                external_id:
+                                  type: string
+                                  example: string
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-08-30T16:30:00Z'
+                      version:
+                        type: string
+                        example: '2'
+                  errors:
+                    type: array
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+      deprecated: false
+    get:
+      summary: List Payments
+      description: ''
+      tags:
+        - Payments
+      operationId: list-payments
+      parameters:
+        - name: x-api-key
+          in: header
+          description: >-
+            Use the `x-api-key` header to include the API key generated
+            previously for authentication purposes. The API key serves as a
+            secret token that identifies the client or application making the
+            request and is used to determine whether the client has the
+            necessary permissions to access the requested resource.
+          required: true
+          schema:
+            type: string
+        - name: ordering
+          in: query
+          description: >-
+            Use this query parameter to specify the order in which the results
+            of a query should be returned. It is commonly used for sorting the
+            data in ascending or descending order based on one or more fields.
+            You can specify one or more fields by which the data should be
+            ordered, along with the order direction (ascending or descending)
+            using a comma-separated list. For example,
+            `ordering=name,created_at` would  order the results first by the
+            `name` field in ascending order and then by the `created_at` field
+            in ascending order.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: >-
+            Use this query parameter to specify the maximum number of results to
+            be returned in a single response. It is used for pagination and can
+            help manage the size of the response data. The server will limit the
+            number of results to the value specified in the `limit` parameter.
+            If there are more results available, you may need to make multiple
+            requests to retrieve the complete dataset. It's particularly useful
+            when dealing with large result sets.
+          schema:
+            type: string
+        - name: offset
+          in: query
+          description: >-
+            Use this query parameter in conjunction with the `limit` parameter
+            for pagination. It specifies the starting point or offset within the
+            dataset from which results should be returned. By setting the
+            offset, you can navigate to different segments of the result set.
+            For example, if you set `offset=20` and `limit=10`, you will receive
+            results 21 to 30. It is often used to retrieve subsequent pages of
+            results.
+          schema:
+            type: string
+        - name: x-aggregator-id
+          in: header
+          description: >-
+            Use the `x-aggregator-id` header to identify the aggregator for a
+            particular request. An aggregator is the entity that is involved in
+            the processing of transactions or data. By including the id in the
+            header, the server can identify which aggregator the request owns
+            and handle the request accordingly.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": [\n\t\t{\n\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\"reference\": \"string\",\n\t\t\t\"external_id\": \"string\",\n\t\t\t\"amount\": 50.0,\n\t\t\t\"type\": \"string\",\n\t\t\t\"application_mode\": \"string\",\n\t\t\t\"created_at\": \"2019-08-24T14:15:22Z\",\n\t\t\t\"updated_at\": \"2019-08-24T14:15:22Z\",\n\t\t\t\"customer\": {\n\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\"reference\": \"string\",\n\t\t\t\t\"external_id\": \"string\"\n\t\t\t}\n\t\t},\n\t\t{\n\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\"reference\": \"string\",\n\t\t\t\"external_id\": \"string\",\n\t\t\t\"amount\": 50.0,\n\t\t\t\"type\": \"string\",\n\t\t\t\"application_mode\": \"string\",\n\t\t\t\"created_at\": \"2019-08-24T14:15:22Z\",\n\t\t\t\"updated_at\": \"2019-08-24T14:15:22Z\",\n\t\t\t\"customer\": {\n\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\"reference\": \"string\",\n\t\t\t\t\"external_id\": \"string\"\n\t\t\t}\n\t\t}\n\t],\n  \"metadata\": {\n    \"timestamp\": \"2023-08-30T16:30:00Z\",\n    \"version\": \"2\"\n  },\n  \"errors\": []\n}"
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                        reference:
+                          type: string
+                          example: string
+                        external_id:
+                          type: string
+                          example: string
+                        amount:
+                          type: integer
+                          example: 50
+                          default: 0
+                        type:
+                          type: string
+                          example: string
+                        application_mode:
+                          type: string
+                          example: string
+                        created_at:
+                          type: string
+                          example: '2019-08-24T14:15:22Z'
+                        updated_at:
+                          type: string
+                          example: '2019-08-24T14:15:22Z'
+                        customer:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                            reference:
+                              type: string
+                              example: string
+                            external_id:
+                              type: string
+                              example: string
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-08-30T16:30:00Z'
+                      version:
+                        type: string
+                        example: '2'
+                  errors:
+                    type: array
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+      deprecated: false
+  /payments/{payment_id}/process:
+    post:
+      summary: Process Payment
+      description: ''
+      tags:
+        - Payments
+      operationId: process-payment
+      parameters:
+        - name: x-api-key
+          in: header
+          description: >-
+            Use the `x-api-key` header to include the API key generated
+            previously for authentication purposes. The API key serves as a
+            secret token that identifies the client or application making the
+            request and is used to determine whether the client has the
+            necessary permissions to access the requested resource.
+          schema:
+            type: string
+        - name: payment_id
+          in: path
+          schema:
+            type: string
+          required: true
+        - name: x-aggregator-id
+          in: header
+          description: >-
+            Use the `x-aggregator-id` header to identify the aggregator for a
+            particular request. An aggregator is the entity that is involved in
+            the processing of transactions or data. By including the id in the
+            header, the server can identify which aggregator the request owns
+            and handle the request accordingly.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  description: >-
+                    The `status` field specifies the status of the payment
+                    processing, which can be either "completed" or "rejected."
+                    It indicates whether the payment has been successfully
+                    processed and completed or if it has been rejected.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"data\": {\n\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\"external_id\": \"string\",\n\t\t\"loan_payments\": [\n\t\t\t{\n\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\"amount\": 100.0,\n\t\t\t\t\"loan\": {\n\t\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\t\"reference\": \"string\",\n\t\t\t\t\t\"external_id\": \"string\",\n\t\t\t\t\t\"installment_payments\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\t\t\t\"amount\": 50.0\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\"amount\": 100.0,\n\t\t\t\t\"loan\": {\n\t\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\t\"reference\": \"string\",\n\t\t\t\t\t\"external_id\": \"string\",\n\t\t\t\t\t\"installment_payments\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n\t\t\t\t\t\t\t\"amount\": 50.0,\n\t\t\t\t\t\t\t\"installment\": {\n\t\t\t\t\t\t\t\t\"number\": 3\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t]\n\t\t\t\t}\n\t\t\t}\n\t\t]\n\t},\n  \"metadata\": {\n    \"timestamp\": \"2023-08-30T16:30:00Z\",\n    \"version\": \"2\"\n  },\n  \"errors\": []\n}"
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                      external_id:
+                        type: string
+                        example: string
+                      loan_payments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                            amount:
+                              type: integer
+                              example: 100
+                              default: 0
+                            loan:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                                reference:
+                                  type: string
+                                  example: string
+                                external_id:
+                                  type: string
+                                  example: string
+                                installment_payments:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: string
+                                        example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                                      amount:
+                                        type: integer
+                                        example: 50
+                                        default: 0
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-08-30T16:30:00Z'
+                      version:
+                        type: string
+                        example: '2'
+                  errors:
+                    type: array
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+      deprecated: false
+  /loan-payments:
+    get:
+      summary: List Loan Payments
+      description: ''
+      tags:
+        - Payments
+      operationId: list-loan-payments
+      parameters:
+        - name: x-api-key
+          in: header
+          description: >-
+            Use the `x-api-key` header to include the API key generated
+            previously for authentication purposes. The API key serves as a
+            secret token that identifies the client or application making the
+            request and is used to determine whether the client has the
+            necessary permissions to access the requested resource.
+          required: true
+          schema:
+            type: string
+        - name: ordering
+          in: query
+          description: >-
+            Use this query parameter to specify the order in which the results
+            of a query should be returned. It is commonly used for sorting the
+            data in ascending or descending order based on one or more fields.
+            You can specify one or more fields by which the data should be
+            ordered, along with the order direction (ascending or descending)
+            using a comma-separated list. For example,
+            `ordering=name,created_at` would  order the results first by the
+            `name` field in ascending order and then by the `created_at` field
+            in ascending order.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: >-
+            Use this query parameter to specify the maximum number of results to
+            be returned in a single response. It is used for pagination and can
+            help manage the size of the response data. The server will limit the
+            number of results to the value specified in the `limit` parameter.
+            If there are more results available, you may need to make multiple
+            requests to retrieve the complete dataset. It's particularly useful
+            when dealing with large result sets.
+          schema:
+            type: string
+        - name: offset
+          in: query
+          description: >-
+            Use this query parameter in conjunction with the `limit` parameter
+            for pagination. It specifies the starting point or offset within the
+            dataset from which results should be returned. By setting the
+            offset, you can navigate to different segments of the result set.
+            For example, if you set `offset=20` and `limit=10`, you will receive
+            results 21 to 30. It is often used to retrieve subsequent pages of
+            results.
+          schema:
+            type: string
+        - name: x-aggregator-id
+          in: header
+          description: >-
+            Use the `x-aggregator-id` header to identify the aggregator for a
+            particular request. An aggregator is the entity that is involved in
+            the processing of transactions or data. By including the id in the
+            header, the server can identify which aggregator the request owns
+            and handle the request accordingly.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+      deprecated: false
+  /installment-loans:
+    get:
+      summary: List Installment Payments
+      description: ''
+      tags:
+        - Payments
+      operationId: list-installment-payments
+      parameters:
+        - name: x-api-key
+          in: header
+          description: >-
+            Use the `x-api-key` header to include the API key generated
+            previously for authentication purposes. The API key serves as a
+            secret token that identifies the client or application making the
+            request and is used to determine whether the client has the
+            necessary permissions to access the requested resource.
+          required: true
+          schema:
+            type: string
+        - name: ordering
+          in: query
+          description: >-
+            Use this query parameter to specify the order in which the results
+            of a query should be returned. It is commonly used for sorting the
+            data in ascending or descending order based on one or more fields.
+            You can specify one or more fields by which the data should be
+            ordered, along with the order direction (ascending or descending)
+            using a comma-separated list. For example,
+            `ordering=name,created_at` would  order the results first by the
+            `name` field in ascending order and then by the `created_at` field
+            in ascending order.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: >-
+            Use this query parameter to specify the maximum number of results to
+            be returned in a single response. It is used for pagination and can
+            help manage the size of the response data. The server will limit the
+            number of results to the value specified in the `limit` parameter.
+            If there are more results available, you may need to make multiple
+            requests to retrieve the complete dataset. It's particularly useful
+            when dealing with large result sets.
+          schema:
+            type: string
+        - name: offset
+          in: query
+          description: >-
+            Use this query parameter in conjunction with the `limit` parameter
+            for pagination. It specifies the starting point or offset within the
+            dataset from which results should be returned. By setting the
+            offset, you can navigate to different segments of the result set.
+            For example, if you set `offset=20` and `limit=10`, you will receive
+            results 21 to 30. It is often used to retrieve subsequent pages of
+            results.
+          schema:
+            type: string
+        - name: x-aggregator-id
+          in: header
+          description: >-
+            Use the `x-aggregator-id` header to identify the aggregator for a
+            particular request. An aggregator is the entity that is involved in
+            the processing of transactions or data. By including the id in the
+            header, the server can identify which aggregator the request owns
+            and handle the request accordingly.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+        '403':
+          description: '403'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n\t\t\"data\": null,\n\t\t\"errors\": [\n\t\t\t\t{\n\t\t\t\t\t\t\"code\": \"XXXXXX\",\n\t\t\t\t\t\t\"description\": \"Description of error\",\n            \"detail\": {\n\t\t\t\t\t\t\t\t\"message\": \"Detail message of error\"\n\t\t\t\t\t\t},\n            \"name\": \"ERROR_NAME\"\n\t\t\t\t}\n\t\t],\n\t\t\"metadata\": {\n\t\t\t\t\"timestamp\": \"2023-11-27T15:04:00.033472Z\", \n\t\t\t\t\"version\": \"2\"\n\t\t}\n}"
+              schema:
+                type: object
+                properties:
+                  data: {}
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: XXXXXX
+                        description:
+                          type: string
+                          example: Description of error
+                        detail:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              example: Detail message of error
+                        name:
+                          type: string
+                          example: ERROR_NAME
+                  metadata:
+                    type: object
+                    properties:
+                      timestamp:
+                        type: string
+                        example: '2023-11-27T15:04:00.033472Z'
+                      version:
+                        type: string
+                        example: '2'
+      deprecated: false
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+x-readme-fauxas: true

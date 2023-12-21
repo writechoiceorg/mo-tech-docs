@@ -22,6 +22,8 @@ paths:
     get:
       summary: Get Offer Preview
       description: ''
+      tags:
+        - Offers
       operationId: get-offer-preview
       parameters:
         - name: offer_id
@@ -336,6 +338,8 @@ paths:
     get:
       summary: List Offers
       description: ''
+      tags:
+        - Offers
       operationId: list-offers
       parameters:
         - name: x-api-key
