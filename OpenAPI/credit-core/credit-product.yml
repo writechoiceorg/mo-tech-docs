@@ -31,7 +31,7 @@ paths:
       parameters:
         - name: x-api-key
           in: header
-          description: API KEY given by MO to the program manager.
+          description: API KEY given by MO to the Program Manager.
           required: true
           schema:
             type: string
