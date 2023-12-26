@@ -710,47 +710,37 @@ paths:
                 external_id:
                   type: string
                   description: >-
-                    The `external_id` field allows you to provide an external
-                    identifier or code that can link the newly created Pre
-                    Customer to an external system or entity. It can be useful
-                    for cross-referencing.
+                    Provide an external identifier or code that can link the newly created Pre Customer to an external system or entity.
                 first_name:
                   type: string
                   description: >-
-                    The `first_name` field is required and should contain the
-                    first name of the new Pre Customer.
+                    The first name of the new Pre Customer.
                 last_name:
                   type: string
                   description: >-
-                    The `last_name` field is required and should contain the
-                    last name or surname of the new Pre Customer.
+                    The last name or surname of the new Pre Customer.
                 document_type:
                   type: string
                   description: >-
-                    The `document_type` field can specify the type or category
-                    of the Pre Customer's document, such as a passport, driver's
-                    license, or other forms of identification.
+                    Specify the type or category of the Pre Customer's document, such as a passport, driver's license, or other forms of identification.
                 document_number:
                   type: string
                   description: >-
-                    The `document_number` field can store the unique number or
+                    The unique number or
                     identifier associated with the document specified in the
                     `document_type` field.
                 phone:
                   type: string
                   description: >-
-                    The `phone` field allows you to provide the Pre Customer's
-                    contact phone number.
+                    The Pre Customer's contact phone number.
                 email:
                   type: string
                   description: >-
-                    The `email` field is required and should contain the email
-                    address of the "Pre Customer." It is marked as required to
-                    ensure each Pre Customer has a valid email address.
+                    The email address of the Pre Customer.
                 address:
                   type: string
                   description: >-
-                    The `address` field can store the Pre Customer's physical
+                    The Pre Customer's physical
                     address or location information.
                 values:
                   type: string
