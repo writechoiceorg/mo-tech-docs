@@ -1,0 +1,122 @@
+<style>
+  .start_container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .start_container .card {
+    background-color: #F2F4FF;
+    /* overflow: hidden; */
+    width: 48%;
+    border-radius: 6px;
+    margin: 10px 0;
+    border: 1px solid #F0F0F0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .start_container .card:hover {
+    border-color: #7A49FF;
+    box-shadow: 0px 3px 5px 0px rgba(9, 30, 66, 0.20);
+  }
+
+  .start_container .card_content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .start_container .card_content h2 {
+    color: #7A49FF;
+    margin-top: 0;
+  }
+
+  .start_container .card_content p {
+    color: #666;
+    flex: 1 !important;
+    margin-bottom: 5px;
+  }
+
+  .start_container .links {
+    margin-top: 10px;
+  }
+
+  .start_container .links a {
+    display: block;
+    margin-bottom: 5px;
+    color: #7A49FF;
+    text-decoration: none;
+    width: fit-content;
+  }
+
+  .start_container .links a:hover {
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 900px) {
+    .start_container .card {
+      width: 95%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .start_container .card {
+      width: 48%;
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    .start_container .card {
+      width: 95%;
+    }
+
+    .start_container .card_content {
+      padding: 21px 17px;
+    }
+  }
+</style>
+
+<body>
+
+  <div class="start_container">
+    <!-- Product 1 -->
+    <div class="card">
+      <div class="card_content">
+        <h2>Credit Card Core</h2>
+        <p>
+          MO Credit Card Core allows any company to issue and provide its own credit card service and manage credit for its clients.
+          It's designed to provide a secure and seamless experience for credit card transactions. 
+        </p>
+        <div class="links">
+          <a href="what-is-mo-credit-core">What is MO Credit Card Core</a>
+          <a href="mo-credit-core">Quickstart</a>
+          <a href="credit-core-overview">The Credit Card Core</a>
+          <a href="movements">Admin Portal</a>
+          <a href="../reference/introduction">API Reference</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="card">
+      <div class="card_content">
+        <h2>Lending Core</h2>
+        <p>
+          Introducing our Lending Core solution, a comprehensive platform for managing lending operations.
+          Streamline loan processing, enhance risk management, and provide a superior borrowing experience with MO Lending
+          Core.
+        </p>
+        <div class="links">
+          <a href="what-is-mo-lending-core">What is MO Lending Core</a>
+          <a href="mo-lending-core">Quickstart</a>
+          <a href="overview-lending-core">The Lending Core</a>
+          <a href="overview-lending-core-admin-portal">Admin Portal</a>
+          <a href="../reference/introduction">API Reference</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
