@@ -42,18 +42,21 @@ paths:
           required: true
         - name: amount
           in: query
+          description: The loan amount offered.
           required: true
           schema:
             type: number
             format: double
         - name: installment_quantity
           in: query
+          description: The number of installments for repaying the loan.
           required: true
           schema:
             type: integer
             format: int32
         - name: disbursed_at
           in: query
+          description: The date and time when the loan will be disbursed.
           schema:
             type: string
             format: date
