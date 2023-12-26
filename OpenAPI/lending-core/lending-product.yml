@@ -421,7 +421,7 @@ paths:
         - name: ordering
           in: query
           description: >-
-            To sort the data obtained from a query in either ascending or descending
+            Sort the data obtained from a query in either ascending or descending
              order based on one or more fields, you can specify the order in which the 
              results should be returned. You can mention one or more fields by which the 
              data should be ordered, along with the order direction (ascending or descending) using a comma-separated list.
@@ -1195,40 +1195,25 @@ paths:
         - name: ordering
           in: query
           description: >-
-            Use this query parameter to specify the order in which the results
-            of a query should be returned. It is commonly used for sorting the
-            data in ascending or descending order based on one or more fields.
-            You can specify one or more fields by which the data should be
-            ordered, along with the order direction (ascending or descending)
-            using a comma-separated list. For example,
-            `ordering=name,created_at` would  order the results first by the
-            `name` field in ascending order and then by the `created_at` field
-            in ascending order.
+            Sort the data obtained from a query in either ascending or descending
+             order based on one or more fields, you can specify the order in which the 
+             results should be returned. You can mention one or more fields by which the 
+             data should be ordered, along with the order direction (ascending or descending) using a comma-separated list.
+             For example, `ordering=name,created_at` would order the results first by the
+            `name` field in ascending order and then by the `created_at` field in ascending order.
           schema:
             type: string
         - name: limit
           in: query
           description: >-
-            Use this query parameter to specify the maximum number of results to
-            be returned in a single response. It is used for pagination and can
-            help manage the size of the response data. The server will limit the
-            number of results to the value specified in the `limit` parameter.
-            If there are more results available, you may need to make multiple
-            requests to retrieve the complete dataset. It's particularly useful
-            when dealing with large result sets.
+            Specify the maximum number of results to be returned in a single response.
           schema:
             type: integer
             format: int32
         - name: offset
           in: query
           description: >-
-            Use this query parameter in conjunction with the `limit` parameter
-            for pagination. It specifies the starting point or offset within the
-            dataset from which results should be returned. By setting the
-            offset, you can navigate to different segments of the result set.
-            For example, if you set `offset=20` and `limit=10`, you will receive
-            results 21 to 30. It is often used to retrieve subsequent pages of
-            results.
+            Use this query parameter in conjunction with the `limit` parameter for pagination. It specifies the starting point or offset within the dataset from which results should be returned.
           schema:
             type: integer
             format: int32
