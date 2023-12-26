@@ -376,16 +376,19 @@ paths:
             type: string
         - name: amount
           in: query
+          description: The loan amount offered.
           schema:
             type: number
             format: double
         - name: installment_quantity
           in: query
+          description: The number of installments for repaying the loan.
           schema:
             type: integer
             format: int32
         - name: type
           in: query
+          description: Type of offer.
           schema:
             type: string
       responses:
