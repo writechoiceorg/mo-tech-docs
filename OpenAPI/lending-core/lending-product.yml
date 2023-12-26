@@ -3519,9 +3519,7 @@ paths:
         - name: loan_id
           in: path
           description: >-
-            The loan_id field is the unique identifier of the loan for which the
-            payment is being made. It is required to provide a valid UUID to
-            link the payment to a specific loan.
+            The unique identifier of the loan which the debt is being listed.
           schema:
             type: string
           required: true
