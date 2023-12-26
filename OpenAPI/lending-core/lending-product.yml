@@ -3686,34 +3686,24 @@ paths:
                 customer_id:
                   type: string
                   description: >-
-                    The `customer_id` field represents the unique identifier of
-                    the customer making the payment. It is required to provide a
-                    valid UUID to associate the payment with a specific
-                    customer.
+                    The unique identifier of the customer making the payment. Used to associate the payment with a specific customer.
                 loan_id:
                   type: string
                   description: >-
-                    The `loan_id` field is the unique identifier of the loan for
-                    which the payment is being made. It is required to provide a
-                    valid UUID to link the payment to a specific loan.
+                    The unique identifier of the loan for which the payment is being made. Used to link the payment to a specific loan.
                 amount:
                   type: number
                   description: >-
-                    The `amount` field represents the payment amount that the
-                    customer intends to make. It is a decimal value and must be
-                    specified.
+                    The payment amount that the customer intends to make. It is a decimal value and must be specified.
                   format: double
                 external_id:
                   type: string
                   description: >-
-                    The `external_id` field allows you to provide an optional
-                    external identifier or code related to the payment. It is
-                    not mandatory but can be used for reference.
+                    Provide an external identifier or code that can link the payment to an external system or entity.
                 application_mode:
                   type: string
                   description: >-
-                    The `application_mode` field specifies the mode in which the
-                    payment should be applied. It can have values such as
+                    Specifies the mode in which the payment should be applied. It can have values such as
                     "total," "installment," or "installment_advance". It is
                     required to be provided.
       responses:
