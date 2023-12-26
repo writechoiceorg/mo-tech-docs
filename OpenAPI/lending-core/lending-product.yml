@@ -424,8 +424,7 @@ paths:
             To sort the data obtained from a query in either ascending or descending
              order based on one or more fields, you can specify the order in which the 
              results should be returned. You can mention one or more fields by which the 
-             data should be ordered, along with the order direction (ascending or descending) 
-             using a comma-separated list.
+             data should be ordered, along with the order direction (ascending or descending) using a comma-separated list.
              For example, `ordering=name,created_at` would order the results first by the
             `name` field in ascending order and then by the `created_at` field in ascending order.
           schema:
