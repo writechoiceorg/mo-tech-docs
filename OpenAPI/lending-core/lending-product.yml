@@ -1956,9 +1956,7 @@ paths:
   /customers/{customer_id}/scores:
     get:
       summary: Get Customer Scores
-      description: >-
-        Use the List Customer Score endpoint to retrieve a list of scores
-        associated with a specific customer based on their `customer_id`.
+      description: ''
       tags:
         - Customers
       operationId: list-customer-scores
@@ -1966,26 +1964,14 @@ paths:
         - name: limit
           in: query
           description: >-
-            Use this query parameter to specify the maximum number of results to
-            be returned in a single response. It is used for pagination and can
-            help manage the size of the response data. The server will limit the
-            number of results to the value specified in the `limit` parameter.
-            If there are more results available, you may need to make multiple
-            requests to retrieve the complete dataset. It's particularly useful
-            when dealing with large result sets.
+            Specify the maximum number of results to be returned in a single response.
           schema:
             type: integer
             format: int32
         - name: offset
           in: query
           description: >-
-            Use this query parameter in conjunction with the `limit` parameter
-            for pagination. It specifies the starting point or offset within the
-            dataset from which results should be returned. By setting the
-            offset, you can navigate to different segments of the result set.
-            For example, if you set `offset=20` and `limit=10`, you will receive
-            results 21 to 30. It is often used to retrieve subsequent pages of
-            results.
+            Use this query parameter in conjunction with the `limit` parameter for pagination. It specifies the starting point or offset within the dataset from which results should be returned.
           schema:
             type: integer
             format: int32
@@ -2003,10 +1989,7 @@ paths:
         - name: customer_id
           in: path
           description: >-
-            This is a UUID that uniquely identifies a Customer in the system.
-            When making a request to retrieve details about a specific Customer,
-            you should replace {customer_id} in the URL with the actual UUID of
-            the Customer you want to retrieve information about.
+            The unique identifier of a Customer in the system.
           schema:
             type: string
           required: true
