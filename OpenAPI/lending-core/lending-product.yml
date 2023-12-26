@@ -1690,10 +1690,7 @@ paths:
   /customers/{customer_id}:
     get:
       summary: Detail Customer
-      description: >-
-        This web service provides specific details about a customer in the
-        **Customer** phase. It can be used to obtain in-depth information about
-        a particular customer.
+      description: ''
       tags:
         - Customers
       operationId: detail-customer
@@ -1701,10 +1698,7 @@ paths:
         - name: customer_id
           in: path
           description: >-
-            This is a UUID that uniquely identifies a Customer in the system.
-            When making a request to retrieve details about a specific Customer,
-            you should replace {customer_id} in the URL with the actual UUID of
-            the Customer you want to retrieve information about.
+            The unique identifier of a Customer in the system.
           schema:
             type: string
           required: true
