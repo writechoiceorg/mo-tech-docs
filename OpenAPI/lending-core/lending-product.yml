@@ -4151,6 +4151,8 @@ paths:
             type: string
         - name: payment_id
           in: path
+          description: >-
+            The unique identifier of the payment in the system.
           schema:
             type: string
           required: true
@@ -4176,10 +4178,8 @@ paths:
                 status:
                   type: string
                   description: >-
-                    The `status` field specifies the status of the payment
-                    processing, which can be either "completed" or "rejected."
-                    It indicates whether the payment has been successfully
-                    processed and completed or if it has been rejected.
+                    Specifies the status of the payment processing, which can be either "completed" or "rejected."
+                    It indicates whether the payment has been successfully processed and completed or if it has been rejected.
       responses:
         '200':
           description: '200'
