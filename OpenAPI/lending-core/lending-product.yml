@@ -2208,9 +2208,7 @@ paths:
       deprecated: false
     post:
       summary: Set Customer Score
-      description: >-
-        Use the Set Customer Score endpoint to set or update a customer's score
-        based on their `customer_id`.
+      description: ''
       tags:
         - Customers
       operationId: set-customer-score
@@ -2218,10 +2216,7 @@ paths:
         - name: customer_id
           in: path
           description: >-
-            This is a UUID that uniquely identifies a Customer in the system.
-            When making a request to retrieve details about a specific Customer,
-            you should replace {customer_id} in the URL with the actual UUID of
-            the Customer you want to retrieve information about.
+            The unique identifier of a Customer in the system.
           schema:
             type: string
           required: true
@@ -2258,16 +2253,18 @@ paths:
               properties:
                 score:
                   type: number
-                  description: Values must be between 0-1
+                  description: >-
+                    Define the Customer's score. **Values must be between 0-1**.
                   format: double
                 pre_approved_amount:
                   type: number
                   description: >-
-                    Pre-approved limit: Max 8-digit amount, representing the
-                    user's maximum allowable request in the system
+                    The maximum loan amount the customer can request (Max: 8 digits).
                   format: double
                 product_id:
                   type: string
+                  description: >-
+                    The unique identifier of the product the respective score will be linked to.
       responses:
         '200':
           description: '200'
