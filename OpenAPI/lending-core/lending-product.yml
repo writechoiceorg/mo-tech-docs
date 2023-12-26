@@ -914,10 +914,7 @@ paths:
   /pre-customers/{precustomer_id}:
     get:
       summary: Detail Pre Customer
-      description: >-
-        Use the Detail Pre Customer endpoint to retrieve the details about a
-        customer in the Pre Customer phase. It can be used to obtain in-depth
-        information about a particular record.
+      description: ''
       tags:
         - Pre Customers
       operationId: detail-pre-customer
@@ -925,11 +922,7 @@ paths:
         - name: precustomer_id
           in: path
           description: >-
-            It is a UUID that uniquely identifies a **Pre Customer** in the
-            system. When making a request to retrieve details about a specific
-            **Pre Customer**, you should replace {precustomer_id} in the URL
-            with the actual UUID of the **Pre Customer** you want to retrieve
-            information about.
+            The unique identifier of the **Pre Customer** in MO.
           schema:
             type: string
           required: true
