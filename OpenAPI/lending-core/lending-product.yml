@@ -1479,58 +1479,48 @@ paths:
               properties:
                 precustomer_id:
                   type: string
+                  description: >-
+                    The unique indentifier of the previously created [**Pre Customer**](ref:create-pre-customer).
                 external_id:
                   type: string
                   description: >-
-                    The `external_id` field allows you to provide an external
-                    identifier or code that can link the newly created Customer
-                    to an external system or entity. It can be useful for
-                    cross-referencing.
+                    Provide an external identifier or code that can link the newly created Customer
+                    to an external system or entity.
                 first_name:
                   type: string
                   description: >-
-                    The `first_name` field is required and should contain the
-                    first name of the new customer.
+                    The first name of the new Customer.
                 last_name:
                   type: string
                   description: >-
-                    The `last_name` field is required and should contain the
-                    last name or surname of the new customer.
+                    The last name or surname of the new Customer.
                 document_type:
                   type: string
                   description: >-
-                    The `document_type` field can specify the type or category
-                    of the customer's document, such as a passport, driver's
-                    license, or other forms of identification.
+                    Specify the type or category of the Customer's document, such as a passport, driver's license, or other forms of identification.
                 document_number:
                   type: string
                   description: >-
-                    The `document_number` field can store the unique number or
-                    identifier associated with the document specified in the
-                    `document_type` field.
+                    The unique number or identifier associated with the document specified in the `document_type` field.
                 phone:
                   type: string
                   description: >-
-                    The `phone` field allows you to provide the customer's
-                    contact phone number.
+                    The Customer's contact phone number.
                 email:
                   type: string
                 address:
                   type: string
                   description: >-
-                    The `address` field can store the customer's physical
-                    address or location information.
+                    The Customer's physical address or location information.
                 personal_accepted_at:
                   type: string
                   description: >-
-                    The `personal_accepted_at` field records the date and time
-                    when the customer accepted or acknowledged personal
+                    The date and time when the customer accepted or acknowledged personal
                     agreements or terms.
                 commercial_accepted_at:
                   type: string
                   description: >-
-                    The `commercial_accepted_at` field records the date and time
-                    when the customer accepted or acknowledged commercial
+                    The date and time when the customer accepted or acknowledged commercial
                     agreements or terms, often in a business context.
                 values:
                   type: string
