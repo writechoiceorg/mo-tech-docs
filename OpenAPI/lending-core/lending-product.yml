@@ -3023,12 +3023,7 @@ paths:
       deprecated: false
     post:
       summary: Create Loan
-      description: >-
-        Use the Create Loan endpoint to create a new loan. A Loan represents the
-        final approval and disbursement of a loan, typically based on a
-        previously submitted Pre Loan request. It can include details such as
-        the pre-loan identifier, aggregator identifier, external identifier,
-        disbursement date, and additional data.
+      description: ''
       tags:
         - Loans
       operationId: create-loan
@@ -3066,25 +3061,17 @@ paths:
                 pre_loan_id:
                   type: string
                   description: >-
-                    The `pre_loan_id` field represents the unique identifier of
-                    the pre-loan or loan request associated with the loan. It is
-                    required to provide a valid UUID to link the loan to an
-                    existing pre-loan request.
+                    The unique identifier of previously created [**pre-loan or loan request**](ref:create-loan-request) associated with the loan.
                 aggregator_id:
                   type: string
                 external_id:
                   type: string
                   description: >-
-                    The `external_id` field allows you to provide an external
-                    identifier or code that may be related to the loan. It's not
-                    mandatory but can be useful for linking the loan to external
-                    systems.
+                    Provide an external identifier or code that can link the newly created loan to an external system or entity.
                 disbursed_at:
                   type: string
                   description: >-
-                    The `disbursed_at` field represents the date and time when
-                    the loan is disbursed or finalized. It's not required, but
-                    it can be used to record the disbursement date.
+                    The date and time when the loan is disbursed or finalized. It can be used to record the disbursement date.
                   format: date
                 others:
                   type: string
