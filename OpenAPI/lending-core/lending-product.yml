@@ -2541,12 +2541,7 @@ paths:
     #   deprecated: false
     post:
       summary: Create Loan Request
-      description: >-
-        Use the Create Pre Loan endpoint to create a new Pre Loan or a loan
-        request. A Pre Loan represents a request for a loan before the final
-        approval and disbursement. It can include details such as the loan
-        amount, number of installments, downpayment amount, customer
-        information, offer details, and additional data.
+      description: ''
       tags:
         - Loan Requests
       operationId: create-loan-request
@@ -2588,58 +2583,40 @@ paths:
                 amount:
                   type: number
                   description: >-
-                    The `amount` field represents the requested loan amount.
-                    It's a decimal value and is required, meaning it must be
-                    provided when making the request.
+                    The requested amount of the pre-loan.
                   format: double
                 number_of_installments:
                   type: integer
                   description: >-
-                    The `number_of_installments` field indicates the number of
-                    installments or terms for repaying the loan. It's an integer
-                    value and is required to be specified when making the
-                    request.
+                    The number of installments or terms for repaying the loan.
                   format: int32
                 downpayment_amount:
                   type: number
                   description: >-
-                    The `downpayment_amount` field represents the amount of the
-                    downpayment, if applicable. The default value is `0.0`,
-                    meaning if not specified, a downpayment of zero is assumed.
+                    The amount of the downpayment of the loan, if applicable. The default value is `0.0`.
                   format: double
                 customer_id:
                   type: string
                   description: >-
-                    The `customer_id` field is the unique identifier of the
-                    customer associated with the loan request. It is required to
-                    provide a valid UUID to link the loan request to an existing
-                    customer.
+                    The unique identifier of the customer associated with the loan request. Used to link the pre-loan with the respective customer.
                 offer_id:
                   type: string
                   description: >-
-                    The `offer_id` field is the unique identifier of the loan
-                    offer related to the request. A valid UUID must be provided
-                    to link the request to an existing offer, and it is
-                    required.
+                    The unique identifier of the loan
+                    offer related to the request. Used to link the pre-loan to a respective offer.
                 external_id:
                   type: string
                   description: >-
-                    The `external_id` field allows you to provide an external
-                    identifier or code that may be related to the loan request.
-                    It's not mandatory but can be useful for linking the request
-                    to external systems.
+                    Provide an external identifier or code that can link the newly created pre-loan to an external system or entity.
                 taken_at:
                   type: string
                   description: >-
-                    The `taken_at` field represents the date and time when the
-                    loan request was initiated. It's not required, but it can be
-                    used to record the start time of the request.
+                    The date and time when the loan request was initiated. It can be used to record the start time of the request.
                   format: date
                 others:
                   type: string
                   description: >-
-                    The `others` field allows the inclusion of additional data
-                    or custom fields in JSON format. It can be used to store
+                    Allows the inclusion of additional data or custom fields in JSON format. It can be used to store
                     extra information related to the loan request.
                   format: json
       responses:
