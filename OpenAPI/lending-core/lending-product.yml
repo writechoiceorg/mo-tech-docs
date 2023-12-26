@@ -1436,10 +1436,7 @@ paths:
       deprecated: false
     post:
       summary: Create Customer
-      description: >-
-        Use the Create Customer endpoint to promote or upgrade a Pre Customer to
-        the Customer phase. This is done when all necessary onboarding steps
-        have been completed.
+      description: ''
       tags:
         - Customers
       operationId: create-customer
