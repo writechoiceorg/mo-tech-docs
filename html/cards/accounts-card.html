@@ -1,4 +1,11 @@
 <style>
+  * {
+    font-family: Inter;
+    --main-orange: #FF5604;
+    --second-orange: #FFF8F4;
+    --third-orange: #FFDBC9;
+  }
+
   .account_card_container {
     display: grid;
     /* grid-template-columns: repeat(auto-fill, minmax(179px, 1fr)); */
@@ -16,12 +23,12 @@
     flex-shrink: 0;
     border-radius: 6px;
     border: 1px solid #F0F0F0;
-    background: #F2F4FF;
+    background: var(--second-orange);
   }
 
   .account_card_container .card:hover {
     cursor: pointer;
-    border-color: #7A49FF;
+    border-color: var(--main-orange);
     transform: translateY(-2px);
     box-shadow: 0px 3px 5px 0px rgba(9, 30, 66, 0.20);
   }
@@ -64,7 +71,7 @@
   }
 
   .account_card_container .card:nth-child(3n-2) {
-    background-color: #4860F5;
+    background-color: var(--main-orange);
     color: white;
   }
 
@@ -73,18 +80,18 @@
   }
 
   .account_card_container .card:nth-child(3n-1) {
-    background-color: #F2F4FF;
-    color: #4860F5;
+    background-color: var(--second-orange);
+    color: var(--main-orange);
   }
 
   .account_card_container .card:nth-child(3n-1) svg path,
   .account_card_container .card:nth-child(3n) svg path {
-    stroke: #4860F5;
+    stroke: var(--main-orange);
   }
 
   .account_card_container .card:nth-child(3n) {
-    background-color: #CCD4FF;
-    color: #4860F5;
+    background-color: var(--third-orange);
+    color: var(--main-orange);
   }
 
   @media screen and (max-width: 490px) {

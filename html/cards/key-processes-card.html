@@ -1,4 +1,11 @@
 <style>
+  * {
+    font-family: Inter;
+    --main-orange: #FF5604;
+    --second-orange: #FFF8F4;
+    --third-orange: #FFDBC9;
+  }
+
   .key_processes_card_container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(179px, 1fr));
@@ -16,7 +23,7 @@
     flex-shrink: 0;
     border-radius: 6px;
     border: 1px solid #F0F0F0;
-    background: #4860F5;
+    background: var(--main-orange);
   }
 
   .key_processes_card_container .card:hover {
@@ -61,7 +68,7 @@
   }
 
   .key_processes_card_container .card:nth-child(3n-2) {
-    background-color: #4860F5;
+    background-color: var(--main-orange);
     color: white;
   }
 
@@ -70,18 +77,18 @@
   }
 
   .key_processes_card_container .card:nth-child(3n-1) {
-    background-color: #F2F4FF;
-    color: #4860F5;
+    background-color: var(--second-orange);
+    color: var(--main-orange);
   }
 
   .key_processes_card_container .card:nth-child(3n-1) svg path,
   .key_processes_card_container .card:nth-child(3n) svg path {
-    stroke: #4860F5;
+    stroke: var(--main-orange);
   }
 
   .key_processes_card_container .card:nth-child(3n) {
-    background-color: #CCD4FF;
-    color: #4860F5;
+    background-color: var(--third-orange);
+    color: var(--main-orange);
   }
 </style>
 

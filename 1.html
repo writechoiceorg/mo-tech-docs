@@ -1,0 +1,120 @@
+<style>
+  * {
+    font-family: Inter;
+    --main-orange: #FF5604;
+    --second-orange: #FFF8F4;
+    --third-orange: #FFDBC9;
+  }
+
+  .key_processes_card_container2 {
+    display: flex;
+    gap: 7px;
+    margin: 0 20px;
+    flex-wrap: wrap;
+  }
+
+  .key_processes_card_container2 .card {
+    display: flex;
+    width: 32%;
+    height: 82px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid #F0F0F0;
+    background: var(--main-orange);
+  }
+
+  .key_processes_card_container2 .card:hover {
+    cursor: pointer;
+    border-color: var(--main-orange);
+    box-shadow: 0 2px 4px rgba(12, 30, 61, 0.221);
+    transform: translateY(-2px);
+    box-shadow: 0px 3px 5px 0px rgba(9, 30, 66, 0.20);
+  }
+
+  .key_processes_card_container2 .card_title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .card_title h3 {
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+  }
+
+  .key_processes_card_container2 .card_title .card-img {
+    max-width: 30px;
+    margin: 0 !important;
+  }
+
+  .key_processes_card_container2 .card_title h3 {
+    margin: 0;
+    font-size: large;
+  }
+
+  .key_processes_card_container2 .card_text {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+  }
+
+  .key_processes_card_container2 .card:nth-child(3n-2) {
+    background-color: var(--main-orange);
+    color: white;
+  }
+
+  .key_processes_card_container2 .card:nth-child(3n-2) svg path {
+    stroke: white;
+  }
+
+  .key_processes_card_container2 .card:nth-child(3n-1) {
+    background-color: var(--second-orange);
+    color: var(--main-orange);
+  }
+
+  .key_processes_card_container2 .card:nth-child(3n-1) svg path,
+  .key_processes_card_container2 .card:nth-child(3n) svg path {
+    stroke: var(--main-orange);
+  }
+
+  .key_processes_card_container2 .card:nth-child(3n) {
+    background-color: var(--third-orange);
+    color: var(--main-orange);
+  }
+</style>
+
+<body>
+  <div class="key_processes_card_container2">
+    
+    <div class="card" onclick="window.location='environments#sandbox-environment'">
+      <div class="card_title">
+        <h3>Sandbox environment
+        </h3>
+      </div>
+    </div>
+    
+    <div class="card" onclick="window.location='environments#client-validation-environment'">
+      <div class="card_title">
+        <h3>Client Validation environment
+        </h3>
+      </div>
+    </div>
+    
+    <div class="card" onclick="window.location='environments#production-environment'">
+      <div class="card_title">
+        <h3>Production environment
+        </h3>
+      </div>
+    </div>
+    
+  </div>
+</body>

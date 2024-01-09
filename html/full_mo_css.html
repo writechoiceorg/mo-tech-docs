@@ -1,4 +1,4 @@
-<!------------------ 29/12/2023 ---------------- -->
+<!------------------ 09/01/2024 ---------------- -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -8,6 +8,9 @@
   /* ------------------- GENERAL CONFIGURATION ------------------- */
   * {
     font-family: Inter;
+    --main-orange: #FF5604;
+    --second-orange: #FFF8F4;
+    --third-orange: #FFDBC9;
   }
 
   /* ------------------- IMAGES ------------------- */
@@ -147,13 +150,12 @@
     flex-shrink: 0;
     border-radius: 6px;
     border: 1px solid #F0F0F0;
-    background: #F2F4FF;
+    background: var(--second-orange);
   }
 
   .account_card_container .card:hover {
     cursor: pointer;
-    border-color: #7A49FF;
-    box-shadow: 0 2px 4px rgba(12, 30, 61, 0.221);
+    border-color: var(--main-orange);
     transform: translateY(-2px);
     box-shadow: 0px 3px 5px 0px rgba(9, 30, 66, 0.20);
   }
@@ -196,7 +198,7 @@
   }
 
   .account_card_container .card:nth-child(3n-2) {
-    background-color: #4860F5;
+    background-color: var(--main-orange);
     color: white;
   }
 
@@ -205,18 +207,18 @@
   }
 
   .account_card_container .card:nth-child(3n-1) {
-    background-color: #F2F4FF;
-    color: #4860F5;
+    background-color: var(--second-orange);
+    color: var(--main-orange);
   }
 
   .account_card_container .card:nth-child(3n-1) svg path,
   .account_card_container .card:nth-child(3n) svg path {
-    stroke: #4860F5;
+    stroke: var(--main-orange);
   }
 
   .account_card_container .card:nth-child(3n) {
-    background-color: #CCD4FF;
-    color: #4860F5;
+    background-color: var(--third-orange);
+    color: var(--main-orange);
   }
 
   @media screen and (max-width: 490px) {
@@ -234,6 +236,7 @@
       margin: 0 3px;
     }
   }
+
 
   /* ------------------- KEY PROCESSES CARDS ------------------- */
   .key_processes_card_container {
@@ -253,7 +256,7 @@
     flex-shrink: 0;
     border-radius: 6px;
     border: 1px solid #F0F0F0;
-    background: #4860F5;
+    background: var(--main-orange);
   }
 
   .key_processes_card_container .card:hover {
@@ -298,7 +301,7 @@
   }
 
   .key_processes_card_container .card:nth-child(3n-2) {
-    background-color: #4860F5;
+    background-color: var(--main-orange);
     color: white;
   }
 
@@ -307,23 +310,23 @@
   }
 
   .key_processes_card_container .card:nth-child(3n-1) {
-    background-color: #F2F4FF;
-    color: #4860F5;
+    background-color: var(--second-orange);
+    color: var(--main-orange);
   }
 
   .key_processes_card_container .card:nth-child(3n-1) svg path,
   .key_processes_card_container .card:nth-child(3n) svg path {
-    stroke: #4860F5;
+    stroke: var(--main-orange);
   }
 
   .key_processes_card_container .card:nth-child(3n) {
-    background-color: #CCD4FF;
-    color: #4860F5;
+    background-color: var(--third-orange);
+    color: var(--main-orange);
   }
 
   /* ------------------- LINKS ------------------- */
   .markdown-body a {
-    color: #4860F5 !important;
+    color: var(--main-orange) !important;
   }
 
   .markdown-body a:hover,
@@ -376,7 +379,7 @@
 
   .Pagination-text3yhjKs84FCa6,
   .WhatsNext-link {
-    color: #4860F5 !important;
+    color: var(--main-orange) !important;
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: Inter;
     font-size: 17.5px;
@@ -559,9 +562,9 @@
   }
 
   /* ------------------- SIDEBAR ------------------- */
-  .rm-Sidebar-heading {
+  /* .rm-Sidebar-heading {
     margin-bottom: 8px !important;
-    color: #4860F5 !important;
+    color: var(--main-orange) !important;
     font-feature-settings: 'clig' off, 'liga' off !important;
     font-family: Inter !important;
     font-size: 14px !important;
@@ -578,24 +581,20 @@
   }
 
   .rm-Sidebar .active {
-    /*background: var(--Secondary-1) !important;*/
     background: rgba(72, 96, 245, 0.14) !important;
     border-radius: 4px !important;
-    color: #4860F5 !important;
+    color: var(--main-orange) !important;
     font-weight: 600 !important;
   }
 
-  /*.rm-Sidebar-section:not(:first-of-type){*/
   .rm-Sidebar-section {
     margin: 0 !important;
     margin-top: 24px !important;
-    /*margin-top:48px !important;*/
   }
 
   .Sidebar-link-textLuTE1ySm4Kqn {
     display: flex;
     justify-items: space-between !important;
-    /*flex-direction: row-reverse;*/
   }
 
   .Sidebar-link_parent3OBrzjAJRSfq {
@@ -613,12 +612,9 @@
   }
 
   .rm-Sidebar-list .subpage {
-    /*padding: 12px !important;*/
     margin-left: 0px !important;
     padding-left: 32px !important;
   }
-
-  /* .Sidebar-link2Dsha-r-GKh2.active {} */
 
   .rm-Sidebar-list .active {
     background: #E9E8FF !important;
@@ -650,7 +646,7 @@
 
   .APIMethod_delete {
     background: #ff0000 !important;
-  }
+  } */
 
   /* ------------------- API CARDS ------------------- */
   .api_card_container {
@@ -677,7 +673,7 @@
 
   .api_card_container .card:hover {
     cursor: pointer;
-    border-color: #4860F5;
+    border-color: var(--main-orange);
     box-shadow: 1px 1px 3.2px 0px rgba(0, 0, 0, 0.20);
   }
 
@@ -695,7 +691,6 @@
 
   .api_card_container .card_title h3 {
     margin: 0;
-    /* flex-grow: 1; */
     font-size: large;
   }
 
@@ -816,6 +811,13 @@
     padding: 42px 35px;
   }
 
+  .card_with_text_container .card:hover {
+    cursor: pointer;
+    border-color: var(--main-orange);
+    transform: translateY(-2px);
+    box-shadow: 0px 3px 5px 0px rgba(9, 30, 66, 0.20);
+  }
+
   .card_with_text_container .content {
     text-align: start;
     display: flex;
@@ -848,16 +850,16 @@
   }
 
   .card_with_text_container .card:nth-child(3n-2) {
-    background-color: #CCD4FF;
-    color: #4860F5;
+    background-color: var(--third-orange);
+    color: var(--main-orange);
   }
 
   .card_with_text_container .card:nth-child(3n-2) svg path {
-    stroke: #4860F5;
+    stroke: var(--main-orange);
   }
 
   .card_with_text_container .card:nth-child(3n-1) {
-    background-color: #4860F5;
+    background-color: var(--main-orange);
     color: #FFF;
   }
 
@@ -867,8 +869,8 @@
   }
 
   .card_with_text_container .card:nth-child(3n) {
-    background-color: #F2F4FF;
-    color: #4860F5;
+    background-color: var(--second-orange);
+    color: var(--main-orange);
   }
 
   @media screen and (max-width: 900px) {
@@ -894,26 +896,26 @@
   /* ------------------- XXX ------------------- */
   /* ------------------- DARK MODE COLORS ------------------- */
   @media (prefers-color-scheme: dark) {
-    [data-color-mode="system"] .rm-Sidebar-link {
+    /* [data-color-mode="system"] .rm-Sidebar-link {
       color: white !important;
     }
 
     [data-color-mode="system"] .rm-Sidebar .active {
-      background: rgba(72, 95, 245, 0.568) !important;
-    }
+      background: var(--main-orange) !important;
+    } */
 
     [data-color-mode="system"] .api_card_container .card {
     color: #fff;
   }
   }
 
-  [data-color-mode="dark"] .rm-Sidebar-link {
+  /* [data-color-mode="dark"] .rm-Sidebar-link {
     color: white !important;
   }
 
   [data-color-mode="dark"] .rm-Sidebar .active {
-    background: rgba(72, 95, 245, 0.568) !important;
-  }
+    background: var(--main-orange) !important;
+  } */
 
   [data-color-mode="dark"] .api_card_container .card {
     color: #fff;
