@@ -13,32 +13,34 @@
       * {
         box-sizing: border-box;
         font-family: Inter;
+        --main-color: #FF5604;
+        --second-color: #FF8E57;
       }
-
+  
       .Header3zzata9F_ZPQ {
         box-shadow: 0 0px 0 var(--color-border-default);
         -webkit-box-shadow: 0 0px 0 var(--color-border-default);
       }
-
+  
       .header_container h1 {
         font-size: 48px;
       }
-
+  
       .undefined {
         display: none;
       }
-
+  
       .header_container p {
         font-size: 16px;
       }
-
+  
       .LandingWrap16kRMSdr5J8g {
         background-color: #FCFCFF;
         padding: 0;
         width: 100%;
       }
-
-
+  
+  
       .body_container,
       .rm-LandingPage {
         background-color: #FCFCFF;
@@ -49,7 +51,7 @@
         background-size: 500px !important;
         margin: 0;
       }
-
+  
       /* ************************ HEADER ************************ */
       .header_container {
         align-self: center;
@@ -58,19 +60,19 @@
         justify-content: center;
         padding: 80px;
       }
-
+  
       .hero_container {
         align-items: center;
         display: flex;
         max-width: 1288px;
       }
-
+  
       .hero_container .hero_title {
         margin-bottom: 16px;
         margin-right: 32px;
         min-width: 50%;
       }
-
+  
       .hero_container .hero_title .first_title_line {
         color: #000;
         font-family: Inter;
@@ -80,23 +82,23 @@
         line-height: normal;
         width: 38.0625rem;
       }
-
+  
       .hero_container .hero_title .second_title_line {
-        color: #FF5604;
+        color: var(--main-color);
         font-family: Inter;
         font-size: 4.375rem;
         font-style: normal;
         font-weight: 700;
         line-height: normal;
       }
-
+  
       .hero_container h1 {
         color: #282A30;
         font-size: 80px;
         letter-spacing: -2px;
         margin: 0;
       }
-
+  
       .hero_content {
         display: flex;
         flex-direction: column;
@@ -105,7 +107,7 @@
         align-self: flex-end;
         margin-bottom: 30px;
       }
-
+  
       .hero_container .hero_content p {
         margin: 0;
         margin-bottom: 32px;
@@ -116,7 +118,7 @@
         font-weight: 400;
         line-height: 24px;
       }
-
+  
       .hero_container .hero_btn {
         border: 1px solid transparent;
         color: #F0F0F0;
@@ -129,17 +131,17 @@
         transition: all 0.3s ease;
         width: 129px;
         border-radius: 0.3125rem;
-        background: linear-gradient(297deg, #FF5604 0%, #FF8E57 100%);
+        background: linear-gradient(297deg, var(--main-color) 0%, var(--second-color) 100%);
       }
-
+  
       .hero_container .hero_btn:hover {
         background: transparent !important;
-        border: 1px solid #FF5604;
+        border: 1px solid var(--main-color);
         box-shadow: 0 10px 20px #282a3017;
-        color: #FF5604;
+        color: var(--main-color);
         text-decoration: none !important;
       }
-
+  
       /* ************************ CARDS ************************ */
       .cards_container {
         color: black;
@@ -148,7 +150,7 @@
         margin: 0;
         margin-bottom: 5%;
       }
-
+  
       .cards_container .card {
         background-color: rgba(255, 255, 255, 0.971);
         border: 1px solid rgba(0, 0, 0, 0.147);
@@ -157,25 +159,24 @@
         flex-direction: column;
         flex-grow: 0;
         flex-shrink: 0;
-        height: fit-content;
+        /* height: fit-content; */
         margin: 16px;
         padding: 16px;
-        transition: box-shadow 0.3s ease, border 0.1s ease;
+        transition: all 0.3s ease, border 0.1s ease;
         width: 408px;
       }
-
-
+  
       .cards_container .card:hover {
-        cursor: pointer;
-        border: 1px solid #FF5604;
+        border: 1px solid var(--main-color);
         box-shadow: 0 10px 20px #282a3017;
-        transform: translateY(-5px);
+        transform: translateY(-2px);
       }
-
-      .cards_container .card:hover a {
-        text-decoration: underline !important;
+  
+  
+      .cards_container .card_with_link:hover {
+        cursor: pointer;
       }
-
+  
       .cards_container .card_image {
         background-position: center;
         background-size: cover;
@@ -183,87 +184,136 @@
         height: 170px;
         padding: 10px;
       }
-
+  
       .cards_container .image1 {
         background-image: url('https://github.com/writechoiceorg/mo-tech-docs/blob/main/homepage/cards/orange-card1.png?raw=true')
       }
-
+  
       .cards_container .image2 {
         background-image: url('https://github.com/writechoiceorg/mo-tech-docs/blob/main/homepage/cards/orange-card2.png?raw=true')
       }
-
+  
       .cards_container .image3 {
         background-image: url('https://github.com/writechoiceorg/mo-tech-docs/blob/main/homepage/cards/orange-card3.png?raw=true')
       }
-
+  
       .cards_container .card_text {
         padding-top: 16px;
       }
-
+  
       .cards_container .card_text h3 {
         height: 24px;
         margin: 0;
         margin-top: 5px;
       }
-
-      .cards_container .card_text p {
+  
+      .cards_container .card_text p,
+      .card_links_container {
         margin-top: 8px;
         min-height: 40px;
         height: fit-content;
       }
-
+  
       .card_links_container {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
-        width: 90%;
       }
-
-      .card_links_container a {
+  
+      .cards_container .card_text a {
         border-radius: 15px;
-        color: #513CE1;
+        color: var(--main-color);
         font-weight: 700;
-        margin-top: 8px;
+        height: fit-content;
         padding: 3px 0;
         text-decoration: none;
         transition: color 0.3s ease;
         width: fit-content;
+        margin: 0;
       }
-
+  
+      .cards_container .card_text a:hover {
+        color: #d74800;
+        font-weight: 750;
+      }
+  
+      /* ************************ DARK MODE ************************ */
+      @media (prefers-color-scheme: dark) {
+  
+        [data-color-mode="system"] .LandingWrap16kRMSdr5J8g,
+        [data-color-mode="system"] .body_container,
+        [data-color-mode="system"] .rm-LandingPage {
+          background-color: #1F282D !important;
+        }
+  
+        [data-color-mode="system"] .hero_container .hero_content p,
+        [data-color-mode="system"] .hero_container .first_title_line {
+          color: #fff !important;
+        }
+  
+        [data-color-mode="system"] .hero_container .hero_btn:hover {
+          color: var(--main-color);
+        }
+  
+        [data-color-mode="system"] .cards_container .card {
+          background-color: #11191E !important;
+          color: #fff;
+        }
+      }
+  
+      [data-color-mode="dark"] .LandingWrap16kRMSdr5J8g,
+      [data-color-mode="dark"] .body_container,
+      [data-color-mode="dark"] .rm-LandingPage {
+        background-color: #1F282D !important;
+      }
+  
+      [data-color-mode="dark"] .hero_container .hero_content p,
+      [data-color-mode="dark"] .hero_container .first_title_line {
+        color: #fff !important;
+      }
+  
+      [data-color-mode="dark"] .hero_container .hero_btn:hover {
+        color: var(--main-color);
+      }
+  
+      [data-color-mode="dark"] .cards_container .card {
+        background-color: #11191E !important;
+        color: #fff;
+      }
+  
       /* ************************ MEDIA QUERIES ************************ */
       @media only screen and (max-width: 1320px) {
         .cards_container .card {
           width: 350px;
         }
-
+  
         .cards_container {
           flex-wrap: wrap;
         }
       }
-
+  
       @media only screen and (max-width: 1200px) {
         /* .cards_container .card {
-        width: 300px;
-      } */
+          width: 300px;
+        } */
       }
-
+  
       @media only screen and (max-width: 1065px) {
         .hero_container h1 {
           font-size: 60px;
         }
       }
-
+  
       @media only screen and (max-width: 1000px) {
         .cards_container {
           flex-wrap: wrap;
         }
       }
-
+  
       @media only screen and (max-width: 950px) {
         .hero_container h1 {
           font-size: 60px;
         }
-
+  
         .hero_container {
           align-items: flex-start;
           display: flex;
@@ -272,24 +322,24 @@
           width: 408px;
         }
       }
-
+  
       @media only screen and (max-width: 800px) {
         .header_container {
           padding: 20px 50px;
         }
-
+  
         .hero_container h1 {
           font-size: 35px !important;
           width: fit-content !important;
         }
       }
-
+  
       @media only screen and (max-width: 700px) {
         .hero_container .hero_btn {
           margin: 0;
           padding: 7px 10px;
         }
-
+  
         .body_container,
         .rm-LandingPage {
           background-position-x: 80%;
@@ -297,37 +347,37 @@
           background-size: 300px !important;
         }
       }
-
+  
       @media only screen and (max-width: 634px) {
         .header_container {
           padding: 30px;
         }
       }
-
+  
       @media only screen and (max-width: 595px) {
         .hero_container h1 {
           font-size: 35px;
         }
-
+  
         .hero_container p {
           font-size: 15px !important;
           margin-bottom: 20px !important;
         }
       }
-
+  
       @media only screen and (max-width: 443px) {
         .hero_container {
           width: auto;
         }
-
+  
         .cards_container .card {
           flex-basis: 90% !important;
           width: 90% !important;
         }
       }
-
+  
       @media only screen and (max-width: 396px) {
-
+  
         .hero_container p,
         .card_text p,
         .card_text a {
@@ -360,7 +410,7 @@
 
     <div class="cards_container">
 
-      <div class="card" onclick="window.location='docs/what-is-mo-credit-core'">
+      <div class="card card_with_link" onclick="window.location='docs/what-is-mo-credit-core'">
         <div class="card_image image1">
         </div>
         <div class="card_text">
@@ -369,7 +419,7 @@
         </div>
       </div>
 
-      <div class="card" onclick="window.location='docs/what-is-mo-lending-core'">
+      <div class="card card_with_link" onclick="window.location='https://mo-technologies.readme.io/docs/what-is-mo-lending-core'">
         <div class="card_image image2">
         </div>
         <div class="card_text">
@@ -378,12 +428,15 @@
         </div>
       </div>
 
-      <div class="card" onclick="window.location='docs/quickstart'">
+      <div class="card card_without_link">
         <div class="card_image image3">
         </div>
         <div class="card_text">
           <h3>Quickstart</h3>
-          <p>An overview about the main steps you need to take to launch your credit operation.</p>
+          <div class="card_links_container">
+            <a href="docs/quickstart">Credit card Core</a>
+            <a href="https://mo-technologies.readme.io/docs/quickstart">Lending Core</a>
+          </div>
         </div>
       </div>
 

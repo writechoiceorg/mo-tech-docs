@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Inter;
+      --main-color: #FF5604;
+      --second-color: #FF8E57;
+    }
+
+    .Header3zzata9F_ZPQ {
+      box-shadow: 0 0px 0 var(--color-border-default);
+      -webkit-box-shadow: 0 0px 0 var(--color-border-default);
+    }
+
+    .header_container h1 {
+      font-size: 48px;
+    }
+
+    .undefined {
+      display: none;
+    }
+
+    .header_container p {
+      font-size: 16px;
+    }
+
+    .LandingWrap16kRMSdr5J8g {
+      background-color: #FCFCFF;
+      padding: 0;
+      width: 100%;
+    }
+
+
+    .body_container,
+    .rm-LandingPage {
+      background-color: #FCFCFF;
+      /* background-image: url("https://github.com/writechoiceorg/mo-tech-docs/blob/main/homepage/background-opaque.png?raw=true") !important; */
+      background-position-x: 75%;
+      background-position-y: -120px;
+      background-repeat: no-repeat;
+      background-size: 500px !important;
+      margin: 0;
+    }
+
+    /* ************************ HEADER ************************ */
+    .header_container {
+      align-self: center;
+      color: #282A30;
+      display: flex;
+      justify-content: center;
+      padding: 80px;
+    }
+
+    .hero_container {
+      align-items: center;
+      display: flex;
+      max-width: 1288px;
+    }
+
+    .hero_container .hero_title {
+      margin-bottom: 16px;
+      margin-right: 32px;
+      min-width: 50%;
+    }
+
+    .hero_container .hero_title .first_title_line {
+      color: #000;
+      font-family: Inter;
+      font-size: 4.375rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      width: 38.0625rem;
+    }
+
+    .hero_container .hero_title .second_title_line {
+      color: var(--main-color);
+      font-family: Inter;
+      font-size: 4.375rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    .hero_container h1 {
+      color: #282A30;
+      font-size: 80px;
+      letter-spacing: -2px;
+      margin: 0;
+    }
+
+    .hero_content {
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      justify-self: end;
+      align-self: flex-end;
+      margin-bottom: 30px;
+    }
+
+    .hero_container .hero_content p {
+      margin: 0;
+      margin-bottom: 32px;
+      color: #000;
+      font-family: Inter;
+      font-style: normal;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+
+    .hero_container .hero_btn {
+      border: 1px solid transparent;
+      color: #F0F0F0;
+      display: block;
+      font-size: 18px;
+      font-weight: 400;
+      padding: 10px 10px;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.3s ease;
+      width: 129px;
+      border-radius: 0.3125rem;
+      background: linear-gradient(297deg, var(--main-color) 0%, var(--second-color) 100%);
+    }
+
+    .hero_container .hero_btn:hover {
+      background: transparent !important;
+      border: 1px solid var(--main-color);
+      box-shadow: 0 10px 20px #282a3017;
+      color: var(--main-color);
+      text-decoration: none !important;
+    }
+
+    /* ************************ CARDS ************************ */
+    .cards_container {
+      color: black;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      margin-bottom: 5%;
+    }
+
+    .cards_container .card {
+      background-color: rgba(255, 255, 255, 0.971);
+      border: 1px solid rgba(0, 0, 0, 0.147);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 0;
+      flex-shrink: 0;
+      /* height: fit-content; */
+      margin: 16px;
+      padding: 16px;
+      transition: all 0.3s ease, border 0.1s ease;
+      width: 408px;
+    }
+
+    .cards_container .card:hover {
+      border: 1px solid var(--main-color);
+      box-shadow: 0 10px 20px #282a3017;
+      transform: translateY(-2px);
+    }
+
+
+    .cards_container .card_with_link:hover {
+      cursor: pointer;
+    }
+
+    .cards_container .card_image {
+      background-position: center;
+      background-size: cover;
+      border-radius: 6px;
+      height: 170px;
+      padding: 10px;
+    }
+
+    .cards_container .image1 {
+      background-image: url('https://github.com/writechoiceorg/mo-tech-docs/blob/main/homepage/cards/orange-card1.png?raw=true')
+    }
+
+    .cards_container .image2 {
+      background-image: url('https://github.com/writechoiceorg/mo-tech-docs/blob/main/homepage/cards/orange-card2.png?raw=true')
+    }
+
+    .cards_container .image3 {
+      background-image: url('https://github.com/writechoiceorg/mo-tech-docs/blob/main/homepage/cards/orange-card3.png?raw=true')
+    }
+
+    .cards_container .card_text {
+      padding-top: 16px;
+    }
+
+    .cards_container .card_text h3 {
+      height: 24px;
+      margin: 0;
+      margin-top: 5px;
+    }
+
+    .cards_container .card_text p,
+    .card_links_container {
+      margin-top: 8px;
+      min-height: 40px;
+      height: fit-content;
+    }
+
+    .card_links_container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cards_container .card_text a {
+      border-radius: 15px;
+      color: var(--main-color);
+      font-weight: 700;
+      height: fit-content;
+      padding: 3px 0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      width: fit-content;
+      margin: 0;
+    }
+
+    .cards_container .card_text a:hover {
+      color: #d74800;
+      font-weight: 750;
+    }
+
+    /* ************************ DARK MODE ************************ */
+    @media (prefers-color-scheme: dark) {
+
+      [data-color-mode="system"] .LandingWrap16kRMSdr5J8g,
+      [data-color-mode="system"] .body_container,
+      [data-color-mode="system"] .rm-LandingPage {
+        background-color: #1F282D !important;
+      }
+
+      [data-color-mode="system"] .hero_container .hero_content p,
+      [data-color-mode="system"] .hero_container .first_title_line {
+        color: #fff !important;
+      }
+
+      [data-color-mode="system"] .hero_container .hero_btn:hover {
+        color: var(--main-color);
+      }
+
+      [data-color-mode="system"] .cards_container .card {
+        background-color: #11191E !important;
+        color: #fff;
+      }
+    }
+
+    [data-color-mode="dark"] .LandingWrap16kRMSdr5J8g,
+    [data-color-mode="dark"] .body_container,
+    [data-color-mode="dark"] .rm-LandingPage {
+      background-color: #1F282D !important;
+    }
+
+    [data-color-mode="dark"] .hero_container .hero_content p,
+    [data-color-mode="dark"] .hero_container .first_title_line {
+      color: #fff !important;
+    }
+
+    [data-color-mode="dark"] .hero_container .hero_btn:hover {
+      color: var(--main-color);
+    }
+
+    [data-color-mode="dark"] .cards_container .card {
+      background-color: #11191E !important;
+      color: #fff;
+    }
+
+    /* ************************ MEDIA QUERIES ************************ */
+    @media only screen and (max-width: 1320px) {
+      .cards_container .card {
+        width: 350px;
+      }
+
+      .cards_container {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media only screen and (max-width: 1200px) {
+      /* .cards_container .card {
+        width: 300px;
+      } */
+    }
+
+    @media only screen and (max-width: 1065px) {
+      .hero_container h1 {
+        font-size: 60px;
+      }
+    }
+
+    @media only screen and (max-width: 1000px) {
+      .cards_container {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media only screen and (max-width: 950px) {
+      .hero_container h1 {
+        font-size: 60px;
+      }
+
+      .hero_container {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 408px;
+      }
+    }
+
+    @media only screen and (max-width: 800px) {
+      .header_container {
+        padding: 20px 50px;
+      }
+
+      .hero_container h1 {
+        font-size: 35px !important;
+        width: fit-content !important;
+      }
+    }
+
+    @media only screen and (max-width: 700px) {
+      .hero_container .hero_btn {
+        margin: 0;
+        padding: 7px 10px;
+      }
+
+      .body_container,
+      .rm-LandingPage {
+        background-position-x: 80%;
+        background-position-y: -50px;
+        background-size: 300px !important;
+      }
+    }
+
+    @media only screen and (max-width: 634px) {
+      .header_container {
+        padding: 30px;
+      }
+    }
+
+    @media only screen and (max-width: 595px) {
+      .hero_container h1 {
+        font-size: 35px;
+      }
+
+      .hero_container p {
+        font-size: 15px !important;
+        margin-bottom: 20px !important;
+      }
+    }
+
+    @media only screen and (max-width: 443px) {
+      .hero_container {
+        width: auto;
+      }
+
+      .cards_container .card {
+        flex-basis: 90% !important;
+        width: 90% !important;
+      }
+    }
+
+    @media only screen and (max-width: 396px) {
+
+      .hero_container p,
+      .card_text p,
+      .card_text a {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body class="body_container">
+  <header class="header">
+
+    <div class="header_container">
+      <div class="hero_container">
+        <div class="hero_title">
+          <h1 class="first_title_line">Integrate MO</h1>
+          <h1 class="second_title_line">Credit Solutions</h1>
+        </div>
+        <div class="hero_content">
+          <p>
+            Explore our guides and examples to integrate our
+            Next-Gen Credit Solutions® and launch your credit operations in a matter of weeks.
+          </p>
+          <a class="hero_btn" href="docs/mo-technologies">Get Started</a>
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+  <div class="cards_container">
+
+    <div class="card card_with_link"
+      onclick="window.location='https://mo-technologies-cc.readme.io/docs/what-is-mo-credit-core'">
+      <div class="card_image image1">
+      </div>
+      <div class="card_text">
+        <h3>MO Credit Card Core</h3>
+        <p>Get to know about our Credit Card Core solution.</p>
+      </div>
+    </div>
+
+    <div class="card card_with_link" onclick="window.location='docs/what-is-mo-lending-core'">
+      <div class="card_image image2">
+      </div>
+      <div class="card_text">
+        <h3>MO Lending Core</h3>
+        <p>Get to know about our Lending Core solution.</p>
+      </div>
+    </div>
+
+    <div class="card card_without_link">
+      <div class="card_image image3">
+      </div>
+      <div class="card_text">
+        <h3>Quickstart</h3>
+        <div class="card_links_container">
+          <a href="https://mo-technologies-cc.readme.io/docs/quickstart">Credit card Core</a>
+          <a href="docs/quickstart">Lending Core</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
