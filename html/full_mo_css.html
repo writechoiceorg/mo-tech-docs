@@ -1,4 +1,4 @@
-<!------------------ 09/01/2024 ---------------- -->
+<!------------------ 11/01/2024 ---------------- -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +11,11 @@
     --main-orange: #FF5604;
     --second-orange: #FFF8F4;
     --third-orange: #FFDBC9;
+    --dark-color-one: #FF7518;
+    --dark-color-two: #242E34;
+    --dark-color-three: #393432;
+    --dark-color-four: #773B1E;
+    --white: #FFF;
   }
 
   /* ------------------- IMAGES ------------------- */
@@ -67,11 +72,16 @@
     color: #F4982B;
   }
 
-  .error_callout_container p, .error_callout_container ul,
-  .info_callout_container p, .info_callout_container ul,
-  .neutral_callout_container p, .neutral_callout_container ul,
-  .success_callout_container p, .success__callout_container ul,
-  .warning_callout_container p, .warning_callout_container ul,
+  .error_callout_container p,
+  .error_callout_container ul,
+  .info_callout_container p,
+  .info_callout_container ul,
+  .neutral_callout_container p,
+  .neutral_callout_container ul,
+  .success_callout_container p,
+  .success__callout_container ul,
+  .warning_callout_container p,
+  .warning_callout_container ul,
   .contentContainer ul {
     margin: 0.5rem 0 0;
     color: var(--text-foundations-boldest, #0C1E3D);
@@ -130,6 +140,195 @@
   .warning_callout_container {
     border: 1px solid var(--border-warning-subtle, #EBD697);
     background: var(--background-warning-subtler, #FAF5E6);
+  }
+
+  @media (prefers-color-scheme: dark) {
+
+    /* --------------------- NEUTRAL --------------------- */
+    [data-color-mode="system"] .callout_container {
+      background-color: #2C2C2C !important;
+    }
+
+    [data-color-mode="system"] .callout_container h3,
+    [data-color-mode="system"] .callout_container a {
+      color: #FFF !important;
+    }
+
+    [data-color-mode="system"] .callout_container svg path,
+    [data-color-mode="system"] .callout_container svg circle {
+      stroke: #FFF !important;
+    }
+
+    [data-color-mode="system"] .callout_container p {
+      color: #B8B8B8 !important;
+    }
+
+    /* --------------------- ERROR --------------------- */
+    [data-color-mode="system"] .error_callout_container {
+      background-color: #362528 !important;
+    }
+
+    [data-color-mode="system"] .error_callout_container h3,
+    [data-color-mode="system"] .error_callout_container a {
+      color: #FF94A9 !important;
+    }
+
+    [data-color-mode="system"] .error_callout_container svg path {
+      stroke: #FF94A9 !important;
+    }
+
+    [data-color-mode="system"] .error_callout_container p {
+      color: #F1B6C2 !important;
+    }
+
+    /* --------------------- INFO --------------------- */
+    [data-color-mode="system"] .info_callout_container {
+      background-color: #2E303E !important;
+    }
+
+    [data-color-mode="system"] .info_callout_container h3,
+    [data-color-mode="system"] .info_callout_container a {
+      color: #9DABFF !important;
+    }
+
+    [data-color-mode="system"] .info_callout_container svg path,
+    [data-color-mode="system"] .info_callout_container svg circle {
+      stroke: #9DABFF !important;
+    }
+
+    [data-color-mode="system"] .info_callout_container p {
+      color: #6A80AC !important;
+    }
+
+    /* --------------------- SUCCESS --------------------- */
+    [data-color-mode="system"] .success_callout_container {
+      background-color: #303D36 !important;
+    }
+
+    [data-color-mode="system"] .success_callout_container h3,
+    [data-color-mode="system"] .success_callout_container a {
+      color: #26D07C !important;
+    }
+
+    [data-color-mode="system"] .success_callout_container svg path {
+      stroke: #26D07C !important;
+    }
+
+    [data-color-mode="system"] .success_callout_container p {
+      color: #86C5A7 !important;
+    }
+
+    /* --------------------- WARNING --------------------- */
+    [data-color-mode="system"] .warning_callout_container {
+      background-color: #3C3630 !important;
+    }
+
+    [data-color-mode="system"] .warning_callout_container h3,
+    [data-color-mode="system"] .warning_callout_container a {
+      color: #FFB256 !important;
+    }
+
+    [data-color-mode="system"] .warning_callout_container svg path,
+    [data-color-mode="system"] .warning_callout_container svg circle {
+      stroke: #FFB256 !important;
+    }
+
+    [data-color-mode="system"] .warning_callout_container p {
+      color: #CEC2B3 !important;
+    }
+  }
+
+  /* --------------------- NEUTRAL --------------------- */
+  [data-color-mode="dark"] .callout_container {
+    background-color: #2C2C2C !important;
+  }
+
+  [data-color-mode="dark"] .callout_container h3,
+  [data-color-mode="dark"] .callout_container a {
+    color: #FFF !important;
+  }
+
+  [data-color-mode="dark"] .callout_container svg path,
+  [data-color-mode="dark"] .callout_container svg circle {
+    stroke: #FFF !important;
+  }
+
+  [data-color-mode="dark"] .callout_container p {
+    color: #B8B8B8 !important;
+  }
+
+  /* --------------------- ERROR --------------------- */
+  [data-color-mode="dark"] .error_callout_container {
+    background-color: #362528 !important;
+  }
+
+  [data-color-mode="dark"] .error_callout_container h3,
+  [data-color-mode="dark"] .error_callout_container a {
+    color: #FF94A9 !important;
+  }
+
+  [data-color-mode="dark"] .error_callout_container svg path {
+    stroke: #FF94A9 !important;
+  }
+
+  [data-color-mode="dark"] .error_callout_container p {
+    color: #F1B6C2 !important;
+  }
+
+  /* --------------------- INFO --------------------- */
+  [data-color-mode="dark"] .info_callout_container {
+    background-color: #2E303E !important;
+  }
+
+  [data-color-mode="dark"] .info_callout_container h3,
+  [data-color-mode="dark"] .info_callout_container a {
+    color: #9DABFF !important;
+  }
+
+  [data-color-mode="dark"] .info_callout_container svg path,
+  [data-color-mode="dark"] .info_callout_container svg circle {
+    stroke: #9DABFF !important;
+  }
+
+  [data-color-mode="dark"] .info_callout_container p {
+    color: #6A80AC !important;
+  }
+
+  /* --------------------- SUCCESS --------------------- */
+  [data-color-mode="dark"] .success_callout_container {
+    background-color: #303D36 !important;
+  }
+
+  [data-color-mode="dark"] .success_callout_container h3,
+  [data-color-mode="dark"] .success_callout_container a {
+    color: #26D07C !important;
+  }
+
+  [data-color-mode="dark"] .success_callout_container svg path {
+    stroke: #26D07C !important;
+  }
+
+  [data-color-mode="dark"] .success_callout_container p {
+    color: #86C5A7 !important;
+  }
+
+  /* --------------------- WARNING --------------------- */
+  [data-color-mode="dark"] .warning_callout_container {
+    background-color: #3C3630 !important;
+  }
+
+  [data-color-mode="dark"] .warning_callout_container h3,
+  [data-color-mode="dark"] .warning_callout_container a {
+    color: #FFB256 !important;
+  }
+
+  [data-color-mode="dark"] .warning_callout_container svg path,
+  [data-color-mode="dark"] .warning_callout_container svg circle {
+    stroke: #FFB256 !important;
+  }
+
+  [data-color-mode="dark"] .warning_callout_container p {
+    color: #CEC2B3 !important;
   }
 
   /* ------------------- ACCOUNTS CARDS ------------------- */
@@ -221,6 +420,46 @@
     color: var(--main-orange);
   }
 
+  @media (prefers-color-scheme: dark) {
+    [data-color-mode="system"] .account_card_container .card:nth-child(3n-2) {
+      background-color: var(--dark-color-four);
+      color: var(--white);
+    }
+
+    [data-color-mode="system"] .account_card_container .card svg path {
+      stroke: var(--white);
+    }
+
+    [data-color-mode="system"] .account_card_container .card:nth-child(3n-1) {
+      background-color: var(--dark-color-one);
+      color: var(--white);
+    }
+
+    [data-color-mode="system"] .account_card_container .card:nth-child(3n) {
+      background-color: var(--dark-color-two);
+      color: var(--white);
+    }
+  }
+
+  [data-color-mode="dark"] .account_card_container .card:nth-child(3n-2) {
+    background-color: var(--dark-color-four);
+    color: var(--white);
+  }
+
+  [data-color-mode="dark"] .account_card_container .card svg path {
+    stroke: var(--white);
+  }
+
+  [data-color-mode="dark"] .account_card_container .card:nth-child(3n-1) {
+    background-color: var(--dark-color-one);
+    color: var(--white);
+  }
+
+  [data-color-mode="dark"] .account_card_container .card:nth-child(3n) {
+    background-color: var(--dark-color-two);
+    color: var(--white);
+  }
+
   @media screen and (max-width: 490px) {
     .account_card_container {
       grid-template-columns: repeat(auto-fill, minmax(179px, 1fr));
@@ -236,7 +475,6 @@
       margin: 0 3px;
     }
   }
-
 
   /* ------------------- KEY PROCESSES CARDS ------------------- */
   .key_processes_card_container {
@@ -561,93 +799,6 @@
     border-bottom: 0 !important;
   }
 
-  /* ------------------- SIDEBAR ------------------- */
-  /* .rm-Sidebar-heading {
-    margin-bottom: 8px !important;
-    color: var(--main-orange) !important;
-    font-feature-settings: 'clig' off, 'liga' off !important;
-    font-family: Inter !important;
-    font-size: 14px !important;
-    font-style: normal !important;
-    font-weight: 700 !important;
-    line-height: 18px !important;
-    text-transform: uppercase !important;
-  }
-
-  .rm-Sidebar-link {
-    border-radius: 6px !important;
-    color: #5A5A5A !important;
-    padding: 6px 5px 6px 15px !important;
-  }
-
-  .rm-Sidebar .active {
-    background: rgba(72, 96, 245, 0.14) !important;
-    border-radius: 4px !important;
-    color: var(--main-orange) !important;
-    font-weight: 600 !important;
-  }
-
-  .rm-Sidebar-section {
-    margin: 0 !important;
-    margin-top: 24px !important;
-  }
-
-  .Sidebar-link-textLuTE1ySm4Kqn {
-    display: flex;
-    justify-items: space-between !important;
-  }
-
-  .Sidebar-link_parent3OBrzjAJRSfq {
-    padding-left: 15px !important;
-  }
-
-  .rm-Sidebar-list a button {
-    order: 2;
-  }
-
-  .Sidebar-link-textLuTE1ySm4Kqn {
-    display: flex !important;
-    justify-content: space-between !important;
-    width: 242px;
-  }
-
-  .rm-Sidebar-list .subpage {
-    margin-left: 0px !important;
-    padding-left: 32px !important;
-  }
-
-  .rm-Sidebar-list .active {
-    background: #E9E8FF !important;
-  }
-
-  .icon-chevron-rightward:before {
-    font-size: 18px;
-  }
-
-  .APIMethod {
-    border-radius: 7px !important;
-  }
-
-  .APIMethod_get {
-    background: #26D07C !important;
-  }
-
-  .APIMethod_post {
-    background: #4860F5 !important;
-  }
-
-  .APIMethod_put {
-    background: #9933FF !important;
-  }
-
-  .APIMethod_patch {
-    background: #FF8B00 !important;
-  }
-
-  .APIMethod_delete {
-    background: #ff0000 !important;
-  } */
-
   /* ------------------- API CARDS ------------------- */
   .api_card_container {
     display: flex;
@@ -733,6 +884,16 @@
 
   .api_card_container .card .card_title .delete {
     background-color: #d02626;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    [data-color-mode="system"] .api_card_container .card {
+      color: #fff;
+    }
+  }
+
+  [data-color-mode="dark"] .api_card_container .card {
+    color: #fff;
   }
 
   @media screen and (max-width: 1430px) {
@@ -860,17 +1021,57 @@
 
   .card_with_text_container .card:nth-child(3n-1) {
     background-color: var(--main-orange);
-    color: #FFF;
+    color: var(--white);
   }
 
   .card_with_text_container .card:nth-child(3n-1) svg path,
   .card_with_text_container .card:nth-child(3n) svg path {
-    stroke: #FFF;
+    stroke: var(--white);
   }
 
   .card_with_text_container .card:nth-child(3n) {
     background-color: var(--second-orange);
     color: var(--main-orange);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    [data-color-mode="system"] .card_with_text_container .card:nth-child(3n-2) {
+      background-color: var(--dark-color-four);
+      color: var(--white);
+    }
+
+    [data-color-mode="system"] .card_with_text_container .card:nth-child(3n-2) svg path {
+      stroke: var(--white);
+    }
+
+    [data-color-mode="system"] .card_with_text_container .card:nth-child(3n-1) {
+      background-color: var(--dark-color-one);
+      color: var(--white);
+    }
+
+    [data-color-mode="system"] .card_with_text_container .card:nth-child(3n) {
+      background-color: var(--dark-color-two);
+      color: var(--white);
+    }
+  }
+
+  [data-color-mode="dark"] .card_with_text_container .card:nth-child(3n-2) {
+    background-color: var(--dark-color-four);
+    color: var(--white);
+  }
+
+  [data-color-mode="dark"] .card_with_text_container .card:nth-child(3n-2) svg path {
+    stroke: var(--white);
+  }
+
+  [data-color-mode="dark"] .card_with_text_container .card:nth-child(3n-1) {
+    background-color: var(--dark-color-one);
+    color: var(--white);
+  }
+
+  [data-color-mode="dark"] .card_with_text_container .card:nth-child(3n) {
+    background-color: var(--dark-color-two);
+    color: var(--white);
   }
 
   @media screen and (max-width: 900px) {
@@ -892,55 +1093,259 @@
     }
   }
 
-  /* ------------------- XXX ------------------- */
-  /* ------------------- XXX ------------------- */
-  /* ------------------- DARK MODE COLORS ------------------- */
+  /* ------------------- INTRO PAGE CARDS ------------------- */
+  .start_container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .start_container .card {
+    background-color: var(--second-orange);
+    width: 48%;
+    border-radius: 6px;
+    margin: 10px 0;
+    border: 1px solid #F0F0F0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .start_container .card:hover {
+    border-color: var(--main-orange);
+    box-shadow: 0px 3px 5px 0px rgba(9, 30, 66, 0.20);
+  }
+
+  .start_container .card_content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .start_container .card_content h2 {
+    color: var(--main-orange);
+    margin-top: 0;
+  }
+
+  .start_container .card_content p {
+    color: #666;
+    flex: 1 !important;
+    margin-bottom: 5px;
+  }
+
+  .start_container .links {
+    margin-top: 10px;
+  }
+
+  .start_container .links a {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--main-orange);
+    text-decoration: none;
+    width: fit-content;
+  }
+
+  .start_container .links a:hover {
+    font-weight: 600;
+  }
+
   @media (prefers-color-scheme: dark) {
-    /* [data-color-mode="system"] .rm-Sidebar-link {
-      color: white !important;
+    [data-color-mode="system"] .start_container .card {
+      background-color: var(--dark-color-four);
     }
 
-    [data-color-mode="system"] .rm-Sidebar .active {
-      background: var(--main-orange) !important;
-    } */
+    [data-color-mode="system"] .start_container .card_content h2,
+    [data-color-mode="system"] .start_container .card_content p {
+      color: var(--white);
+    }
 
-    [data-color-mode="system"] .api_card_container .card {
-    color: #fff;
-  }
-  }
-
-  /* [data-color-mode="dark"] .rm-Sidebar-link {
-    color: white !important;
+    [data-color-mode="system"] .start_container .links a {
+      color: var(--third-orange) !important;
+    }
   }
 
-  [data-color-mode="dark"] .rm-Sidebar .active {
-    background: var(--main-orange) !important;
-  } */
-
-  [data-color-mode="dark"] .api_card_container .card {
-    color: #fff;
+  [data-color-mode="dark"] .start_container .card {
+    background-color: var(--dark-color-four);
   }
 
-  /* ------------------- x ------------------- */
+  [data-color-mode="dark"] .start_container .card_content h2,
+  [data-color-mode="dark"] .start_container .card_content p {
+    color: var(--white);
+  }
+
+  [data-color-mode="dark"] .start_container .links a {
+    color: var(--third-orange) !important;
+  }
+
+  @media screen and (max-width: 900px) {
+    .start_container .card {
+      width: 95%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .start_container .card {
+      width: 48%;
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    .start_container .card {
+      width: 95%;
+    }
+
+    .start_container .card_content {
+      padding: 21px 17px;
+    }
+  }
+
+  /* ------------------- TITLE ONLY CARDS ------------------- */
+  .title_only_cards {
+    display: flex;
+    gap: 7px;
+    margin: 0 20px;
+    flex-wrap: wrap;
+  }
+
+  .title_only_cards .card {
+    display: flex;
+    width: 32%;
+    height: 82px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid #F0F0F0;
+    background: var(--main-orange);
+  }
+
+  .title_only_cards .card:hover {
+    cursor: pointer;
+    border-color: var(--main-orange);
+    box-shadow: 0 2px 4px rgba(12, 30, 61, 0.221);
+    transform: translateY(-2px);
+    box-shadow: 0px 3px 5px 0px rgba(9, 30, 66, 0.20);
+  }
+
+  .title_only_cards .card_title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .card_title h3 {
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Inter;
+    font-size: 14px !important;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+  }
+
+  .title_only_cards .card_title .card-img {
+    max-width: 30px;
+    margin: 0 !important;
+  }
+
+  .title_only_cards .card_title h3 {
+    margin: 0;
+    font-size: large;
+  }
+
+  .title_only_cards .card_text {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+  }
+
+  .title_only_cards .card:nth-child(3n-2) {
+    background-color: var(--main-orange);
+    color: white;
+  }
+
+  .title_only_cards .card:nth-child(3n-2) svg path {
+    stroke: white;
+  }
+
+  .title_only_cards .card:nth-child(3n-1) {
+    background-color: var(--second-orange);
+    color: var(--main-orange);
+  }
+
+  .title_only_cards .card:nth-child(3n-1) svg path,
+  .title_only_cards .card:nth-child(3n) svg path {
+    stroke: var(--main-orange);
+  }
+
+  .title_only_cards .card:nth-child(3n) {
+    background-color: var(--third-orange);
+    color: var(--main-orange);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    [data-color-mode="system"] .title_only_cards .card:nth-child(3n-2) {
+      background-color: var(--dark-color-four);
+      color: var(--white);
+    }
+
+    [data-color-mode="system"] .title_only_cards .card:nth-child(3n-2) svg path {
+      stroke: var(--white);
+    }
+
+    [data-color-mode="system"] .title_only_cards .card:nth-child(3n-1) {
+      background-color: var(--dark-color-one);
+      color: var(--white);
+    }
+
+    [data-color-mode="system"] .title_only_cards .card:nth-child(3n) {
+      background-color: var(--dark-color-two);
+      color: var(--white);
+    }
+  }
+
+  [data-color-mode="dark"] .title_only_cards .card:nth-child(3n-2) {
+    background-color: var(--dark-color-four);
+    color: var(--white);
+  }
+
+  [data-color-mode="dark"] .title_only_cards .card:nth-child(3n-2) svg path {
+    stroke: var(--white);
+  }
+
+  [data-color-mode="dark"] .title_only_cards .card:nth-child(3n-1) {
+    background-color: var(--dark-color-one);
+    color: var(--white);
+  }
+
+  [data-color-mode="dark"] .title_only_cards .card:nth-child(3n) {
+    background-color: var(--dark-color-two);
+    color: var(--white);
+  }
+
+  /* ------------------- X ------------------- */
+  /* ------------------- X ------------------- */
 </style>
 
 <!------------------------------------------- -->
 <!------------- Table of Contents ----------- -->
 <!------------------------------------------- -->
 <!-- GENERAL CONFIGURATION ---------------- 8 -->
-<!-- IMAGES ------------------------------ 13 -->
-<!-- CALLOUTS ---------------------------- 23 -->
-<!-- ACCOUNTS CARDS --------------------- 131 -->
-<!-- KEY PROCESSES CARDS ---------------- 237 -->
-<!-- LINKS ------------------------------ 323 -->
-<!-- README RECIPES --------------------- 340 -->
-<!-- PAGINATION ------------------------- 364 -->
-<!-- ACCORDION -------------------------- 393 -->
-<!-- TABLE ------------------------------ 504 -->
-<!-- SIDEBAR ---------------------------- 554 -->
-<!-- API CARDS -------------------------- 648 -->
-<!-- CHECKMARKS ------------------------- 769 -->
-<!-- CARDS WITH TEXT -------------------- 791 -->
-<!--  ------------------------- 893 -->
-<!--  -------------------------  -->
-<!-- DARK MODE CONFIGURATION ------------ 895 -->
+<!-- IMAGES ------------------------------ 21 -->
+<!-- CALLOUTS ---------------------------- 31 -->
+<!-- ACCOUNTS CARDS --------------------- 334 -->
+<!-- KEY PROCESSES CARDS ---------------- 479 -->
+<!-- LINKS ------------------------------ 565 -->
+<!-- README RECIPES --------------------- 583 -->
+<!-- PAGINATION ------------------------- 607 -->
+<!-- ACCORDION -------------------------- 637 -->
+<!-- TABLE ------------------------------ 748 -->
+<!-- API CARDS -------------------------- 802 -->
+<!-- CHECKMARKS ------------------------- 925 -->
+<!-- CARDS WITH TEXT -------------------- 947 -->
+<!-- INTRO PAGE CARDS ------------------ 1096 -->
+<!-- TITLE ONLY CARDS ------------------ 1202 -->
+<!--  ------------------  -->
+<!--  ------------------  -->

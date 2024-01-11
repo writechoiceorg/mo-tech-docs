@@ -2,8 +2,13 @@
   * {
     font-family: Inter;
     --main-orange: #FF5604;
-    --second-orange: #FFF8F4;
+    --second-orange: var(--white)8F4;
     --third-orange: #FFDBC9;
+    --dark-color-one: #FF7518;
+    --dark-color-two: #242E34;
+    --dark-color-three: #393432;
+    --dark-color-four: #773B1E;
+    --white: var(--white);
   }
 
   .account_card_container {
@@ -92,6 +97,46 @@
   .account_card_container .card:nth-child(3n) {
     background-color: var(--third-orange);
     color: var(--main-orange);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    [data-color-mode="system"] .account_card_container .card:nth-child(3n-2) {
+      background-color: var(--dark-color-four);
+      color: var(--white);
+    }
+
+    [data-color-mode="system"] .account_card_container .card svg path {
+      stroke: var(--white);
+    }
+
+    [data-color-mode="system"] .account_card_container .card:nth-child(3n-1) {
+      background-color: var(--dark-color-one);
+      color: var(--white);
+    }
+
+    [data-color-mode="system"] .account_card_container .card:nth-child(3n) {
+      background-color: var(--dark-color-two);
+      color: var(--white);
+    }
+  }
+
+  [data-color-mode="dark"] .account_card_container .card:nth-child(3n-2) {
+    background-color: var(--dark-color-four);
+    color: var(--white);
+  }
+
+  [data-color-mode="dark"] .account_card_container .card svg path {
+    stroke: var(--white);
+  }
+
+  [data-color-mode="dark"] .account_card_container .card:nth-child(3n-1) {
+    background-color: var(--dark-color-one);
+    color: var(--white);
+  }
+
+  [data-color-mode="dark"] .account_card_container .card:nth-child(3n) {
+    background-color: var(--dark-color-two);
+    color: var(--white);
   }
 
   @media screen and (max-width: 490px) {

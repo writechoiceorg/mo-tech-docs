@@ -2,18 +2,23 @@
   * {
     font-family: Inter;
     --main-orange: #FF5604;
-    --second-orange: #FFF8F4;
+    --second-orange: var(--white)8F4;
     --third-orange: #FFDBC9;
+    --dark-color-one: #FF7518;
+    --dark-color-two: #242E34;
+    --dark-color-three: #393432;
+    --dark-color-four: #773B1E;
+    --white: var(--white);
   }
 
-  .key_processes_card_container2 {
+  .title_only_cards {
     display: flex;
     gap: 7px;
     margin: 0 20px;
     flex-wrap: wrap;
   }
 
-  .key_processes_card_container2 .card {
+  .title_only_cards .card {
     display: flex;
     width: 32%;
     height: 82px;
@@ -26,7 +31,7 @@
     background: var(--main-orange);
   }
 
-  .key_processes_card_container2 .card:hover {
+  .title_only_cards .card:hover {
     cursor: pointer;
     border-color: var(--main-orange);
     box-shadow: 0 2px 4px rgba(12, 30, 61, 0.221);
@@ -34,7 +39,7 @@
     box-shadow: 0px 3px 5px 0px rgba(9, 30, 66, 0.20);
   }
 
-  .key_processes_card_container2 .card_title {
+  .title_only_cards .card_title {
     width: 100%;
     display: flex;
     align-items: center;
@@ -51,70 +56,110 @@
     line-height: 18px;
   }
 
-  .key_processes_card_container2 .card_title .card-img {
+  .title_only_cards .card_title .card-img {
     max-width: 30px;
     margin: 0 !important;
   }
 
-  .key_processes_card_container2 .card_title h3 {
+  .title_only_cards .card_title h3 {
     margin: 0;
     font-size: large;
   }
 
-  .key_processes_card_container2 .card_text {
+  .title_only_cards .card_text {
     display: flex;
     justify-content: start;
     width: 100%;
   }
 
-  .key_processes_card_container2 .card:nth-child(3n-2) {
+  .title_only_cards .card:nth-child(3n-2) {
     background-color: var(--main-orange);
     color: white;
   }
 
-  .key_processes_card_container2 .card:nth-child(3n-2) svg path {
+  .title_only_cards .card:nth-child(3n-2) svg path {
     stroke: white;
   }
 
-  .key_processes_card_container2 .card:nth-child(3n-1) {
+  .title_only_cards .card:nth-child(3n-1) {
     background-color: var(--second-orange);
     color: var(--main-orange);
   }
 
-  .key_processes_card_container2 .card:nth-child(3n-1) svg path,
-  .key_processes_card_container2 .card:nth-child(3n) svg path {
+  .title_only_cards .card:nth-child(3n-1) svg path,
+  .title_only_cards .card:nth-child(3n) svg path {
     stroke: var(--main-orange);
   }
 
-  .key_processes_card_container2 .card:nth-child(3n) {
+  .title_only_cards .card:nth-child(3n) {
     background-color: var(--third-orange);
     color: var(--main-orange);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    [data-color-mode="system"] .title_only_cards .card:nth-child(3n-2) {
+      background-color: var(--dark-color-four);
+      color: var(--white);
+    }
+
+    [data-color-mode="system"] .title_only_cards .card:nth-child(3n-2) svg path {
+      stroke: var(--white);
+    }
+
+    [data-color-mode="system"] .title_only_cards .card:nth-child(3n-1) {
+      background-color: var(--dark-color-one);
+      color: var(--white);
+    }
+
+    [data-color-mode="system"] .title_only_cards .card:nth-child(3n) {
+      background-color: var(--dark-color-two);
+      color: var(--white);
+    }
+  }
+
+  [data-color-mode="dark"] .title_only_cards .card:nth-child(3n-2) {
+    background-color: var(--dark-color-four);
+    color: var(--white);
+  }
+
+  [data-color-mode="dark"] .title_only_cards .card:nth-child(3n-2) svg path {
+    stroke: var(--white);
+  }
+
+  [data-color-mode="dark"] .title_only_cards .card:nth-child(3n-1) {
+    background-color: var(--dark-color-one);
+    color: var(--white);
+  }
+
+  [data-color-mode="dark"] .title_only_cards .card:nth-child(3n) {
+    background-color: var(--dark-color-two);
+    color: var(--white);
   }
 </style>
 
 <body>
-  <div class="key_processes_card_container2">
-    
+  <div class="title_only_cards">
+
     <div class="card" onclick="window.location='environments#sandbox-environment'">
       <div class="card_title">
         <h3>Sandbox environment
         </h3>
       </div>
     </div>
-    
+
     <div class="card" onclick="window.location='environments#client-validation-environment'">
       <div class="card_title">
         <h3>Client Validation environment
         </h3>
       </div>
     </div>
-    
+
     <div class="card" onclick="window.location='environments#production-environment'">
       <div class="card_title">
         <h3>Production environment
         </h3>
       </div>
     </div>
-    
+
   </div>
 </body>
