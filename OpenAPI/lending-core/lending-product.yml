@@ -2457,7 +2457,7 @@ paths:
                         type: string
                         example: '2'
       deprecated: false
-  /pre-loans:
+  /loan-requests:
     # get:
     #   summary: List Loan Requests
     #   description: ''
