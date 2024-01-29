@@ -16,7 +16,7 @@ components:
     sec0:
       type: apiKey
       in: header
-      # x-default: feebf600-5b52-485a-be26-17cc0debdaee
+      # # x-default: feebf600-5b52-485a-be26-17cc0debdaee
       name: x-api-key
 security:
   - sec0: []
@@ -35,7 +35,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
         - name: line_of_credit
           in: query
           description: >-
@@ -174,7 +174,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
@@ -551,7 +551,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
@@ -772,7 +772,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
@@ -963,7 +963,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       responses:
         '200':
           description: '200'
@@ -1168,7 +1168,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
@@ -1461,7 +1461,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       responses:
         '200':
           description: '200'
@@ -1630,7 +1630,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
@@ -1901,7 +1901,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
@@ -2137,7 +2137,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
@@ -2384,7 +2384,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
@@ -2573,7 +2573,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
@@ -2860,7 +2860,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
@@ -3127,7 +3127,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
@@ -3345,7 +3345,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
@@ -3443,7 +3443,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
@@ -3615,7 +3615,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
         - name: dispute_status
           in: path
           description: >-
@@ -3880,7 +3880,7 @@ paths:
           required: true
           schema:
             type: string
-            default: feebf600-5b52-485a-be26-17cc0debdaee
+            # default: feebf600-5b52-485a-be26-17cc0debdaee
       requestBody:
         content:
           application/json:
