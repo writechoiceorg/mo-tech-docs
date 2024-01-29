@@ -16,7 +16,7 @@ components:
     sec0:
       type: apiKey
       in: header
-      x-default: feebf600-5b52-485a-be26-17cc0debdaee
+      # x-default: feebf600-5b52-485a-be26-17cc0debdaee
       name: x-api-key
 security:
   - sec0: []
