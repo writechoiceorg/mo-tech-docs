@@ -4766,7 +4766,7 @@ paths:
         for a credit card account. Includes all the authorizations, settlements,
         payments, adjustments and financial charges.
       tags:
-        - Movements
+        - Transactions
       operationId: get-movements
       parameters:
         - name: account_card_external_id
