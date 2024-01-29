@@ -1472,7 +1472,6 @@ paths:
                 - precustomer_id
                 - first_name
                 - last_name
-                - email
               properties:
                 precustomer_id:
                   type: string
@@ -1505,6 +1504,8 @@ paths:
                     The Customer's contact phone number.
                 email:
                   type: string
+                  description: >-
+                    The Customer's email.
                 address:
                   type: string
                   description: >-
@@ -2578,7 +2579,6 @@ paths:
                 - number_of_installments
                 - customer_id
                 - offer_id
-                - taken_at
               properties:
                 amount:
                   type: number
