@@ -4092,7 +4092,7 @@ paths:
           required: true
           schema:
             type: string
-            default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
+            # default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
       requestBody:
         content:
           application/json:
@@ -4350,7 +4350,7 @@ paths:
           required: true
           schema:
             type: string
-            default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
+            # default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
       requestBody:
         content:
           application/json:
@@ -4549,7 +4549,7 @@ paths:
           required: true
           schema:
             type: string
-            default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
+            # default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
       requestBody:
         content:
           application/json:
@@ -4653,7 +4653,7 @@ paths:
           required: true
           schema:
             type: string
-            default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
+            # default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
       requestBody:
         content:
           application/json:
@@ -4798,7 +4798,7 @@ paths:
           required: true
           schema:
             type: string
-            default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
+            # default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
       responses:
         '201':
           description: '201'
@@ -4928,7 +4928,7 @@ paths:
           required: true
           schema:
             type: string
-            default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
+            # default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
       requestBody:
         content:
           application/json:
@@ -4998,7 +4998,7 @@ paths:
           required: true
           schema:
             type: string
-            default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
+            # default: LfPjK9G1.HdU3KoMpRdszfUR735RFOVb74uo0nfa0
       requestBody:
         content:
           application/json:
