@@ -185,12 +185,10 @@ paths:
                 - product_id
                 - external_id
                 - first_name
-                - middle_name
                 - last_name
                 - city
                 - address
                 - payment_day
-                - postal_code
               properties:
                 line_of_credit:
                   type: integer
@@ -219,7 +217,6 @@ paths:
                 middle_name:
                   type: string
                   description: Middle name of the customer.
-                  default: Jr
                 last_name:
                   type: string
                   description: Last name of the customer.
@@ -237,7 +234,6 @@ paths:
                   description: >-
                     Postal code of the address that the customer registered on
                     the application.
-                  default: 1234
                 payment_day:
                   type: string
                   description: >-
@@ -2564,7 +2560,7 @@ paths:
                         example: '2023-09-27T16:17:56.905-06:00'
       deprecated: false
   /transactions/:
-    post:
+    get:
       summary: Get Processor Transactions
       description: ''
       tags:
